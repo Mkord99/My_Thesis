@@ -1,12 +1,13 @@
 import numpy as np
+import networkx as nx
+import matplotlib.pyplot as plt
 from shapely.geometry import Polygon, Point, LineString
 from shapely.affinity import scale
-import matplotlib.pyplot as plt
 from scipy.spatial import distance
-from gurobipy import Model, GRB, quicksum
+from gurobipy import Model, GRB
 import math
 
-# Defining building coordinates
+# Coordinates of the building
 coordinates = [
     (0, 0),  
     (0, 20), 
@@ -31,7 +32,7 @@ ymin -= max_distance
 xmax += max_distance
 ymax += max_distance
 
-# Create grid points around the building
+# Grod points
 grid_points = []
 for x in range(int(xmin), int(xmax) + grid_spacing, grid_spacing):
     for y in range(int(ymin), int(ymax) + grid_spacing, grid_spacing):
@@ -39,35 +40,50 @@ for x in range(int(xmin), int(xmax) + grid_spacing, grid_spacing):
         if not polygon.contains(point) and not polygon.touches(point):
             grid_points.append(point)
 
-# Plotting the polygon and grid points
-plt.scatter([p.x for p in grid_points], [p.y for p in grid_points], s=10)
-plt.title("Polygon with Gridded Surface")
-plt.xlabel("X-coordinate")
-plt.ylabel("Y-coordinate")
+# The Graph
+G = nx.DiGraph()
+
+# Nodes
+for i, point in enumerate(grid_points):
+    G.add_node(i, pos=(point.x, point.y))
+
+# Directed edges between nodes 
+max_edge_distance = grid_spacing * np.sqrt(2)
+E = []
+for i, p1 in enumerate(grid_points):
+    for j, p2 in enumerate(grid_points):
+        if i != j:
+            dist = distance.euclidean((p1.x, p1.y), (p2.x, p2.y))
+            if dist <= max_edge_distance:
+                G.add_edge(i, j, weight=dist)
+                G.add_edge(j, i, weight=dist)  
+                E.append((i, j, dist))
+                E.append((j, i, dist))  
+
+# Gurobi model
+model = Model("Model")
+
+# Edge variables and cost
+E_vars = {}
+cost = {}
+
+for i, j, dist in E:
+    E_vars[(i, j)] = model.addVar(vtype=GRB.BINARY, name=f"edge_{i}_{j}")
+    cost[(i, j)] = dist
+
+# Segment visibility and edge visibility
+segment_visibility = {}
+edge_visibility = {edge: [] for edge in E_vars}
+angles = {}
 
 # Building boundary segmentation
 boundary_line = LineString(polygon.exterior.coords)
 segment_size = 5
 segments = []
 for i in range(0, int(boundary_line.length), segment_size):
-    segment = boundary_line.interpolate(i), boundary_line.interpolate(min(i + segment_size, boundary_line.length))
-    segments.append(segment)
-
-# Plot segments on the building
-for seg_start, seg_end in segments:
-    plt.plot([seg_start.x, seg_end.x], [seg_start.y, seg_end.y], 'b', lw=2) 
-    plt.plot(seg_start.x, seg_start.y, 'ro')
-    plt.plot(seg_end.x, seg_end.y, 'ro') 
-
-# Create edges between grid points
-edges = []
-max_edge_distance = grid_spacing * np.sqrt(2)
-for i, p1 in enumerate(grid_points):
-    for j, p2 in enumerate(grid_points):
-        if i != j:
-            dist = distance.euclidean((p1.x, p1.y), (p2.x, p2.y))
-            if dist <= max_edge_distance:
-                edges.append((i, j, dist))
+    seg_start = boundary_line.interpolate(i)
+    seg_end = boundary_line.interpolate(min(i + segment_size, boundary_line.length))
+    segments.append((seg_start, seg_end))
 
 # Function to calculate the angle
 def calculate_angle(vec1, vec2):
@@ -77,28 +93,12 @@ def calculate_angle(vec1, vec2):
     angle_rad = math.acos(dot_product / (mag1 * mag2))
     return math.degrees(angle_rad)
 
-# Gurobi model
-model = Model("visibility_optimization")
-
-# Variables and weights
-edge_vars = {}
-weights = {}
-
-for i, j, dist in edges:
-    edge_vars[(i, j)] = model.addVar(vtype=GRB.BINARY, name=f"edge_{i}_{j}")
-    weights[(i, j)] = dist  # or assign based on your criteria
-
-segment_visibility = {seg: [] for seg in range(len(segments))}
-edge_visibility = {edge: [] for edge in edge_vars}
-
-angles = {}
-
-# Viability constraints
+# Visibility constraints
 for seg_idx, (seg_start, seg_end) in enumerate(segments):
-    for edge, var in edge_vars.items():
-        p1, p2 = grid_points[edge[0]], grid_points[edge[1]]
-
-        # Vectors from edge vertex to segment start and end point
+    for edge, var in E_vars.items():
+        p1, p2 = Point(G.nodes[edge[0]]['pos']), Point(G.nodes[edge[1]]['pos'])
+        
+        
         vec1_start = (seg_start.x - p1.x, seg_start.y - p1.y)
         vec1_end = (seg_end.x - p1.x, seg_end.y - p1.y)
         vec2_start = (seg_start.x - p2.x, seg_start.y - p2.y)
@@ -106,13 +106,13 @@ for seg_idx, (seg_start, seg_end) in enumerate(segments):
 
         segment_vec = (seg_end.x - seg_start.x, seg_end.y - seg_start.y)
 
-        # Angle calculations
+        
         angle1_start = calculate_angle(vec1_start, segment_vec)
         angle1_end = calculate_angle(vec1_end, segment_vec)
         angle2_start = calculate_angle(vec2_start, segment_vec)
         angle2_end = calculate_angle(vec2_end, segment_vec)
 
-        # Store calculated angles in the angles dictionary
+        
         angles[(seg_idx, edge)] = {
             'angle1_start': angle1_start,
             'angle1_end': angle1_end,
@@ -133,39 +133,50 @@ for seg_idx, (seg_start, seg_end) in enumerate(segments):
         touches2_start = line2_start.touches(polygon)
         touches2_end = line2_end.touches(polygon)
 
-        # The edge is valid if it touches at exactly one point for both vectors
+        if seg_idx not in segment_visibility:
+            segment_visibility[seg_idx] = []
+
         if ((6 <= d1_start <= 15 and 6 <= d1_end <= 15 and 30 <= angle1_start <= 150 and 30 <= angle1_end <= 150 and touches1_start and touches1_end) or
             (6 <= d2_start <= 15 and 6 <= d2_end <= 15 and 30 <= angle2_start <= 150 and 30 <= angle2_end <= 150 and touches2_start and touches2_end)):
             segment_visibility[seg_idx].append(edge)
             edge_visibility[edge].append(seg_idx)
 
-# Add constraints to ensure every segment is covered by at least one edge
-for seg_idx, visible_edges in segment_visibility.items():
-    model.addConstr(quicksum(edge_vars[edge] for edge in visible_edges) >= 1, name=f"visibility_constraint_segment_{seg_idx}")
+# Objective
+model.setObjective(sum(E_vars[(i, j)] * cost[(i, j)] for i, j, _ in E), GRB.MINIMIZE)
 
-# Objective: Minimize the number of edges selected
-model.setObjective(quicksum(edge_vars[edge] * weights[edge] for edge in edge_vars), GRB.MINIMIZE)
+# Constraint: All segments must be visible
+for seg_idx, edges in segment_visibility.items():
+    if edges:
+        model.addConstr(sum(E_vars[edge] for edge in edges) >= 1, name=f"seg_visibility_{seg_idx}")
 
-# Optimize the model
+# Constraint: incoming and outgoing edges on one node must be equal
+for node in G.nodes:
+    in_degree = sum(E_vars[(i, node)] for i, _ in G.in_edges(node) if (i, node) in E_vars)
+    out_degree = sum(E_vars[(node, j)] for _, j in G.out_edges(node) if (node, j) in E_vars)
+
+    model.addConstr(in_degree == out_degree, name=f"flow_{node}")
+
+# Constraint: Only one direction between nodes can be selected
+for i, j, _ in E:
+    if (j, i) in E_vars:  
+        model.addConstr(E_vars[(i, j)] + E_vars[(j, i)] <= 1, name=f"no_bidirectional_{i}_{j}")
+
 model.optimize()
+# %% Plot
 
-# Plot the selected edges in red
-plt.title("Selected Edges Minimizing Visibility")
+plt.figure(figsize=(10, 10))
+pos = nx.get_node_attributes(G, 'pos')
+nx.draw(G, pos, with_labels=True, node_size=50, node_color='blue', edge_color='gray', font_size=8)
+
+
+x, y = polygon.exterior.xy
+plt.plot(x, y, 'r-', linewidth=2)
+
+
+selected_edges = [edge for edge in E_vars if E_vars[edge].X > 0.5]
+nx.draw_networkx_edges(G, pos, edgelist=selected_edges, edge_color='red', width=2)
+
+plt.title("Selected Edges")
 plt.xlabel("X-coordinate")
 plt.ylabel("Y-coordinate")
-
-for seg_start, seg_end in segments:
-    plt.plot([seg_start.x, seg_end.x], [seg_start.y, seg_end.y], 'b', lw=2) 
-
-plt.scatter([p.x for p in grid_points], [p.y for p in grid_points], s=10)
-
-if model.status == GRB.OPTIMAL:
-    selected_edges = [edge for edge in edge_vars if edge_vars[edge].x > 0.5]
-    for edge in selected_edges:
-        p1 = grid_points[edge[0]]
-        p2 = grid_points[edge[1]]
-        plt.plot([p1.x, p2.x], [p1.y, p2.y], 'r', lw=2)
-
 plt.show()
-
-
