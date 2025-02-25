@@ -1,53 +1,53 @@
 import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
-from shapely.geometry import Polygon, Point, LineString
-from shapely.affinity import scale
+from shapely.geometry import Polygon, Point, LineString, MultiPolygon
 from scipy.spatial import distance
 from gurobipy import Model, GRB
+from itertools import combinations
 import math
 
 # Coordinates of the building
-coordinates = [
-    (0, 0),  
-    (0, 20), 
-    (20, 20),  
-    (20, 15),  
-    (10, 15),  
-    (10, 5),  
-    (20, 5),  
-    (20, 0),  
-    (0, 0)  
-]
+polygon1 = Polygon ([(0, 0), (10, 0), (10, 10), (25,10), (25, 0), (40, 0), (40, 20), (35, 20),
+    (35, 35), (40, 35), (40, 50), (30, 50), (30, 40), (15, 40), (15, 50), (0, 50), (0, 35),
+    (10, 35), (10, 20), (0, 20), (0, 0) ])
 
-# Scaling the polygon
-polygon = Polygon(coordinates)
-polygon = scale(polygon, xfact=2, yfact=2, origin='centroid')
-grid_spacing = 4
-max_distance = 10
+polygon2 = Polygon ([(70, 0), (80, 0), (80, 10), (95, 10), (95, 0), (110, 0),(110, 20), (105, 20),
+    (105, 35), (110, 35), (110, 50), (100, 50), (100, 40), (85, 40), (85, 50), (70, 50),
+    (70, 35), (80, 35), (80, 20), (70, 20), (70, 0) ])
 
-xmin, ymin, xmax, ymax = polygon.bounds
-xmin -= max_distance
-ymin -= max_distance
-xmax += max_distance
-ymax += max_distance
+
+building= MultiPolygon([polygon1, polygon2])
+closer_buffer =building.buffer(1)  
+outer_buffer =building.buffer(30)  
+
+xmin, ymin, xmax, ymax = closer_buffer.bounds
+
 
 # Grod points
+grid_spacing = 8
+
+xmin, ymin, xmax, ymax = outer_buffer.bounds
+
 grid_points = []
 for x in range(int(xmin), int(xmax) + grid_spacing, grid_spacing):
     for y in range(int(ymin), int(ymax) + grid_spacing, grid_spacing):
         point = Point(x, y)
-        if not polygon.contains(point) and not polygon.touches(point):
-            grid_points.append(point)
+        
+        if not building.contains(point) and outer_buffer.contains(point):
+            min_distance = min(poly.exterior.distance(point) for poly in closer_buffer.geoms)
+            
+            if min_distance >= 0:
+                grid_points.append(point)
 
 # The Graph
 G = nx.DiGraph()
 
-# Nodes
+# Add nodes
 for i, point in enumerate(grid_points):
     G.add_node(i, pos=(point.x, point.y))
 
-# Directed edges between nodes 
+
 max_edge_distance = grid_spacing * np.sqrt(2)
 E = []
 for i, p1 in enumerate(grid_points):
@@ -55,12 +55,16 @@ for i, p1 in enumerate(grid_points):
         if i != j:
             dist = distance.euclidean((p1.x, p1.y), (p2.x, p2.y))
             if dist <= max_edge_distance:
-                G.add_edge(i, j, weight=dist)
-                G.add_edge(j, i, weight=dist)  
-                E.append((i, j, dist))
-                E.append((j, i, dist))  
+                
+                edge_line = LineString([(p1.x, p1.y), (p2.x, p2.y)])
+                
+                # Ensure edge does not touch or cross into the polygon
+                if not closer_buffer.intersects(edge_line):
+                    G.add_edge(i, j, weight=dist)
+                    G.add_edge(j, i, weight=dist)
+                    E.append((i, j, dist))
+                    E.append((j, i, dist))
 
-# Gurobi model
 model = Model("Model")
 
 # Edge variables and cost
@@ -77,13 +81,16 @@ edge_visibility = {edge: [] for edge in E_vars}
 angles = {}
 
 # Building boundary segmentation
-boundary_line = LineString(polygon.exterior.coords)
+boundry_lines = [LineString(poly.exterior.coords) for poly in building.geoms]
+
 segment_size = 5
 segments = []
-for i in range(0, int(boundary_line.length), segment_size):
-    seg_start = boundary_line.interpolate(i)
-    seg_end = boundary_line.interpolate(min(i + segment_size, boundary_line.length))
-    segments.append((seg_start, seg_end))
+for boundry_line in boundry_lines:
+    for i in range(0, int(boundry_line.length), segment_size):
+        seg_start = boundry_line.interpolate(i)
+        seg_end = boundry_line.interpolate(min(i + segment_size, boundry_line.length))
+        segments.append((seg_start, seg_end))
+
 
 # Function to calculate the angle
 def calculate_angle(vec1, vec2):
@@ -128,10 +135,10 @@ for seg_idx, (seg_start, seg_end) in enumerate(segments):
         line2_start = LineString([p2, seg_start])
         line2_end = LineString([p2, seg_end])
 
-        touches1_start = line1_start.touches(polygon)
-        touches1_end = line1_end.touches(polygon)
-        touches2_start = line2_start.touches(polygon)
-        touches2_end = line2_end.touches(polygon)
+        touches1_start = line1_start.touches(building)
+        touches1_end = line1_end.touches(building)
+        touches2_start = line2_start.touches(building)
+        touches2_end = line2_end.touches(building)
 
         if seg_idx not in segment_visibility:
             segment_visibility[seg_idx] = []
@@ -158,13 +165,67 @@ for node in G.nodes:
     out_degree = sum(E_vars[(node, j)] for _, j in G.out_edges(node) if (node, j) in E_vars)
 
     model.addConstr(in_degree == out_degree, name=f"flow_{node}")
+ 
+"""
+# The edges with no visibility can not be selected
+for edge, segments in edge_visibility.items():
+    if not segments:  
+        model.addConstr(E_vars[edge] == 0, name=f"no_visibility_{edge}")
+"""
 
-# Constraint: Only one direction between nodes can be selected
-for i, j, _ in E:
-    if (j, i) in E_vars:  
-        model.addConstr(E_vars[(i, j)] + E_vars[(j, i)] <= 1, name=f"no_bidirectional_{i}_{j}")
 
-model.optimize()
+
+# pre-elimination for 3 edges subtours
+for U in combinations(G.nodes, 3):
+    expr = 0
+    for i in U:
+        for j in U:
+            if i != j and (i, j) in E_vars:
+                expr += E_vars[(i, j)]
+    model.addConstr(expr <= 2, name=f"subtour3_{U}")
+
+#Enabling lazy constraints:
+model.Params.LazyConstraints = 1
+
+model._vars = E_vars
+model._nodes = list(G.nodes)
+
+def get_subtour(nodes, selected_edges):
+    
+    H = nx.Graph()
+    H.add_nodes_from(nodes)
+    H.add_edges_from(selected_edges)
+    comps = list(nx.connected_components(H))
+    
+    # one compom=nent = no subtour
+    if len(comps) == 1:
+        return None
+    return min(comps, key=len)
+
+def subtourelim_callback(model, where):
+   
+    if where == GRB.Callback.MIPSOL:
+        sol = model.cbGetSolution(model._vars)
+        selected = [(i, j) for (i, j) in model._vars if sol[i, j] > 0.5]
+        
+        used_nodes = set()
+        for i, j in selected:
+            used_nodes.add(i)
+            used_nodes.add(j)
+        used_nodes = list(used_nodes)
+        
+        subtour = get_subtour(used_nodes, selected)
+        if subtour is not None:
+            # lazy constraint: the sum of edges inside the subtour must be <= |subtour| - 1.
+            expr = 0
+            for i in subtour:
+                for j in subtour:
+                    if (i, j) in model._vars:
+                        expr += model._vars[(i, j)]
+            model.cbLazy(expr <= len(subtour) - 1)
+
+
+model.optimize(subtourelim_callback)
 
 # %% Plot
 
@@ -172,10 +233,9 @@ plt.figure(figsize=(10, 10))
 pos = nx.get_node_attributes(G, 'pos')
 nx.draw(G, pos, with_labels=True, node_size=50, node_color='blue', edge_color='gray', font_size=8)
 
-
-x, y = polygon.exterior.xy
-plt.plot(x, y, 'r-', linewidth=2)
-
+for poly in building.geoms:
+    x, y = poly.exterior.xy
+    plt.plot(x, y, 'g-', linewidth=2)
 
 selected_edges = [edge for edge in E_vars if E_vars[edge].X > 0.5]
 nx.draw_networkx_edges(G, pos, edgelist=selected_edges, edge_color='red', width=2)
@@ -184,3 +244,4 @@ plt.title("Selected Edges")
 plt.xlabel("X-coordinate")
 plt.ylabel("Y-coordinate")
 plt.show()
+
