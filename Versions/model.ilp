@@ -1,0 +1,16 @@
+\ Model TSP_Visibility_copy
+\ LP format - for model browsing. Use MPS format to capture full model detail.
+Minimize
+ 
+Subject To
+ Degree_175: x[158,175] + x[159,175] + x[174,175] + x[175,158] + x[175,159]
+   + x[175,174] = 2
+ Symmetry_174_175: x[174,175] - x[175,174] = 0
+ EdgeVisibility_996: x[158,175] <= 0
+ EdgeVisibility_1075: x[175,158] <= 0
+ EdgeVisibility_1076: x[175,159] <= 0
+ EdgeVisibility_1077: x[175,174] <= 0
+Bounds
+Binaries
+ x[158,175] x[159,175] x[174,175] x[175,158] x[175,159] x[175,174]
+End
