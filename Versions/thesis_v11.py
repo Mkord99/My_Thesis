@@ -1,4 +1,4 @@
-# Without weights and edge particles visibility
+# Without edges and edge nodes visibility
 import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -7,9 +7,6 @@ from scipy.spatial import distance
 from gurobipy import Model, GRB
 from itertools import combinations
 import math
-import time
-
-start_time = time.time()
 
 # Coordinates of the building
 polygon1 = Polygon ([(0, 0), (10, 0), (10, 10), (25,10), (25, 0), (40, 0), (40, 20), (35, 20),
@@ -164,89 +161,14 @@ for seg_idx, (seg_start, seg_end) in enumerate(segments):
             segment_visibility[seg_idx].append(edge)
             edge_visibility[edge].append(seg_idx)
    
-# Edge particles Visibility
-
-edge_particle_visibility = {}  
-
-for edge in E_vars.keys():
-    p1 = Point(G.nodes[edge[0]]['pos'])
-    p2 = Point(G.nodes[edge[1]]['pos'])
-    edge_line = LineString([p1, p2])
-    edge_length = edge_line.length
-    
-    sample_points = [edge_line.interpolate(d) for d in np.arange(0, edge_length + 1e-6, 1)]
-    
-    edge_particle_visibility[edge] = {}
-    
-    for idx in range(len(sample_points) - 1):
-        part_start = sample_points[idx]
-        part_end = sample_points[idx+1]
-        particle_vis = []  
-        
-        for seg_idx, (seg_start, seg_end) in enumerate(segments):
             
-            vec1_start = (seg_start.x - part_start.x, seg_start.y - part_start.y)
-            vec1_end   = (seg_end.x - part_start.x, seg_end.y - part_start.y)
-            vec2_start = (seg_start.x - part_end.x, seg_start.y - part_end.y)
-            vec2_end   = (seg_end.x - part_end.x, seg_end.y - part_end.y)
-            segment_vec = (seg_end.x - seg_start.x, seg_end.y - seg_start.y)
-            
-            
-            angle1_start = calculate_angle(vec1_start, segment_vec)
-            angle1_end   = calculate_angle(vec1_end, segment_vec)
-            angle2_start = calculate_angle(vec2_start, segment_vec)
-            angle2_end   = calculate_angle(vec2_end, segment_vec)
-            
-            
-            d1_start = part_start.distance(seg_start)
-            d1_end   = part_start.distance(seg_end)
-            d2_start = part_end.distance(seg_start)
-            d2_end   = part_end.distance(seg_end)
-            
-            
-            line1_start = LineString([part_start, seg_start])
-            line1_end   = LineString([part_start, seg_end])
-            line2_start = LineString([part_end, seg_start])
-            line2_end   = LineString([part_end, seg_end])
-            
-            touches1_start = line1_start.touches(building)
-            touches1_end   = line1_end.touches(building)
-            touches2_start = line2_start.touches(building)
-            touches2_end   = line2_end.touches(building)
-            
-            
-            if ((line1_start.intersects(obst_vis) or line1_end.intersects(obst_vis)) and
-                (line2_start.intersects(obst_vis) or line2_end.intersects(obst_vis))):
-                continue
-            
-            
-            if ((6 <= d1_start <= 15 and 6 <= d1_end <= 15 and 30 <= angle1_start <= 150 and 30 <= angle1_end <= 150 and touches1_start and touches1_end) or
-                (6 <= d2_start <= 15 and 6 <= d2_end <= 15 and 30 <= angle2_start <= 150 and 30 <= angle2_end <= 150 and touches2_start and touches2_end)):
-                particle_vis.append(seg_idx)
-         
-        edge_particle_visibility[edge][idx] = particle_vis
-
-
-segment_visibility_particles = {}
-for seg_idx in range(len(segments)):
-    segment_visibility_particles[seg_idx] = []
-    for edge, particles in edge_particle_visibility.items():
-        for part_idx, particle_vis in particles.items():
-            if seg_idx in particle_vis:
-                segment_visibility_particles[seg_idx].append(edge)
-                break  
-
-
-mid_time = time.time()
-print(f"Pre-Processing Time: {mid_time - start_time:.2f} seconds")
-
 # %% Objectives and Constraints
 
 # Objective
 model.setObjective(sum(E_vars[(i, j)] * cost[(i, j)] for i, j, _ in E), GRB.MINIMIZE)
 
 # Constraint: All segments must be visible
-for seg_idx, edges in segment_visibility_particles.items():
+for seg_idx, edges in segment_visibility.items():
     if edges:
         model.addConstr(sum(E_vars[edge] for edge in edges) >= 1, name=f"seg_visibility_{seg_idx}")
 
@@ -356,6 +278,3 @@ plt.xlabel("X-coordinate")
 plt.ylabel("Y-coordinate")
 plt.show()
 
-
-end_time = time.time()
-print(f"Optimizing Time: {end_time - mid_time:.2f} seconds")

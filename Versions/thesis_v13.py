@@ -1,4 +1,4 @@
-# Without weights and edge particles visibility
+# With weights and only edge nodes visibility
 import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -226,15 +226,24 @@ for edge in E_vars.keys():
          
         edge_particle_visibility[edge][idx] = particle_vis
 
+# Calculating the Visibility Ratio Factor (VRF) for each edge
+VRF = {}  
+epsilon = 1e-6  # Small value to avoid division by zero
 
-segment_visibility_particles = {}
-for seg_idx in range(len(segments)):
-    segment_visibility_particles[seg_idx] = []
-    for edge, particles in edge_particle_visibility.items():
-        for part_idx, particle_vis in particles.items():
-            if seg_idx in particle_vis:
-                segment_visibility_particles[seg_idx].append(edge)
-                break  
+for edge in E_vars.keys():
+    p1 = Point(G.nodes[edge[0]]['pos'])
+    p2 = Point(G.nodes[edge[1]]['pos'])
+    edge_line = LineString([p1, p2])
+    edge_length = edge_line.length
+    
+    # Combine the visible segments from all particles for this edge (union)
+    visible_segments = set()
+    for part_idx in edge_particle_visibility[edge]:
+        visible_segments.update(edge_particle_visibility[edge][part_idx])
+    
+   
+    VRF[edge] = len(visible_segments) / (edge_length + epsilon)
+
 
 
 mid_time = time.time()
@@ -243,10 +252,11 @@ print(f"Pre-Processing Time: {mid_time - start_time:.2f} seconds")
 # %% Objectives and Constraints
 
 # Objective
-model.setObjective(sum(E_vars[(i, j)] * cost[(i, j)] for i, j, _ in E), GRB.MINIMIZE)
+model.setObjective(sum(E_vars[edge] * cost[edge] * (1/(VRF[edge] + epsilon)) for edge in E_vars), GRB.MINIMIZE)
+
 
 # Constraint: All segments must be visible
-for seg_idx, edges in segment_visibility_particles.items():
+for seg_idx, edges in segment_visibility.items():
     if edges:
         model.addConstr(sum(E_vars[edge] for edge in edges) >= 1, name=f"seg_visibility_{seg_idx}")
 
