@@ -174,7 +174,7 @@ for edge in E_vars.keys():
     edge_line = LineString([p1, p2])
     edge_length = edge_line.length
     
-    sample_points = [edge_line.interpolate(d) for d in np.arange(0, edge_length + 1e-6, 1)]
+    sample_points = [edge_line.interpolate(d) for d in np.arange(0, edge_length + 1e-6, 4)]
     
     edge_particle_visibility[edge] = {}
     
