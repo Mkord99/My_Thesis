@@ -1,0 +1,4 @@
+2025-04-21 16:44:23,680 - __main__ - INFO - Starting visibility path planning
+2025-04-21 16:44:23,680 - __main__ - INFO - Loading geometry data
+2025-04-21 16:44:23,680 - src.data_handler - INFO - Loading geometries from data/geometry.json
+2025-04-21 16:44:23,680 - src.data_handler - WARNING - Building building_2 has an invalid polygon

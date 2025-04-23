@@ -1,0 +1,11 @@
+{
+"type": "FeatureCollection",
+"name": "buildings",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32617" } },
+"features": [
+{ "type": "Feature", "properties": { "Name": null, "description": null, "timestamp": null, "begin": null, "end": null, "altitudeMode": null, "tessellate": -1, "extrude": 0, "visibility": -1, "drawOrder": null, "icon": null, "OBJECTID": 303812, "BUILDING_FOOTPRINT_ID": 1453 }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 555733.31, 4806161.37 ], [ 555774.38, 4806088.07 ], [ 555806.3, 4806106.08 ], [ 555780.38, 4806152.52 ], [ 555777.23, 4806150.63 ], [ 555759.22, 4806184.34 ], [ 555738.04, 4806172.01 ], [ 555741.52, 4806165.69 ], [ 555733.31, 4806161.37 ] ] ] } },
+{ "type": "Feature", "properties": { "Name": null, "description": null, "timestamp": null, "begin": null, "end": null, "altitudeMode": null, "tessellate": -1, "extrude": 0, "visibility": -1, "drawOrder": null, "icon": null, "OBJECTID": 303813, "BUILDING_FOOTPRINT_ID": 1454 }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 555778.17, 4806211.83 ], [ 555806.29, 4806161.59 ], [ 555816.72, 4806167.59 ], [ 555825.56, 4806151.9 ], [ 555814.83, 4806146.21 ], [ 555859.06, 4806067.85 ], [ 555912.14, 4806097.55 ], [ 555897.29, 4806124.1 ], [ 555875.8, 4806112.4 ], [ 555809.77, 4806230.47 ], [ 555778.17, 4806211.83 ] ] ] } },
+{ "type": "Feature", "properties": { "Name": null, "description": null, "timestamp": null, "begin": null, "end": null, "altitudeMode": null, "tessellate": -1, "extrude": 0, "visibility": -1, "drawOrder": null, "icon": null, "OBJECTID": 303814, "BUILDING_FOOTPRINT_ID": 1455 }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 555795.23, 4806040.15 ], [ 555805.98, 4806013.6 ], [ 555839.47, 4806027.51 ], [ 555823.67, 4806064.48 ], [ 555794.92, 4806052.78 ], [ 555799.66, 4806041.73 ], [ 555795.23, 4806040.15 ] ] ] } },
+{ "type": "Feature", "properties": { "Name": null, "description": null, "timestamp": null, "begin": null, "end": null, "altitudeMode": null, "tessellate": -1, "extrude": 0, "visibility": -1, "drawOrder": null, "icon": null, "OBJECTID": 304500, "BUILDING_FOOTPRINT_ID": 2511 }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 555716.45, 4806230.37 ], [ 555752.78, 4806220.57 ], [ 555773.96, 4806301.14 ], [ 555737.62, 4806310.62 ], [ 555716.45, 4806230.37 ] ] ] } }
+]
+}
