@@ -7,20 +7,20 @@
     }
   },
   "graph": {
-    "grid_spacing": 12,
-    "max_edge_distance": 17,
+    "grid_spacing": 8,
+    "max_edge_distance": 11.4,
     "use_buffer_constraint": true
   },
   "visibility": {
-    "segment_size": 10,
+    "segment_size": 5,
     "visibility_constraints": {
-      "min_distance": 1,
-      "max_distance": 40,
-      "max_normal_angle": 85
+      "min_distance": 6,
+      "max_distance": 20,
+      "max_normal_angle": 30
     },
     "particle_visibility": {
       "enabled": true,
-      "spacing": 2
+      "spacing": 1
     }
   },
   "optimization": {
@@ -31,7 +31,7 @@
     "time_limit": null
   },
   "performance": {
-    "num_cores": null
+    "num_cores": 12
   },
   "output": {
     "logs": {

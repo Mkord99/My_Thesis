@@ -1,1 +1,0 @@
-2025-04-23 15:33:09,124 - __main__ - INFO - Starting visibility path planning

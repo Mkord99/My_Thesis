@@ -1,0 +1,23 @@
+2025-04-23 16:56:26,928 - __main__ - INFO - Starting visibility path planning
+2025-04-23 16:56:26,935 - __main__ - INFO - Initial memory usage - Memory usage: 126.43 MB
+2025-04-23 16:56:26,935 - __main__ - INFO - Loading geometry data
+2025-04-23 16:56:26,935 - __main__ - INFO - Before geometry loading - Memory usage: 126.43 MB
+2025-04-23 16:56:26,935 - src.data_handler - INFO - Loading geometries from data/geometry.json
+2025-04-23 16:56:26,936 - __main__ - INFO - After geometry loading - Memory usage: 127.06 MB
+2025-04-23 16:56:26,936 - __main__ - INFO - Building the graph
+2025-04-23 16:56:26,936 - __main__ - INFO - Before graph building - Memory usage: 127.06 MB
+2025-04-23 16:56:26,936 - src.graph_builder - INFO - Building grid graph
+2025-04-23 16:56:26,946 - __main__ - ERROR - Error during execution: 'Polygon' object has no attribute 'geoms'
+Traceback (most recent call last):
+  File "/home/mo/thesis/my_thesis/Versions/thesis_v17/main.py", line 173, in main
+    G, grid_points = graph_builder.build_graph(building, obstacles)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo/thesis/my_thesis/Versions/thesis_v17/src/graph_builder.py", line 40, in build_graph
+    grid_points = self._generate_grid_points(building, inner_buffer, outer_buffer, obstacles)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mo/thesis/my_thesis/Versions/thesis_v17/src/graph_builder.py", line 97, in _generate_grid_points
+    min_distance = min(poly.exterior.distance(point) for poly in inner_buffer.geoms)
+                                                                 ^^^^^^^^^^^^^^^^^^
+AttributeError: 'Polygon' object has no attribute 'geoms'
+2025-04-23 16:56:26,949 - __main__ - INFO - Before cleanup - Memory usage: 128.81 MB
+2025-04-23 16:56:26,973 - __main__ - INFO - After cleanup - Memory usage: 128.81 MB

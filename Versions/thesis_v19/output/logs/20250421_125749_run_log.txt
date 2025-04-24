@@ -1,0 +1,13 @@
+2025-04-21 12:57:49,285 - __main__ - INFO - Starting visibility path planning
+2025-04-21 12:57:49,285 - __main__ - INFO - Loading geometry data
+2025-04-21 12:57:49,285 - src.data_handler - INFO - Loading geometries from data/geometry.json
+2025-04-21 12:57:49,285 - __main__ - INFO - Building the graph
+2025-04-21 12:57:49,285 - src.graph_builder - INFO - Building grid graph
+2025-04-21 12:57:49,303 - src.graph_builder - INFO - Generated 200 grid points
+2025-04-21 12:57:49,878 - src.graph_builder - WARNING - The generated graph is not connected.
+2025-04-21 12:57:49,878 - src.graph_builder - INFO - Created graph with 200 nodes and 1588 edges
+2025-04-21 12:57:49,878 - __main__ - INFO - Analyzing visibility
+2025-04-21 12:57:49,878 - src.visibility_analyzer - INFO - Using None CPU cores for visibility analysis
+2025-04-21 12:57:49,878 - src.visibility_analyzer - INFO - Analyzing visibility
+2025-04-21 12:57:49,883 - src.visibility_analyzer - INFO - Created 98 building segments
+2025-04-21 12:57:49,883 - src.visibility_analyzer - INFO - Calculating edge-segment visibility (parallelized)
