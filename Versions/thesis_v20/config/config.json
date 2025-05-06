@@ -1,0 +1,65 @@
+{
+  "data": {
+    "geometry_file": "data/geometry.json",
+    "buffer_distances": {
+      "inner": 1,
+      "outer": 30
+    }
+  },
+  "graph": {
+    "grid_spacing": 10,
+    "max_edge_distance": 15,
+    "use_buffer_constraint": true
+  },
+  "visibility": {
+    "segment_size": 5,
+    "visibility_constraints": {
+      "min_distance": 3,
+      "max_distance": 15,
+      "max_normal_angle": 45
+    },
+    "particle_visibility": {
+      "enabled": true,
+      "spacing": 2
+    }
+  },
+  "optimization": {
+    "use_vrf_weight": true,
+    "epsilon": 1e-6,
+    "tie_points": [],
+    "eliminate_subtours": true,
+    "time_limit": 3600
+  },
+  "performance": {
+    "num_cores": null
+  },
+  "output": {
+    "logs": {
+      "enabled": true,
+      "path": "output/logs/",
+      "filename": "run_log.txt"
+    },
+    "plots": {
+      "save": true,
+      "display": true,
+      "path": "output/plots/",
+      "filename": "result_plot.png",
+      "format": "png",
+      "dpi": 600
+    },
+    "visibility": {
+      "save": true,
+      "path": "output/visibility/"
+    }
+  },
+  "visualization": {
+    "show_grid": true,
+    "show_building_ids": true,
+    "show_segment_ids": true,
+    "show_node_ids": true,
+    "node_id_font_size": 10,
+    "node_size": 30,
+    "edge_width": 1.0,
+    "selected_edge_width": 2.0
+  }
+}
