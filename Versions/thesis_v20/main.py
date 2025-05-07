@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
 Main entry point for the visibility path planning application.
+With geometry rotation based on longest edge alignment.
 """
 import os
 import json
@@ -9,7 +10,9 @@ import logging
 import signal
 import sys
 import gc
+import numpy as np
 from datetime import datetime
+import networkx as nx
 
 from src.data_handler import GeometryLoader
 from src.graph_builder import GraphBuilder
@@ -32,6 +35,7 @@ config = None
 visualizer = None
 model = None
 times = {}
+geometry_loader = None  # Added to store the geometry loader for rotation
 
 def cleanup():
     """Release memory and resources."""
@@ -75,7 +79,9 @@ def signal_handler(sig, frame):
         
         # Plot current results
         if visualizer is not None and building is not None and obstacles is not None and segments is not None:
-            visualizer.plot(G, building, obstacles, segments, selected_edges, path_metrics)
+            # Create a restored version of G for visualization
+            G_vis = create_rotated_graph(G, geometry_loader, reverse=True)
+            visualizer.plot(G_vis, building, obstacles, segments, selected_edges, path_metrics)
     
     # Clean up resources before exit
     cleanup()
@@ -134,9 +140,52 @@ def create_output_directories(config):
     # Create visibility data directory
     visibility_dir = os.path.join("output", "visibility")
     os.makedirs(visibility_dir, exist_ok=True)
+    
+    # Create debug directory
+    debug_dir = os.path.join("output", "debug")
+    os.makedirs(debug_dir, exist_ok=True)
+
+def create_rotated_graph(G, geo_loader, reverse=False):
+    """
+    Create a new graph with rotated node positions.
+    
+    Args:
+        G: Original graph
+        geo_loader: GeometryLoader instance with rotation info
+        reverse: If True, rotate positions in the reverse direction
+        
+    Returns:
+        New graph with rotated positions
+    """
+    if not geo_loader.rotated or geo_loader.rotation_angle == 0:
+        return G
+    
+    # Create a new graph
+    G_rot = nx.DiGraph()
+    
+    # Add nodes with rotated positions
+    for node in G.nodes():
+        pos = G.nodes[node]['pos']
+        
+        # Rotate position
+        if reverse:
+            # Rotating back to original orientation
+            rotated_pos = geo_loader.rotate_point(pos, reverse=True)
+        else:
+            # Rotating to align with target angle
+            rotated_pos = geo_loader.rotate_point(pos, reverse=False)
+        
+        # Add node with rotated position
+        G_rot.add_node(node, pos=rotated_pos)
+    
+    # Add edges with the same weights
+    for u, v, data in G.edges(data=True):
+        G_rot.add_edge(u, v, **data)
+    
+    return G_rot
 
 def main():
-    global G, grid_points, building, obstacles, segments, segment_visibility, edge_visibility, vrf, selected_edges, config, visualizer, model, times
+    global G, grid_points, building, obstacles, segments, segment_visibility, edge_visibility, vrf, selected_edges, config, visualizer, model, times, geometry_loader
     
     # Register signal handler for graceful interruption
     signal.signal(signal.SIGINT, signal_handler)
@@ -144,9 +193,6 @@ def main():
     # Load configuration
     with open('config/config.json', 'r') as f:
         config = json.load(f)
-    
-    # Update DPI to 600
-    config['output']['plots']['dpi'] = 600
     
     # Create output directories
     create_output_directories(config)
@@ -162,7 +208,7 @@ def main():
         setup_logging(None)  # Console-only logging
     
     logger = logging.getLogger(__name__)
-    logger.info("Starting visibility path planning with normal vector approach")
+    logger.info("Starting visibility path planning with normal vector approach and geometry rotation")
     log_memory_usage(logger, "Initial memory usage")
     
     # Record start time
@@ -174,22 +220,40 @@ def main():
         logger.info("Loading geometry data")
         log_memory_usage(logger, "Before geometry loading")
         geometry_loader = GeometryLoader(config)
-        building, obstacles, polygons = geometry_loader.load_geometries()
+        original_building, original_obstacles, original_polygons = geometry_loader.load_geometries()
         log_memory_usage(logger, "After geometry loading")
         times['Geometry Loading'] = time.time() - step_start_time
         
-        # Build the graph
+        # ROTATION STEP 1: Find the longest edge and its angle
         step_start_time = time.time()
-        logger.info("Building the graph")
+        logger.info("Finding longest edge and calculating rotation angle")
+        longest_edge_length, longest_edge_angle, longest_edge_start, longest_edge_end, longest_poly = geometry_loader.find_longest_edge_and_angle(original_building)
+        logger.info(f"Longest edge length: {longest_edge_length:.2f}, angle with north: {longest_edge_angle:.2f} degrees")
+        
+        # ROTATION STEP 2: Determine target angle
+        target_angle = geometry_loader.get_target_angle(longest_edge_angle)
+        logger.info(f"Target angle: {target_angle} degrees")
+        
+        # ROTATION STEP 3: Calculate rotation angle
+        rotation_angle = geometry_loader.calculate_rotation_angle(longest_edge_angle, target_angle)
+        logger.info(f"Rotation angle needed: {rotation_angle:.2f} degrees")
+        
+        # ROTATION STEP 4: Rotate all geometries
+        building, obstacles = geometry_loader.rotate_all_geometries(original_building, original_obstacles, rotation_angle)
+        times['Geometry Rotation'] = time.time() - step_start_time
+        
+        # Build the graph on rotated geometries
+        step_start_time = time.time()
+        logger.info("Building the graph on rotated geometries")
         log_memory_usage(logger, "Before graph building")
         graph_builder = GraphBuilder(config)
         G, grid_points = graph_builder.build_graph(building, obstacles)
         log_memory_usage(logger, "After graph building")
         times['Graph Building'] = time.time() - step_start_time
         
-        # Calculate visibility using normal vector approach
+        # Calculate visibility using normal vector approach on rotated geometries
         step_start_time = time.time()
-        logger.info("Analyzing visibility with normal vector approach")
+        logger.info("Analyzing visibility with normal vector approach on rotated geometries")
         log_memory_usage(logger, "Before visibility analysis")
         visibility_analyzer = VisibilityAnalyzer(config)
         segments, segment_visibility, edge_visibility, vrf = visibility_analyzer.analyze(
@@ -201,12 +265,9 @@ def main():
         # Print time spent on visibility analysis
         print(f"Time spent on visibility analysis: {times['Visibility Analysis']:.2f} seconds")
         
-        # Initialize visualizer for potential interruptions
-        visualizer = PathVisualizer(config)
-        
-        # Run optimization
+        # Run optimization on the rotated system
         step_start_time = time.time()
-        logger.info("Running path optimization")
+        logger.info("Running path optimization on rotated geometries")
         log_memory_usage(logger, "Before optimization")
         
         # Memory optimization: Force garbage collection before optimization
@@ -219,6 +280,19 @@ def main():
         )
         log_memory_usage(logger, "After optimization")
         times['Optimization'] = time.time() - step_start_time
+        
+        # ROTATION STEP 5: Prepare for visualization in original orientation
+        step_start_time = time.time()
+        logger.info("Preparing visualization in original orientation")
+        
+        # Create a new graph with positions rotated back to original orientation for visualization
+        G_vis = create_rotated_graph(G, geometry_loader, reverse=True)
+        
+        # For visualization, use the original building and obstacles
+        building_for_vis = original_building
+        obstacles_for_vis = original_obstacles
+        
+        times['Visualization Preparation'] = time.time() - step_start_time
         
         # Calculate total time
         total_time = time.time() - start_time
@@ -241,10 +315,11 @@ def main():
                 gap = model.MIPGap * 100  # Convert to percentage
                 print(f"Reached time limit with {gap:.2f}% optimality gap")
         
-        # Create visualization
+        # Create visualization with original geometry orientation
         logger.info("Creating visualization")
+        visualizer = PathVisualizer(config)
         visualizer.plot(
-            G, building, obstacles, segments, selected_edges, path_metrics
+            G_vis, building_for_vis, obstacles_for_vis, segments, selected_edges, path_metrics
         )
         
         logger.info("Process completed successfully")
@@ -260,8 +335,26 @@ def main():
             visualizer = PathVisualizer(config)
         
         if visualizer is not None and G is not None and building is not None and obstacles is not None and segments is not None:
-            path_metrics = calculate_path_metrics(G, selected_edges, segments, segment_visibility) if segments and segment_visibility else None
-            visualizer.plot(G, building, obstacles, segments, selected_edges, path_metrics)
+            # Try to create a visualization graph if possible
+            try:
+                if geometry_loader and geometry_loader.rotated:
+                    G_vis = create_rotated_graph(G, geometry_loader, reverse=True)
+                    building_vis = original_building if 'original_building' in locals() else building
+                    obstacles_vis = original_obstacles if 'original_obstacles' in locals() else obstacles
+                else:
+                    G_vis = G
+                    building_vis = building
+                    obstacles_vis = obstacles
+                
+                # Calculate metrics if possible
+                path_metrics = None
+                if segments and segment_visibility and selected_edges:
+                    path_metrics = calculate_path_metrics(G, selected_edges, segments, segment_visibility)
+                
+                # Create visualization
+                visualizer.plot(G_vis, building_vis, obstacles_vis, segments, selected_edges, path_metrics)
+            except Exception as viz_error:
+                logger.error(f"Error creating emergency visualization: {viz_error}")
         
         raise
     finally:

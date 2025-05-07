@@ -58,14 +58,17 @@ def find_longest_edge_and_angle(building):
 
 def get_target_angle(longest_edge_angle):
     """
-    Determine target angle based on the updated approach:
-    - If angle is between 0-45° or 135-180° → align with vertical (0°)
-    - If angle is between 45-135° → align with horizontal (90°)
+    Determine target angle based on the new classification:
+    If angle is between 0° and 45°, target is 0° (North)
+    If angle is between 45° and 135°, target is 90° (East)
+    If angle is between 135° and 180°, target is 180° (South)
     """
-    if (0 <= longest_edge_angle < 45) or (135 <= longest_edge_angle <= 180):
-        return 0  # Align with vertical (North)
-    else:  # 45 <= longest_edge_angle < 135
-        return 90  # Align with horizontal (East)
+    if 0 <= longest_edge_angle < 45:
+        return 0  # Align with North
+    elif 45 <= longest_edge_angle < 135:
+        return 90  # Align with East
+    else:  # 135 <= longest_edge_angle <= 180
+        return 180  # Align with South
 
 def calculate_rotation_angle(longest_edge_angle, target_angle):
     """Calculate the rotation angle needed."""
@@ -115,6 +118,11 @@ def visualize_building_and_longest_edge(building, longest_edge_start, longest_ed
               head_length=north_length*0.1, fc='blue', ec='blue', label="North")
     plt.text(midpoint_x, midpoint_y + north_length*1.1, "N", ha='center', fontsize=12)
     
+    # Draw south direction from midpoint
+    plt.arrow(midpoint_x, midpoint_y, 0, -north_length, head_width=north_length*0.1, 
+              head_length=north_length*0.1, fc='purple', ec='purple', label="South")
+    plt.text(midpoint_x, midpoint_y - north_length*1.1, "S", ha='center', fontsize=12)
+    
     # Draw edge direction from midpoint
     plt.arrow(midpoint_x, midpoint_y, 
               normalized_edge[0] * north_length, normalized_edge[1] * north_length, 
@@ -142,16 +150,18 @@ def visualize_building_and_longest_edge(building, longest_edge_start, longest_ed
                ha="center", fontsize=12, 
                bbox={"facecolor":"orange", "alpha":0.2, "pad":5})
     
-    # Add final orientation indicator
+    # Add final orientation indicator with new classification
     if target_angle == 0:
         orientation = "Vertical (North)"
-    else:
-        orientation = "Horizontal (East)" 
+    elif target_angle == 90:
+        orientation = "Horizontal (East)"
+    else:  # target_angle == 180
+        orientation = "Vertical (South)"
     
     plt.figtext(0.5, 0.05, f"After rotation, this edge will be aligned: {orientation}", 
                ha="center", fontsize=12, weight='bold')
     
-    # Add compass
+    # Add enhanced compass
     ax = plt.gca()
     xmin, xmax = ax.get_xlim()
     ymin, ymax = ax.get_ylim()
@@ -159,15 +169,18 @@ def visualize_building_and_longest_edge(building, longest_edge_start, longest_ed
     compass_y = ymax - (ymax - ymin) * 0.1
     compass_size = min(xmax - xmin, ymax - ymin) * 0.05
     
-    # Draw compass
+    # Draw compass with North, East, South
     plt.arrow(compass_x, compass_y, 0, compass_size, head_width=compass_size/3, 
              head_length=compass_size/3, fc='blue', ec='blue')
     plt.arrow(compass_x, compass_y, compass_size, 0, head_width=compass_size/3, 
              head_length=compass_size/3, fc='red', ec='red')
+    plt.arrow(compass_x, compass_y, 0, -compass_size, head_width=compass_size/3, 
+             head_length=compass_size/3, fc='purple', ec='purple')
     
     # Add labels
     plt.text(compass_x, compass_y + compass_size * 1.2, 'N', ha='center', va='center', fontsize=10)
     plt.text(compass_x + compass_size * 1.2, compass_y, 'E', ha='center', va='center', fontsize=10)
+    plt.text(compass_x, compass_y - compass_size * 1.2, 'S', ha='center', va='center', fontsize=10)
     
     # Add title and labels
     plt.title(f"Building with Longest Edge (Angle with North: {longest_edge_angle:.2f}°)", fontsize=14)
@@ -207,7 +220,7 @@ building = MultiPolygon(building_polygons)
 longest_edge_length, longest_edge_angle, longest_edge_start, longest_edge_end, longest_poly = find_longest_edge_and_angle(building)
 print(f"Longest edge length: {longest_edge_length:.2f}, angle with north: {longest_edge_angle:.2f} degrees")
 
-# Determine target angle
+# Determine target angle with new classification
 target_angle = get_target_angle(longest_edge_angle)
 print(f"Target angle: {target_angle} degrees")
 

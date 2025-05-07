@@ -1,0 +1,192 @@
+2025-04-23 17:18:06,897 - __main__ - INFO - Starting visibility path planning
+2025-04-23 17:18:06,902 - __main__ - INFO - Initial memory usage - Memory usage: 126.77 MB
+2025-04-23 17:18:06,902 - __main__ - INFO - Loading geometry data
+2025-04-23 17:18:06,902 - __main__ - INFO - Before geometry loading - Memory usage: 126.77 MB
+2025-04-23 17:18:06,902 - src.data_handler - INFO - Loading geometries from data/geometry.json
+2025-04-23 17:18:06,903 - __main__ - INFO - After geometry loading - Memory usage: 127.39 MB
+2025-04-23 17:18:06,903 - __main__ - INFO - Building the graph
+2025-04-23 17:18:06,903 - __main__ - INFO - Before graph building - Memory usage: 127.39 MB
+2025-04-23 17:18:06,903 - src.graph_builder - INFO - Building grid graph
+2025-04-23 17:18:06,937 - src.graph_builder - INFO - Generated 240 grid points
+2025-04-23 17:18:07,733 - src.graph_builder - WARNING - The generated graph is not connected.
+2025-04-23 17:18:07,733 - src.graph_builder - INFO - Created graph with 240 nodes and 1808 edges
+2025-04-23 17:18:07,733 - __main__ - INFO - After graph building - Memory usage: 128.77 MB
+2025-04-23 17:18:07,733 - __main__ - INFO - Analyzing visibility
+2025-04-23 17:18:07,733 - __main__ - INFO - Before visibility analysis - Memory usage: 128.77 MB
+2025-04-23 17:18:07,733 - src.visibility_analyzer - INFO - Using 12 CPU cores for visibility analysis
+2025-04-23 17:18:07,733 - src.visibility_analyzer - INFO - Analyzing visibility
+2025-04-23 17:18:07,733 - src.visibility_analyzer - INFO - Before segment creation - Memory usage: 128.77 MB
+2025-04-23 17:18:07,739 - src.visibility_analyzer - INFO - Created 115 building segments
+2025-04-23 17:18:07,739 - src.visibility_analyzer - INFO - Calculating edge-segment visibility (parallelized)
+2025-04-23 17:18:07,739 - src.visibility_analyzer - INFO - Before edge-segment visibility calculation - Memory usage: 128.77 MB
+2025-04-23 17:18:07,739 - src.visibility_analyzer - INFO - Dividing 115 segments into 12 chunks for parallel processing
+2025-04-23 17:18:24,561 - src.visibility_analyzer - INFO - After edge-segment visibility calculation - Memory usage: 133.64 MB
+2025-04-23 17:18:24,561 - src.visibility_analyzer - INFO - Calculating particle-based visibility (parallelized)
+2025-04-23 17:18:24,561 - src.visibility_analyzer - INFO - Before particle visibility calculation - Memory usage: 133.64 MB
+2025-04-23 17:18:24,561 - src.visibility_analyzer - INFO - Dividing 1808 edges into 12 chunks for parallel processing
+2025-04-23 17:18:48,962 - src.visibility_analyzer - INFO - After particle visibility calculation - Memory usage: 133.77 MB
+2025-04-23 17:18:48,962 - __main__ - INFO - After visibility analysis - Memory usage: 133.77 MB
+2025-04-23 17:18:48,962 - __main__ - INFO - Running path optimization
+2025-04-23 17:18:48,962 - __main__ - INFO - Before optimization - Memory usage: 133.77 MB
+2025-04-23 17:18:48,962 - src.optimizer - INFO - Setting up optimization model
+2025-04-23 17:18:48,962 - src.optimizer - INFO - Before optimization model creation - Memory usage: 133.77 MB
+2025-04-23 17:18:48,963 - gurobipy - INFO - Set parameter Username
+2025-04-23 17:18:48,963 - gurobipy - INFO - Set parameter LicenseID to value 2654881
+2025-04-23 17:18:48,964 - gurobipy - INFO - Academic license - for non-commercial use only - expires 2026-04-21
+2025-04-23 17:18:48,964 - gurobipy - INFO - Set parameter LazyConstraints to value 1
+2025-04-23 17:18:48,970 - src.optimizer - WARNING - Segment 0 has no visible edges
+2025-04-23 17:18:48,970 - src.optimizer - WARNING - Segment 1 has no visible edges
+2025-04-23 17:18:48,970 - src.optimizer - WARNING - Segment 2 has no visible edges
+2025-04-23 17:18:48,970 - src.optimizer - WARNING - Segment 3 has no visible edges
+2025-04-23 17:18:48,970 - src.optimizer - WARNING - Segment 4 has no visible edges
+2025-04-23 17:18:48,970 - src.optimizer - WARNING - Segment 5 has no visible edges
+2025-04-23 17:18:48,970 - src.optimizer - WARNING - Segment 6 has no visible edges
+2025-04-23 17:18:48,970 - src.optimizer - WARNING - Segment 7 has no visible edges
+2025-04-23 17:18:48,970 - src.optimizer - WARNING - Segment 8 has no visible edges
+2025-04-23 17:18:48,970 - src.optimizer - WARNING - Segment 9 has no visible edges
+2025-04-23 17:18:48,970 - src.optimizer - WARNING - Segment 10 has no visible edges
+2025-04-23 17:18:48,970 - src.optimizer - WARNING - Segment 11 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 12 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 13 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 14 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 15 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 16 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 17 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 18 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 19 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 20 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 21 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 22 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 23 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 24 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 25 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 26 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 27 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 28 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 29 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 30 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 31 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 32 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 33 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 34 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 35 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 36 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 37 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 38 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 39 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 40 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 41 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 42 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 43 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 44 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 45 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 46 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 47 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 48 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 49 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 50 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 51 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 52 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 53 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 54 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 55 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 56 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 57 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 58 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 59 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 60 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 61 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 62 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 63 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 64 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 65 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 66 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 67 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 68 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 69 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 70 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 71 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 72 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 73 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 74 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 75 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 76 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 77 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 78 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 79 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 80 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 81 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 82 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 83 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 84 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 85 has no visible edges
+2025-04-23 17:18:48,971 - src.optimizer - WARNING - Segment 86 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 87 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 88 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 89 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 90 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 91 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 92 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 93 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 94 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 95 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 96 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 97 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 98 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 99 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 100 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 101 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 102 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 103 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 104 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 105 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 106 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 107 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 108 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 109 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 110 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 111 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 112 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 113 has no visible edges
+2025-04-23 17:18:48,972 - src.optimizer - WARNING - Segment 114 has no visible edges
+2025-04-23 17:18:48,978 - src.optimizer - INFO - No tie points specified in config
+2025-04-23 17:18:57,498 - src.optimizer - INFO - After optimization model setup - Memory usage: 698.89 MB
+2025-04-23 17:18:57,498 - src.optimizer - INFO - Solving optimization model
+2025-04-23 17:18:57,712 - gurobipy - INFO - Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+2025-04-23 17:18:57,712 - gurobipy - INFO - 
+2025-04-23 17:18:57,712 - gurobipy - INFO - CPU model: 12th Gen Intel(R) Core(TM) i5-12450H, instruction set [SSE2|AVX|AVX2]
+2025-04-23 17:18:57,712 - gurobipy - INFO - Thread count: 12 physical cores, 12 logical processors, using up to 12 threads
+2025-04-23 17:18:57,712 - gurobipy - INFO - 
+2025-04-23 17:18:57,712 - gurobipy - INFO - Non-default parameters:
+2025-04-23 17:18:57,712 - gurobipy - INFO - LazyConstraints  1
+2025-04-23 17:18:57,712 - gurobipy - INFO - 
+2025-04-23 17:18:57,712 - gurobipy - INFO - Optimize a model with 2275520 rows, 1808 columns and 433920 nonzeros
+2025-04-23 17:18:57,720 - gurobipy - INFO - Model fingerprint: 0xc2189e65
+2025-04-23 17:18:57,720 - gurobipy - INFO - Variable types: 0 continuous, 1808 integer (1808 binary)
+2025-04-23 17:18:57,723 - gurobipy - INFO - Coefficient statistics:
+2025-04-23 17:18:57,723 - gurobipy - INFO -   Matrix range     [1e+00, 1e+00]
+2025-04-23 17:18:57,723 - gurobipy - INFO -   Objective range  [1e+07, 2e+07]
+2025-04-23 17:18:57,723 - gurobipy - INFO -   Bounds range     [1e+00, 1e+00]
+2025-04-23 17:18:57,723 - gurobipy - INFO -   RHS range        [2e+00, 2e+00]
+2025-04-23 17:18:57,747 - gurobipy - INFO - Found heuristic solution: objective 0.0000000
+2025-04-23 17:18:57,831 - gurobipy - INFO - 
+2025-04-23 17:18:57,831 - gurobipy - INFO - Explored 0 nodes (0 simplex iterations) in 0.12 seconds (0.06 work units)
+2025-04-23 17:18:57,831 - gurobipy - INFO - Thread count was 1 (of 12 available processors)
+2025-04-23 17:18:57,831 - gurobipy - INFO - 
+2025-04-23 17:18:57,831 - gurobipy - INFO - Solution count 1: 0 
+2025-04-23 17:18:57,831 - gurobipy - INFO - 
+2025-04-23 17:18:57,831 - gurobipy - INFO - Optimal solution found (tolerance 1.00e-04)
+2025-04-23 17:18:57,840 - gurobipy - INFO - Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0000%
+2025-04-23 17:18:57,840 - gurobipy - INFO - 
+2025-04-23 17:18:57,840 - gurobipy - INFO - User-callback calls 27, time in user-callback 0.00 sec
+2025-04-23 17:18:57,842 - src.optimizer - INFO - Optimization successful, selected 0 edges
+2025-04-23 17:18:57,842 - src.optimizer - INFO - After optimization model solving - Memory usage: 903.57 MB
+2025-04-23 17:18:57,842 - __main__ - INFO - After optimization - Memory usage: 903.57 MB
+2025-04-23 17:18:57,842 - __main__ - INFO - Creating visualization
+2025-04-23 17:18:57,842 - src.visualizer - INFO - Creating visualization
+2025-04-23 17:18:57,998 - src.visualizer - WARNING - No selected edges to plot
+2025-04-23 17:19:00,151 - src.visualizer - INFO - Saved plot to output/plots/result_plot_20250423_171857.png
+2025-04-23 18:43:28,173 - __main__ - INFO - Process completed successfully
+2025-04-23 18:43:28,507 - __main__ - INFO - Disposed Gurobi optimization model
+2025-04-23 18:43:28,507 - __main__ - INFO - Before cleanup - Memory usage: 379.94 MB
+2025-04-23 18:43:28,554 - __main__ - INFO - After cleanup - Memory usage: 379.94 MB

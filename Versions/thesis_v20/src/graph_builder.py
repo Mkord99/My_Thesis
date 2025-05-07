@@ -135,69 +135,29 @@ class GraphBuilder:
                         edge_line = LineString([(p1.x, p1.y), (p2.x, p2.y)])
                         
                         # Ensure edge does not intersect buffer or obstacles
-                        if (not inner_buffer.intersects(edge_line) and 
-                            not obstacles['radiation'].intersects(edge_line)):
+                        valid_edge = True
+                        
+                        # Check intersection with inner buffer
+                        if inner_buffer.intersects(edge_line):
+                            # If it intersects at endpoints only, that's acceptable
+                            if inner_buffer.intersection(edge_line).length <= 1e-10:
+                                pass
+                            else:
+                                valid_edge = False
+                        
+                        # Check intersection with radiation obstacles
+                        if obstacles['radiation'].intersects(edge_line):
+                            # If it intersects at endpoints only, that's acceptable
+                            if obstacles['radiation'].intersection(edge_line).length <= 1e-10:
+                                pass
+                            else:
+                                valid_edge = False
+                        
+                        if valid_edge:
                             G.add_edge(i, j, weight=dist)
         
         # Verify the graph is connected, otherwise log a warning
         if not nx.is_weakly_connected(G):
             self.logger.warning("The generated graph is not connected.")
-        
-        return G
-    
-    # The preprocessing method is still defined but not used
-    def _preprocess_graph(self, G):
-        """
-        Preprocess the graph to reduce complexity while preserving optimality.
-        THIS METHOD IS KEPT FOR REFERENCE BUT NOT CURRENTLY USED.
-        
-        Args:
-            G: networkx DiGraph
-            
-        Returns:
-            Processed networkx DiGraph with reduced complexity
-        """
-        self.logger.info("Preprocessing graph to reduce complexity")
-        
-        # Step 1: Remove isolated nodes
-        isolated_nodes = list(nx.isolates(G))
-        if isolated_nodes:
-            G.remove_nodes_from(isolated_nodes)
-            self.logger.info(f"Removed {len(isolated_nodes)} isolated nodes")
-        
-        # Step 2: Simplify paths where a node has exactly one predecessor and one successor
-        original_node_count = G.number_of_nodes()
-        simplified_count = 0
-        
-        # Make a copy of the node list to avoid modification during iteration
-        for node in list(G.nodes()):
-            # Skip if node was already removed in a previous iteration
-            if not G.has_node(node):
-                continue
-                
-            predecessors = list(G.predecessors(node))
-            successors = list(G.successors(node))
-            
-            # Check if node has exactly one predecessor and one successor
-            if len(predecessors) == 1 and len(successors) == 1:
-                pred = predecessors[0]
-                succ = successors[0]
-                
-                # Only simplify if predecessor and successor are different
-                # and not already connected
-                if pred != succ and not G.has_edge(pred, succ):
-                    # Calculate new edge weight (preserve path length)
-                    new_weight = G[pred][node]['weight'] + G[node][succ]['weight']
-                    
-                    # Add direct edge between predecessor and successor
-                    G.add_edge(pred, succ, weight=new_weight)
-                    
-                    # Remove the intermediate node
-                    G.remove_node(node)
-                    simplified_count += 1
-        
-        if simplified_count > 0:
-            self.logger.info(f"Simplified {simplified_count} path nodes")
-            self.logger.info(f"Reduced graph from {original_node_count} to {G.number_of_nodes()} nodes")
         
         return G

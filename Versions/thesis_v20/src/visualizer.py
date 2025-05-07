@@ -66,7 +66,7 @@ class PathVisualizer:
         plt.ylabel("Y-coordinate")
         plt.grid(True, linestyle='--', alpha=0.7)
         
-        # Add path metrics if provided
+        # Add path metrics if provided (removing any rotation angle info)
         if path_metrics:
             metrics_text = f"Path Length: {path_metrics.get('path_length', 'N/A'):.2f} m\n"
             metrics_text += f"Selected Edges: {path_metrics.get('num_edges', 'N/A')}\n"
@@ -150,17 +150,19 @@ class PathVisualizer:
                 )
         
         # Plot radiation obstacles
-        for poly in obstacles['radiation'].geoms:
-            x, y = poly.exterior.xy
-            plt.plot(x, y, 'r-', linewidth=2)
-            plt.fill(x, y, alpha=0.6, color='red', hatch='///')
+        if 'radiation' in obstacles and not obstacles['radiation'].is_empty:
+            for poly in obstacles['radiation'].geoms:
+                x, y = poly.exterior.xy
+                plt.plot(x, y, 'r-', linewidth=2)
+                plt.fill(x, y, alpha=0.6, color='red', hatch='///')
         
         # Plot visibility obstacles
-        for poly in obstacles['visibility'].geoms:
-            if poly not in obstacles['radiation'].geoms:  # Avoid plotting twice
-                x, y = poly.exterior.xy
-                plt.plot(x, y, 'k-', linewidth=2)
-                plt.fill(x, y, alpha=0.6, color='black')
+        if 'visibility' in obstacles and not obstacles['visibility'].is_empty:
+            for poly in obstacles['visibility'].geoms:
+                if not any(poly.equals(rad_poly) for rad_poly in obstacles.get('radiation', {}).geoms):
+                    x, y = poly.exterior.xy
+                    plt.plot(x, y, 'k-', linewidth=2)
+                    plt.fill(x, y, alpha=0.6, color='black')
     
     def _plot_segments(self, segments):
         """
