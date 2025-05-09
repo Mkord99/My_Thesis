@@ -1,0 +1,154 @@
+2025-05-07 16:45:04,583 - __main__ - INFO - Starting visibility path planning with normal vector approach and building orientation preprocessing
+2025-05-07 16:45:04,587 - __main__ - INFO - Initial memory usage - Memory usage: 127.72 MB
+2025-05-07 16:45:04,587 - __main__ - INFO - Loading geometry data and applying orientation preprocessing
+2025-05-07 16:45:04,587 - __main__ - INFO - Before geometry loading - Memory usage: 127.72 MB
+2025-05-07 16:45:04,587 - src.data_handler - INFO - Loading geometries from data/geometry.json
+2025-05-07 16:45:04,588 - src.data_handler - INFO - Analyzing building orientation and applying rotation preprocessing
+2025-05-07 16:45:04,590 - src.rotation_utils - INFO - Longest edge length: 20.00, angle with north: 0.00 degrees
+2025-05-07 16:45:04,590 - src.rotation_utils - INFO - Target angle: 0 degrees
+2025-05-07 16:45:04,590 - src.rotation_utils - INFO - Rotation angle needed: 0.00 degrees
+2025-05-07 16:45:04,590 - src.rotation_utils - INFO - Rotation center: (51.053719008264466, 24.6900826446281)
+2025-05-07 16:45:04,590 - src.data_handler - INFO - Saved orientation information to output/orientation/orientation_info.json
+2025-05-07 16:45:04,591 - src.data_handler - INFO - Rotated building and obstacles by 0.00 degrees
+2025-05-07 16:45:04,591 - __main__ - INFO - Building rotation: 0.00 degrees around (51.053719008264466, 24.6900826446281)
+2025-05-07 16:45:04,591 - __main__ - INFO - After geometry loading - Memory usage: 128.34 MB
+2025-05-07 16:45:04,591 - __main__ - INFO - Building the graph
+2025-05-07 16:45:04,591 - __main__ - INFO - Before graph building - Memory usage: 128.34 MB
+2025-05-07 16:45:04,591 - src.graph_builder - INFO - Building grid graph
+2025-05-07 16:45:04,607 - src.graph_builder - INFO - Generated 200 grid points
+2025-05-07 16:45:05,181 - src.graph_builder - WARNING - The generated graph is not connected.
+2025-05-07 16:45:05,181 - src.graph_builder - INFO - Created graph with 200 nodes and 1588 edges
+2025-05-07 16:45:05,181 - __main__ - INFO - After graph building - Memory usage: 129.47 MB
+2025-05-07 16:45:05,181 - __main__ - INFO - Analyzing visibility with normal vector approach
+2025-05-07 16:45:05,181 - __main__ - INFO - Before visibility analysis - Memory usage: 129.47 MB
+2025-05-07 16:45:05,182 - src.visibility_analyzer - INFO - Using 12 CPU cores for visibility analysis
+2025-05-07 16:45:05,182 - src.visibility_analyzer - INFO - Using touch threshold of 0.1 meters
+2025-05-07 16:45:05,182 - src.visibility_analyzer - INFO - Analyzing visibility
+2025-05-07 16:45:05,182 - src.visibility_analyzer - INFO - Before segment creation - Memory usage: 129.47 MB
+2025-05-07 16:45:05,197 - src.visibility_analyzer - INFO - Created 98 building segments with normal vectors
+2025-05-07 16:45:05,197 - src.visibility_analyzer - INFO - Calculating edge-segment visibility using normal vector approach (parallelized)
+2025-05-07 16:45:05,197 - src.visibility_analyzer - INFO - Before edge-segment visibility calculation - Memory usage: 129.47 MB
+2025-05-07 16:45:05,197 - src.visibility_analyzer - INFO - Dividing 98 segments into 12 chunks for parallel processing
+2025-05-07 16:45:06,718 - src.visibility_analyzer - INFO - After edge-segment visibility calculation - Memory usage: 134.22 MB
+2025-05-07 16:45:06,718 - src.visibility_analyzer - INFO - Calculating particle-based visibility using normal vector approach (parallelized)
+2025-05-07 16:45:06,718 - src.visibility_analyzer - INFO - Before particle visibility calculation - Memory usage: 134.22 MB
+2025-05-07 16:45:06,718 - src.visibility_analyzer - INFO - Dividing 1588 edges into 12 chunks for parallel processing
+2025-05-07 16:45:18,887 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:18,887 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:18,887 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:18,887 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:18,887 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:18,887 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:18,888 - __main__ - INFO - Before cleanup - Memory usage: 96.73 MB
+2025-05-07 16:45:18,888 - __main__ - INFO - Before cleanup - Memory usage: 96.86 MB
+2025-05-07 16:45:18,888 - __main__ - INFO - Before cleanup - Memory usage: 97.35 MB
+2025-05-07 16:45:18,888 - __main__ - INFO - Before cleanup - Memory usage: 97.35 MB
+2025-05-07 16:45:18,888 - __main__ - INFO - Before cleanup - Memory usage: 96.98 MB
+2025-05-07 16:45:18,888 - __main__ - INFO - Before cleanup - Memory usage: 134.22 MB
+2025-05-07 16:45:18,887 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:18,887 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:18,887 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:18,887 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:18,889 - __main__ - INFO - Before cleanup - Memory usage: 97.10 MB
+2025-05-07 16:45:18,889 - __main__ - INFO - Before cleanup - Memory usage: 96.98 MB
+2025-05-07 16:45:18,889 - __main__ - INFO - Before cleanup - Memory usage: 96.85 MB
+2025-05-07 16:45:18,889 - __main__ - INFO - Before cleanup - Memory usage: 97.35 MB
+2025-05-07 16:45:18,887 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:18,892 - __main__ - INFO - Before cleanup - Memory usage: 97.10 MB
+2025-05-07 16:45:18,887 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:18,887 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:18,893 - __main__ - INFO - Before cleanup - Memory usage: 96.98 MB
+2025-05-07 16:45:18,893 - __main__ - INFO - Before cleanup - Memory usage: 97.10 MB
+2025-05-07 16:45:18,945 - __main__ - INFO - After cleanup - Memory usage: 98.61 MB
+2025-05-07 16:45:18,945 - __main__ - INFO - After cleanup - Memory usage: 98.85 MB
+2025-05-07 16:45:18,945 - __main__ - INFO - After cleanup - Memory usage: 99.23 MB
+2025-05-07 16:45:18,945 - __main__ - INFO - After cleanup - Memory usage: 98.98 MB
+2025-05-07 16:45:18,946 - __main__ - INFO - After cleanup - Memory usage: 98.98 MB
+2025-05-07 16:45:18,946 - __main__ - INFO - After cleanup - Memory usage: 98.61 MB
+2025-05-07 16:45:18,947 - __main__ - INFO - After cleanup - Memory usage: 99.35 MB
+2025-05-07 16:45:18,949 - __main__ - INFO - After cleanup - Memory usage: 98.98 MB
+2025-05-07 16:45:18,949 - __main__ - INFO - After cleanup - Memory usage: 98.85 MB
+2025-05-07 16:45:18,951 - __main__ - INFO - After cleanup - Memory usage: 99.10 MB
+2025-05-07 16:45:18,957 - __main__ - INFO - After cleanup - Memory usage: 134.22 MB
+2025-05-07 16:45:18,966 - __main__ - INFO - After cleanup - Memory usage: 98.85 MB
+2025-05-07 16:45:18,968 - __main__ - INFO - After cleanup - Memory usage: 99.10 MB
+2025-05-07 16:45:19,057 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,057 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,057 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,057 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,057 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,057 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,057 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,057 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,057 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,057 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,057 - __main__ - INFO - Before cleanup - Memory usage: 90.16 MB
+2025-05-07 16:45:19,057 - __main__ - INFO - Before cleanup - Memory usage: 90.15 MB
+2025-05-07 16:45:19,058 - __main__ - INFO - Before cleanup - Memory usage: 90.16 MB
+2025-05-07 16:45:19,057 - __main__ - INFO - Before cleanup - Memory usage: 90.16 MB
+2025-05-07 16:45:19,057 - __main__ - INFO - Before cleanup - Memory usage: 90.16 MB
+2025-05-07 16:45:19,057 - __main__ - INFO - Before cleanup - Memory usage: 90.16 MB
+2025-05-07 16:45:19,058 - __main__ - INFO - Before cleanup - Memory usage: 90.16 MB
+2025-05-07 16:45:19,058 - __main__ - INFO - Before cleanup - Memory usage: 90.16 MB
+2025-05-07 16:45:19,058 - __main__ - INFO - Before cleanup - Memory usage: 134.22 MB
+2025-05-07 16:45:19,058 - __main__ - INFO - Before cleanup - Memory usage: 90.16 MB
+2025-05-07 16:45:19,057 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,057 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,061 - __main__ - INFO - Before cleanup - Memory usage: 90.16 MB
+2025-05-07 16:45:19,061 - __main__ - INFO - Before cleanup - Memory usage: 90.21 MB
+2025-05-07 16:45:19,057 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,065 - __main__ - INFO - Before cleanup - Memory usage: 90.16 MB
+2025-05-07 16:45:19,106 - __main__ - INFO - After cleanup - Memory usage: 91.91 MB
+2025-05-07 16:45:19,106 - __main__ - INFO - After cleanup - Memory usage: 91.91 MB
+2025-05-07 16:45:19,111 - __main__ - INFO - After cleanup - Memory usage: 134.22 MB
+2025-05-07 16:45:19,112 - __main__ - INFO - Before cleanup - Memory usage: 134.22 MB
+2025-05-07 16:45:19,112 - __main__ - INFO - After cleanup - Memory usage: 92.41 MB
+2025-05-07 16:45:19,113 - __main__ - INFO - After cleanup - Memory usage: 92.40 MB
+2025-05-07 16:45:19,117 - __main__ - INFO - After cleanup - Memory usage: 92.54 MB
+2025-05-07 16:45:19,118 - __main__ - INFO - After cleanup - Memory usage: 92.41 MB
+2025-05-07 16:45:19,120 - __main__ - INFO - After cleanup - Memory usage: 92.41 MB
+2025-05-07 16:45:19,121 - __main__ - INFO - After cleanup - Memory usage: 92.41 MB
+2025-05-07 16:45:19,133 - __main__ - INFO - After cleanup - Memory usage: 92.41 MB
+2025-05-07 16:45:19,134 - __main__ - INFO - After cleanup - Memory usage: 92.54 MB
+2025-05-07 16:45:19,135 - __main__ - INFO - After cleanup - Memory usage: 92.46 MB
+2025-05-07 16:45:19,136 - __main__ - INFO - After cleanup - Memory usage: 92.41 MB
+2025-05-07 16:45:19,141 - __main__ - INFO - After cleanup - Memory usage: 134.22 MB
+2025-05-07 16:45:19,209 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,209 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,209 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,209 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,209 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,209 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,209 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,209 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,209 - __main__ - INFO - Before cleanup - Memory usage: 90.16 MB
+2025-05-07 16:45:19,209 - __main__ - INFO - Before cleanup - Memory usage: 89.98 MB
+2025-05-07 16:45:19,209 - __main__ - INFO - Before cleanup - Memory usage: 134.22 MB
+2025-05-07 16:45:19,209 - __main__ - INFO - Before cleanup - Memory usage: 90.28 MB
+2025-05-07 16:45:19,209 - __main__ - INFO - Before cleanup - Memory usage: 90.28 MB
+2025-05-07 16:45:19,209 - __main__ - INFO - Before cleanup - Memory usage: 90.16 MB
+2025-05-07 16:45:19,209 - __main__ - INFO - Before cleanup - Memory usage: 90.28 MB
+2025-05-07 16:45:19,209 - __main__ - INFO - Before cleanup - Memory usage: 90.28 MB
+2025-05-07 16:45:19,210 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,211 - __main__ - INFO - Before cleanup - Memory usage: 90.28 MB
+2025-05-07 16:45:19,212 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,213 - __main__ - INFO - Before cleanup - Memory usage: 90.16 MB
+2025-05-07 16:45:19,216 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,217 - __main__ - INFO - Before cleanup - Memory usage: 90.28 MB
+2025-05-07 16:45:19,220 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,221 - __main__ - INFO - Before cleanup - Memory usage: 90.28 MB
+2025-05-07 16:45:19,224 - __main__ - WARNING - Received interrupt signal, stopping gracefully and showing current results
+2025-05-07 16:45:19,225 - __main__ - INFO - Before cleanup - Memory usage: 90.21 MB
+2025-05-07 16:45:19,247 - __main__ - INFO - After cleanup - Memory usage: 134.22 MB
+2025-05-07 16:45:19,249 - __main__ - INFO - After cleanup - Memory usage: 91.73 MB
+2025-05-07 16:45:19,251 - __main__ - INFO - After cleanup - Memory usage: 92.03 MB
+2025-05-07 16:45:19,256 - __main__ - INFO - After cleanup - Memory usage: 91.91 MB
+2025-05-07 16:45:19,256 - __main__ - INFO - After cleanup - Memory usage: 91.91 MB
+2025-05-07 16:45:19,261 - __main__ - INFO - After cleanup - Memory usage: 92.53 MB
+2025-05-07 16:45:19,283 - __main__ - INFO - After cleanup - Memory usage: 92.53 MB
+2025-05-07 16:45:19,283 - __main__ - INFO - After cleanup - Memory usage: 92.41 MB
+2025-05-07 16:45:19,287 - __main__ - INFO - After cleanup - Memory usage: 92.41 MB
+2025-05-07 16:45:19,288 - __main__ - INFO - After cleanup - Memory usage: 92.46 MB
+2025-05-07 16:45:19,295 - __main__ - INFO - After cleanup - Memory usage: 92.41 MB
+2025-05-07 16:45:19,296 - __main__ - INFO - After cleanup - Memory usage: 92.53 MB
+2025-05-07 16:45:19,296 - __main__ - INFO - After cleanup - Memory usage: 92.41 MB
