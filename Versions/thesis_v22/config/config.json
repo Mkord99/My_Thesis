@@ -20,8 +20,8 @@
   "visibility": {
     "segment_size": 5,
     "visibility_constraints": {
-      "min_distance": 5,
-      "max_distance": 20,
+      "min_distance": 3,
+      "max_distance": 15,
       "max_normal_angle": 45
     },
     "particle_visibility": {
@@ -32,9 +32,9 @@
   "optimization": {
     "use_vrf_weight": true,
     "epsilon": 1e-6,
-    "tie_points": [],
+    "tie_points": [98],
     "eliminate_subtours": true,
-    "time_limit": 
+    "time_limit": null
   },
   "performance": {
     "num_cores": null
