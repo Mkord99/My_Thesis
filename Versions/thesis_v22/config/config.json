@@ -13,20 +13,20 @@
     "force_target_angle": null
   },
   "graph": {
-    "grid_spacing": 10,
-    "max_edge_distance": 15,
+    "grid_spacing": 8,
+    "max_edge_distance": 11.5,
     "use_buffer_constraint": true
   },
   "visibility": {
     "segment_size": 5,
     "visibility_constraints": {
-      "min_distance": 3,
-      "max_distance": 15,
+      "min_distance": 5,
+      "max_distance": 20,
       "max_normal_angle": 45
     },
     "particle_visibility": {
       "enabled": true,
-      "spacing": 5
+      "spacing": 1
     }
   },
   "optimization": {
@@ -34,7 +34,7 @@
     "epsilon": 1e-6,
     "tie_points": [],
     "eliminate_subtours": true,
-    "time_limit": 3600
+    "time_limit": 
   },
   "performance": {
     "num_cores": null

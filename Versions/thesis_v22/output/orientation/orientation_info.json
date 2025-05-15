@@ -1,11 +1,11 @@
 {
-  "longest_edge_angle": 75.90561186017948,
-  "target_angle": 90,
-  "rotation_angle": 14.094388139820524,
+  "longest_edge_angle": 150.78413650400705,
+  "target_angle": 180,
+  "rotation_angle": 29.21586349599295,
   "rotation_center": [
-    555525.2944589057,
-    4806748.958783473
+    555801.9012800026,
+    4806158.297316807
   ],
-  "orientation": "Horizontal (East)",
+  "orientation": "Vertical (South)",
   "grid_alignment": true
 }
