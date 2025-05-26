@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <scene id="building_scene" name="Buildings and Obstacles Scene">
+        
+        <!-- Building 1 -->
+        <part>
+            <filter type="objloader">
+                <param type="string" key="filepath" value="building1.obj" />
+                <param type="string" key="matfile" value="building1.mtl" />
+            </filter>
+            <!-- No transform needed - already in local coordinates -->
+            <filter type="transform">
+                <param type="rotation">
+                    <rot axis="x" angle_deg="0" />
+                    <rot axis="y" angle_deg="0" />
+                    <rot axis="z" angle_deg="0" />
+                </param>
+                <param type="vec3" key="scale" value="1;1;1" />
+                <param type="vec3" key="translate" value="0;0;0" />
+            </filter>
+        </part>
+        
+        <!-- Building 2 -->
+        <part>
+            <filter type="objloader">
+                <param type="string" key="filepath" value="building2.obj" />
+                <param type="string" key="matfile" value="building2.mtl" />
+            </filter>
+            <filter type="transform">
+                <param type="rotation">
+                    <rot axis="x" angle_deg="0" />
+                    <rot axis="y" angle_deg="0" />
+                    <rot axis="z" angle_deg="0" />
+                </param>
+                <param type="vec3" key="scale" value="1;1;1" />
+                <param type="vec3" key="translate" value="0;0;0" />
+            </filter>
+        </part>
+        
+        <!-- Obstacle 1 -->
+        <part>
+            <filter type="objloader">
+                <param type="string" key="filepath" value="obstacle1.obj" />
+                <param type="string" key="matfile" value="obstacle1.mtl" />
+            </filter>
+            <filter type="transform">
+                <param type="rotation">
+                    <rot axis="x" angle_deg="0" />
+                    <rot axis="y" angle_deg="0" />
+                    <rot axis="z" angle_deg="0" />
+                </param>
+                <param type="vec3" key="scale" value="1;1;1" />
+                <param type="vec3" key="translate" value="0;0;0" />
+            </filter>
+        </part>
+        
+        <!-- Obstacle 2 -->
+        <part>
+            <filter type="objloader">
+                <param type="string" key="filepath" value="obstacle2.obj" />
+                <param type="string" key="matfile" value="obstacle2.mtl" />
+            </filter>
+            <filter type="transform">
+                <param type="rotation">
+                    <rot axis="x" angle_deg="0" />
+                    <rot axis="y" angle_deg="0" />
+                    <rot axis="z" angle_deg="0" />
+                </param>
+                <param type="vec3" key="scale" value="1;1;1" />
+                <param type="vec3" key="translate" value="0;0;0" />
+            </filter>
+        </part>
+        
+        <!-- Ground plane (optional - adds a flat ground surface) -->
+        <part>
+            <filter type="geotiffloader">
+                <!-- Create a simple flat ground plane -->
+                <param type="string" key="filepath" value="!" />
+                <param type="double" key="xmin" value="-10.0" />
+                <param type="double" key="xmax" value="110.0" />
+                <param type="double" key="ymin" value="-10.0" />
+                <param type="double" key="ymax" value="62.0" />
+                <param type="double" key="zmin" value="0.0" />
+                <param type="double" key="zmax" value="0.0" />
+            </filter>
+            <!-- Ground material properties -->
+            <filter type="material">
+                <param type="string" key="name" value="ground" />
+                <param type="double" key="reflectance" value="0.2" />
+                <param type="string" key="type" value="lambertian" />
+            </filter>
+        </part>
+        
+    </scene>
+</document>

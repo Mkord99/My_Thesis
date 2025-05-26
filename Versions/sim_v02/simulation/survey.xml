@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <survey name="human_mobile_scanning_survey" 
+            id="survey1"
+            defaultScanner="HeronLite_scanner"
+            defaultPlatform="human_with_backpack">
+        
+        <!-- Survey metadata -->
+        <metadata>
+            <description>Mobile laser scanning with human carrying Heron Lite backpack</description>
+            <date>2024</date>
+            <location>Local coordinate system</location>
+            <surveyArea>
+                <minX>-6.0</minX>
+                <maxX>106.0</maxX>
+                <minY>-6.0</minY>
+                <maxY>58.0</maxY>
+            </surveyArea>
+        </metadata>
+        
+        <!-- Scanner settings (reference to scanner XML) -->
+        <scannerSettings id="HeronLite_scanner" 
+                        settingsFile="heron_lite_scanner.xml" />
+        
+        <!-- Platform settings (reference to platform XML) -->
+        <platformSettings id="human_with_backpack" 
+                         settingsFile="human_platform.xml" />
+        
+        <!-- Scene settings (reference to scene XML) -->
+        <sceneSettings id="building_scene" 
+                      settingsFile="scene.xml" />
+        
+        <!-- Survey execution -->
+        <leg id="leg_001">
+            <!-- Platform configuration -->
+            <platformSettings>
+                <platform>human_with_backpack</platform>
+                <trajectory>trajectory.txt</trajectory>
+            </platformSettings>
+            
+            <!-- Scanner configuration -->
+            <scannerSettings template="HeronLite_scanner">
+                <active>true</active>
+                <writeWaveform>false</writeWaveform>
+                <writePulse>false</writePulse>
+                <calcEchowidth>false</calcEchowidth>
+                <fullWaveNoise>false</fullWaveNoise>
+                <fixedIncidenceAngle>false</fixedIncidenceAngle>
+            </scannerSettings>
+            
+            <!-- Scene -->
+            <scene>building_scene</scene>
+            
+            <!-- Output settings -->
+            <output>
+                <outputFolder>output/</outputFolder>
+                <pointCloudFile>
+                    <filename>human_mobile_scan</filename>
+                    <format>las</format>
+                </pointCloudFile>
+                <trajectoryFile>
+                    <filename>trajectory_output</filename>
+                    <format>txt</format>
+                </trajectoryFile>
+            </output>
+        </leg>
+        
+    </survey>
+</document>
