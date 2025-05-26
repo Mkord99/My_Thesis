@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <scanners>
+        <scanner id="velodyne_hdl32e" manufacturer="velodyne">
+            <verticalFOV value="40"/>
+            <horizontalFOV value="360"/>
+            <verticalResolution value="32"/>
+            <horizontalResolution value="1000"/>
+            <minRange value="1.0"/>
+            <accuracy value="0.02"/>
+            <beamDivergence value="0.003"/>
+            <pulseLength value="0.000000005"/>
+            <maxNORangeStdDev value="0.0"/>
+            <wavelength value="905"/>
+            <receiverDiameter value="0.0254"/>
+            <opticalEfficiency value="0.75"/>
+            <mode value="rotating_mirror"/>
+        </scanner>
+    </scanners>
+</document>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <platforms>
+        <platform id="ground_vehicle" name="ground_vehicle">
+            <motion step="0.1" mode="default" turnMode="default" dragMode="right" acceleration="0.5" turnAcceleration="0.01" maxVelocity="10" turnWhenStopped="false" maxLateralMovement="0.2">
+                <velocity default="2.0"/>
+                <turnRadius value="1.0"/>
+            </motion>
+        </platform>
+    </platforms>
+</document>

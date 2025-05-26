@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <scene id="building_scene" name="Buildings and Obstacles Scene">
+        
+        <!-- Ground plane - using plane generator instead of geotiff -->
+        <part id="0">
+            <filter type="flatplane">
+                <param type="double" key="xmin" value="-10.0" />
+                <param type="double" key="xmax" value="110.0" />
+                <param type="double" key="ymin" value="-60.0" />
+                <param type="double" key="ymax" value="70.0" />
+                <param type="double" key="z" value="0.0" />
+            </filter>
+        </part>
+        
+        <!-- Building 1 -->
+        <part id="1">
+            <filter type="objloader">
+                <param type="string" key="filepath" value="building1.obj"/>
+                <param type="string" key="matfile" value="building1.mtl"/>
+            </filter>
+            <!-- No scaling or translation needed - already positioned -->
+        </part>
+        
+        <!-- Building 2 -->
+        <part id="2">
+            <filter type="objloader">
+                <param type="string" key="filepath" value="building2.obj"/>
+                <param type="string" key="matfile" value="building2.mtl"/>
+            </filter>
+            <!-- No scaling or translation needed - already positioned -->
+        </part>
+        
+        <!-- Obstacle 1 -->
+        <part id="3">
+            <filter type="objloader">
+                <param type="string" key="filepath" value="obstacle1.obj"/>
+                <param type="string" key="matfile" value="obstacle1.mtl"/>
+            </filter>
+            <!-- No scaling or translation needed - already positioned -->
+        </part>
+        
+        <!-- Obstacle 2 -->
+        <part id="4">
+            <filter type="objloader">
+                <param type="string" key="filepath" value="obstacle2.obj"/>
+                <param type="string" key="matfile" value="obstacle2.mtl"/>
+            </filter>
+            <!-- No scaling or translation needed - already positioned -->
+        </part>
+        
+    </scene>
+</document>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <platform id="human_with_backpack" 
+              name="Human with Scanner Backpack"
+              type="linearpath">
+        
+        <!-- Scanner mounting position relative to platform center -->
+        <scannerMount x="0.0" y="0.0" z="2.0">
+            <!-- No rotation for vertical alignment -->
+        </scannerMount>
+        
+        <!-- No noise for perfect simulation -->
+        <noise>
+            <position>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </position>
+            <rotation>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </rotation>
+        </noise>
+        
+    </platform>
+</document>
