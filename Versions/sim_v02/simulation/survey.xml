@@ -10,12 +10,6 @@
             <description>Mobile laser scanning with human carrying Heron Lite backpack</description>
             <date>2024</date>
             <location>Local coordinate system</location>
-            <surveyArea>
-                <minX>-6.0</minX>
-                <maxX>106.0</maxX>
-                <minY>-6.0</minY>
-                <maxY>58.0</maxY>
-            </surveyArea>
         </metadata>
         
         <!-- Scanner settings (reference to scanner XML) -->
@@ -35,7 +29,7 @@
             <!-- Platform configuration -->
             <platformSettings>
                 <platform>human_with_backpack</platform>
-                <trajectory>trajectory.txt</trajectory>
+                <trajectoryFile>trajectory.txt</trajectoryFile>
             </platformSettings>
             
             <!-- Scanner configuration -->
@@ -46,23 +40,12 @@
                 <calcEchowidth>false</calcEchowidth>
                 <fullWaveNoise>false</fullWaveNoise>
                 <fixedIncidenceAngle>false</fixedIncidenceAngle>
+                <trajectoryTimeInterval_s>0.01</trajectoryTimeInterval_s>
             </scannerSettings>
             
             <!-- Scene -->
             <scene>building_scene</scene>
             
-            <!-- Output settings -->
-            <output>
-                <outputFolder>output/</outputFolder>
-                <pointCloudFile>
-                    <filename>human_mobile_scan</filename>
-                    <format>las</format>
-                </pointCloudFile>
-                <trajectoryFile>
-                    <filename>trajectory_output</filename>
-                    <format>txt</format>
-                </trajectoryFile>
-            </output>
         </leg>
         
     </survey>

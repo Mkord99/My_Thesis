@@ -27,10 +27,6 @@ def run_simulation():
     
     # Configuration file paths
     survey_file = "survey.xml"
-    scanner_file = "heron_lite_scanner.xml"
-    platform_file = "human_platform.xml"
-    scene_file = "scene.xml"
-    trajectory_file = "trajectory.txt"
     
     # Output directory
     output_dir = "output"
@@ -39,12 +35,12 @@ def run_simulation():
     
     # Check if all required files exist
     required_files = [
-        survey_file, scanner_file, platform_file, 
-        scene_file, trajectory_file,
+        survey_file,
         "building1.obj", "building1.mtl",
         "building2.obj", "building2.mtl",
         "obstacle1.obj", "obstacle1.mtl",
-        "obstacle2.obj", "obstacle2.mtl"
+        "obstacle2.obj", "obstacle2.mtl",
+        "trajectory.txt"
     ]
     
     print("\nChecking required files...")
@@ -64,28 +60,23 @@ def run_simulation():
         # Initialize Helios++ simulation
         print("\nInitializing Helios++ simulation...")
         
-        # Create simulation context
+        # Assets paths as list (required by pyhelios)
+        assets_paths = [
+            ".",  # Current directory
+            "assets/"  # Assets directory
+        ]
+        
+        # Create simulation context with correct constructor signature
         sim = pyhelios.Simulation(
-            survey_file,
-            "assets/",  # Assets directory
-            output_dir,  # Output directory
-            1,  # Number of threads
-            False,  # LAS output
-            False  # ZIP output
+            survey_file,        # Survey file path
+            assets_paths,       # Assets paths as list
+            output_dir,         # Output directory
+            1,                  # Number of threads
+            False,              # Write waveform
+            False,              # Write pulse
+            False,              # Calculate echo width
+            False               # Full wave noise
         )
-        
-        # Set simulation parameters
-        sim.setRandomSeed(42)  # For reproducible results
-        sim.setFixedGpsTime(False)
-        sim.setCallbackFrequency(100)  # Update frequency for progress
-        
-        # Progress callback
-        def progress_callback():
-            progress = sim.getProgress()
-            elapsed = sim.getElapsedTime()
-            print(f"\rProgress: {progress:.1f}% | Elapsed: {elapsed:.1f}s", end="")
-        
-        sim.setCallback(progress_callback)
         
         # Simulation statistics before run
         print("\nSimulation Configuration:")
@@ -104,34 +95,29 @@ def run_simulation():
         # Run the simulation
         sim.start()
         
-        # Wait for completion
+        # Wait for completion - simple approach
+        print("Simulation running... (this may take several minutes)")
         while sim.isRunning():
-            time.sleep(0.5)
+            time.sleep(2.0)
+            print(".", end="", flush=True)
         
         end_time = time.time()
         execution_time = end_time - start_time
         
         print(f"\n\nSimulation completed in {execution_time:.2f} seconds")
         
-        # Get output information
-        output_path = sim.getOutputPath()
-        print(f"\nOutput saved to: {output_path}")
-        
         # Check for output files
-        output_files = os.listdir(output_dir)
-        if output_files:
-            print("\nGenerated files:")
-            for file in output_files:
-                file_path = os.path.join(output_dir, file)
-                file_size = os.path.getsize(file_path) / (1024 * 1024)  # MB
-                print(f"  - {file} ({file_size:.2f} MB)")
-        
-        # Additional statistics if available
-        try:
-            total_points = sim.getNumberOfPoints()
-            print(f"\nTotal points generated: {total_points:,}")
-        except:
-            pass
+        if os.path.exists(output_dir):
+            output_files = os.listdir(output_dir)
+            if output_files:
+                print(f"\nGenerated files in '{output_dir}':")
+                for file in output_files:
+                    file_path = os.path.join(output_dir, file)
+                    if os.path.isfile(file_path):
+                        file_size = os.path.getsize(file_path) / (1024 * 1024)  # MB
+                        print(f"  - {file} ({file_size:.2f} MB)")
+            else:
+                print(f"\nNo output files found in '{output_dir}'")
         
         print("\n✓ Simulation completed successfully!")
         
@@ -142,6 +128,7 @@ def run_simulation():
         print("  2. Ensure Helios++ is properly installed")
         print("  3. Verify that the XML files are valid")
         print("  4. Check that .obj/.mtl files are in the correct format")
+        print("  5. Make sure pyhelios bindings are compatible with your Helios++ version")
         return
     
     print("\n" + "=" * 60)
