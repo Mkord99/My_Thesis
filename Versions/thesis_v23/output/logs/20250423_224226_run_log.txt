@@ -1,0 +1,208 @@
+2025-04-23 22:42:26,288 - __main__ - INFO - Starting visibility path planning with normal vector approach
+2025-04-23 22:42:26,295 - __main__ - INFO - Initial memory usage - Memory usage: 125.47 MB
+2025-04-23 22:42:26,295 - __main__ - INFO - Loading geometry data
+2025-04-23 22:42:26,295 - __main__ - INFO - Before geometry loading - Memory usage: 125.47 MB
+2025-04-23 22:42:26,295 - src.data_handler - INFO - Loading geometries from data/geometry.json
+2025-04-23 22:42:26,296 - __main__ - INFO - After geometry loading - Memory usage: 126.09 MB
+2025-04-23 22:42:26,296 - __main__ - INFO - Building the graph
+2025-04-23 22:42:26,296 - __main__ - INFO - Before graph building - Memory usage: 126.09 MB
+2025-04-23 22:42:26,296 - src.graph_builder - INFO - Building grid graph
+2025-04-23 22:42:26,312 - src.graph_builder - INFO - Generated 200 grid points
+2025-04-23 22:42:26,878 - src.graph_builder - WARNING - The generated graph is not connected.
+2025-04-23 22:42:26,878 - src.graph_builder - INFO - Created graph with 200 nodes and 1588 edges
+2025-04-23 22:42:26,878 - __main__ - INFO - After graph building - Memory usage: 127.34 MB
+2025-04-23 22:42:26,878 - __main__ - INFO - Analyzing visibility with normal vector approach
+2025-04-23 22:42:26,878 - __main__ - INFO - Before visibility analysis - Memory usage: 127.34 MB
+2025-04-23 22:42:26,878 - src.visibility_analyzer - INFO - Using 12 CPU cores for visibility analysis
+2025-04-23 22:42:26,878 - src.visibility_analyzer - INFO - Using touch threshold of 0.1 meters
+2025-04-23 22:42:26,878 - src.visibility_analyzer - INFO - Analyzing visibility
+2025-04-23 22:42:26,878 - src.visibility_analyzer - INFO - Before segment creation - Memory usage: 127.34 MB
+2025-04-23 22:42:26,893 - src.visibility_analyzer - INFO - Created 98 building segments with normal vectors
+2025-04-23 22:42:26,893 - src.visibility_analyzer - INFO - Calculating edge-segment visibility using normal vector approach (parallelized)
+2025-04-23 22:42:26,894 - src.visibility_analyzer - INFO - Before edge-segment visibility calculation - Memory usage: 127.34 MB
+2025-04-23 22:42:26,894 - src.visibility_analyzer - INFO - Dividing 98 segments into 12 chunks for parallel processing
+2025-04-23 22:42:28,812 - src.visibility_analyzer - INFO - After edge-segment visibility calculation - Memory usage: 132.47 MB
+2025-04-23 22:42:28,812 - src.visibility_analyzer - INFO - Calculating particle-based visibility using normal vector approach (parallelized)
+2025-04-23 22:42:28,812 - src.visibility_analyzer - INFO - Before particle visibility calculation - Memory usage: 132.47 MB
+2025-04-23 22:42:28,812 - src.visibility_analyzer - INFO - Dividing 1588 edges into 12 chunks for parallel processing
+2025-04-23 22:42:45,904 - src.visibility_analyzer - INFO - After particle visibility calculation - Memory usage: 132.84 MB
+2025-04-23 22:42:45,907 - src.visibility_analyzer - INFO - Saved segment visibility to output/visibility/segment_visibility.csv
+2025-04-23 22:42:45,908 - src.visibility_analyzer - INFO - Saved edge visibility to output/visibility/edge_visibility.csv
+2025-04-23 22:42:45,908 - __main__ - INFO - After visibility analysis - Memory usage: 132.97 MB
+2025-04-23 22:42:45,908 - __main__ - INFO - Running path optimization
+2025-04-23 22:42:45,908 - __main__ - INFO - Before optimization - Memory usage: 132.97 MB
+2025-04-23 22:42:45,908 - __main__ - INFO - Running garbage collection before optimization
+2025-04-23 22:42:45,931 - src.optimizer - INFO - Setting up optimization model
+2025-04-23 22:42:45,931 - src.optimizer - INFO - Before optimization model creation - Memory usage: 132.97 MB
+2025-04-23 22:42:45,931 - src.optimizer - INFO - Optimizing memory usage before model creation
+2025-04-23 22:42:45,949 - gurobipy - INFO - Set parameter Username
+2025-04-23 22:42:45,949 - gurobipy - INFO - Set parameter LicenseID to value 2654881
+2025-04-23 22:42:45,949 - gurobipy - INFO - Academic license - for non-commercial use only - expires 2026-04-21
+2025-04-23 22:42:45,950 - gurobipy - INFO - Set parameter LazyConstraints to value 1
+2025-04-23 22:42:45,950 - gurobipy - INFO - Set parameter TimeLimit to value 3600
+2025-04-23 22:42:45,950 - src.optimizer - INFO - Set optimization time limit to 3600 seconds
+2025-04-23 22:42:45,950 - gurobipy - INFO - Set parameter MIPGap to value 0.05
+2025-04-23 22:42:45,950 - gurobipy - INFO - Set parameter Threads to value 12
+2025-04-23 22:42:45,950 - gurobipy - INFO - Set parameter Heuristics to value 0.8
+2025-04-23 22:42:45,950 - gurobipy - INFO - Set parameter MIPFocus to value 1
+2025-04-23 22:42:45,950 - gurobipy - INFO - Set parameter PreCrush to value 1
+2025-04-23 22:42:45,950 - gurobipy - INFO - Set parameter Cuts to value 2
+2025-04-23 22:42:45,966 - src.optimizer - INFO - Adding constraints for tie points: [98]
+2025-04-23 22:42:45,966 - src.optimizer - INFO - Added tie point constraints for node 98
+2025-04-23 22:42:45,966 - src.optimizer - INFO - Using original comprehensive subtour elimination constraints
+2025-04-23 22:42:47,768 - src.optimizer - INFO - Added 151912 subtour elimination constraints
+2025-04-23 22:42:47,768 - src.optimizer - INFO - After optimization model setup - Memory usage: 177.72 MB
+2025-04-23 22:42:47,768 - src.optimizer - INFO - Solving optimization model
+2025-04-23 22:42:47,785 - gurobipy - INFO - Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+2025-04-23 22:42:47,785 - gurobipy - INFO - 
+2025-04-23 22:42:47,785 - gurobipy - INFO - CPU model: 12th Gen Intel(R) Core(TM) i5-12450H, instruction set [SSE2|AVX|AVX2]
+2025-04-23 22:42:47,785 - gurobipy - INFO - Thread count: 12 physical cores, 12 logical processors, using up to 12 threads
+2025-04-23 22:42:47,785 - gurobipy - INFO - 
+2025-04-23 22:42:47,785 - gurobipy - INFO - Non-default parameters:
+2025-04-23 22:42:47,785 - gurobipy - INFO - TimeLimit  3600
+2025-04-23 22:42:47,785 - gurobipy - INFO - MIPGap  0.05
+2025-04-23 22:42:47,785 - gurobipy - INFO - Heuristics  0.8
+2025-04-23 22:42:47,785 - gurobipy - INFO - MIPFocus  1
+2025-04-23 22:42:47,785 - gurobipy - INFO - Cuts  2
+2025-04-23 22:42:47,786 - gurobipy - INFO - PreCrush  1
+2025-04-23 22:42:47,786 - gurobipy - INFO - Threads  12
+2025-04-23 22:42:47,786 - gurobipy - INFO - LazyConstraints  1
+2025-04-23 22:42:47,786 - gurobipy - INFO - 
+2025-04-23 22:42:47,786 - gurobipy - INFO - Optimize a model with 152212 rows, 1588 columns and 322722 nonzeros
+2025-04-23 22:42:47,787 - gurobipy - INFO - Model fingerprint: 0x3ea501d3
+2025-04-23 22:42:47,787 - gurobipy - INFO - Variable types: 0 continuous, 1588 integer (1588 binary)
+2025-04-23 22:42:47,788 - gurobipy - INFO - Coefficient statistics:
+2025-04-23 22:42:47,788 - gurobipy - INFO -   Matrix range     [1e+00, 1e+00]
+2025-04-23 22:42:47,788 - gurobipy - INFO -   Objective range  [5e+00, 2e+07]
+2025-04-23 22:42:47,788 - gurobipy - INFO -   Bounds range     [1e+00, 1e+00]
+2025-04-23 22:42:47,788 - gurobipy - INFO -   RHS range        [1e+00, 2e+00]
+2025-04-23 22:42:47,823 - gurobipy - INFO - Presolve removed 147731 rows and 0 columns
+2025-04-23 22:42:47,823 - gurobipy - INFO - Presolve time: 0.02s
+2025-04-23 22:42:47,823 - gurobipy - INFO - Presolved: 4481 rows, 1588 columns, 27294 nonzeros
+2025-04-23 22:42:47,825 - gurobipy - INFO - Variable types: 0 continuous, 1588 integer (1588 binary)
+2025-04-23 22:42:47,830 - gurobipy - INFO - Performing another presolve...
+2025-04-23 22:42:47,851 - gurobipy - INFO - Presolve removed 34 rows and 0 columns
+2025-04-23 22:42:47,851 - gurobipy - INFO - Presolve time: 0.02s
+2025-04-23 22:42:47,863 - gurobipy - INFO - 
+2025-04-23 22:42:47,863 - gurobipy - INFO - Root relaxation: objective 2.851598e+02, 69 iterations, 0.00 seconds (0.00 work units)
+2025-04-23 22:42:47,868 - gurobipy - INFO - 
+2025-04-23 22:42:47,868 - gurobipy - INFO -     Nodes    |    Current Node    |     Objective Bounds      |     Work
+2025-04-23 22:42:47,868 - gurobipy - INFO -  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+2025-04-23 22:42:47,868 - gurobipy - INFO - 
+2025-04-23 22:42:47,868 - gurobipy - INFO -      0     0  285.15979    0   48          -  285.15979      -     -    0s
+2025-04-23 22:42:47,907 - gurobipy - INFO -      0     0  443.19755    0   78          -  443.19755      -     -    0s
+2025-04-23 22:42:47,923 - gurobipy - INFO -      0     0  460.03964    0   82          -  460.03964      -     -    0s
+2025-04-23 22:42:47,957 - gurobipy - INFO -      0     0  554.94975    0   50          -  554.94975      -     -    0s
+2025-04-23 22:42:47,974 - gurobipy - INFO -      0     0  565.79418    0   51          -  565.79418      -     -    0s
+2025-04-23 22:42:47,977 - gurobipy - INFO -      0     0  566.40372    0   43          -  566.40372      -     -    0s
+2025-04-23 22:42:48,030 - gurobipy - INFO -      0     0  590.31419    0   20          -  590.31419      -     -    0s
+2025-04-23 22:42:48,091 - gurobipy - INFO -      0     0  596.28635    0   30          -  596.28635      -     -    0s
+2025-04-23 22:42:48,107 - gurobipy - INFO -      0     0  597.27560    0   29          -  597.27560      -     -    0s
+2025-04-23 22:42:48,110 - gurobipy - INFO -      0     0  597.34441    0   30          -  597.34441      -     -    0s
+2025-04-23 22:42:48,113 - gurobipy - INFO -      0     0  597.44172    0   32          -  597.44172      -     -    0s
+2025-04-23 22:42:48,116 - gurobipy - INFO -      0     0  597.50498    0   31          -  597.50498      -     -    0s
+2025-04-23 22:42:48,119 - gurobipy - INFO -      0     0  597.50498    0   31          -  597.50498      -     -    0s
+2025-04-23 22:42:48,171 - gurobipy - INFO -      0     0  599.44430    0   17          -  599.44430      -     -    0s
+2025-04-23 22:42:48,235 - gurobipy - INFO -      0     2  599.44430    0   17          -  599.44430      -     -    0s
+2025-04-23 22:42:49,962 - gurobipy - INFO - H 2414  1938                    3.586356e+08  717.28324   100%  10.7    2s
+2025-04-23 22:42:50,947 - gurobipy - INFO - H 2430  1853                    1.633178e+08  748.10975   100%  11.2    3s
+2025-04-23 22:42:51,045 - gurobipy - INFO - H 2444  1780                    9.931630e+07  751.24928   100%  11.5    3s
+2025-04-23 22:42:51,047 - gurobipy - INFO - H 2445  1691                    2.400219e+07  751.78258   100%  11.5    3s
+2025-04-23 22:42:51,677 - gurobipy - INFO - H 2572  1691                    1168.1750945  753.22636  35.5%  12.5    3s
+2025-04-23 22:42:52,077 - gurobipy - INFO - H 2752  1728                    1087.8197936  753.22636  30.8%  13.1    4s
+2025-04-23 22:42:52,196 - gurobipy - INFO - H 2793  1679                    1057.5745679  753.22636  28.8%  13.1    4s
+2025-04-23 22:42:52,371 - gurobipy - INFO - H 2845  1635                    1028.7746346  753.22636  26.8%  13.1    4s
+2025-04-23 22:42:52,719 - gurobipy - INFO - H 3202  1653                     944.6628568  759.93349  19.6%  13.6    4s
+2025-04-23 22:42:52,792 - gurobipy - INFO - H 3274  1629                     938.4406605  759.93349  19.0%  13.8    5s
+2025-04-23 22:42:52,793 - gurobipy - INFO - H 3291  1562                     934.6311377  759.93349  18.7%  13.7    5s
+2025-04-23 22:42:52,829 - gurobipy - INFO - H 3331  1532                     931.6897173  759.93349  18.4%  13.7    5s
+2025-04-23 22:42:53,445 - gurobipy - INFO - H 3636  1393                     929.4039921  761.40225  18.1%  13.6    5s
+2025-04-23 22:42:53,848 - gurobipy - INFO - H 3814  1398                     928.3373333  764.75947  17.6%  13.8    6s
+2025-04-23 22:42:54,561 - gurobipy - INFO - H 4136  1431                     923.0040196  766.94096  16.9%  14.0    6s
+2025-04-23 22:42:57,909 - gurobipy - INFO -   6861  2791  894.48677   39  109  923.00402  772.18459  16.3%  13.5   10s
+2025-04-23 22:43:02,856 - gurobipy - INFO -  10050  5076 infeasible   41       923.00402  789.67106  14.4%  13.8   15s
+2025-04-23 22:43:07,819 - gurobipy - INFO -  12826  6739  886.18689   86   96  923.00402  795.25639  13.8%  14.0   20s
+2025-04-23 22:43:13,102 - gurobipy - INFO -  16667  9191  912.25588  103   66  923.00402  801.63962  13.1%  14.0   25s
+2025-04-23 22:43:14,250 - gurobipy - INFO - H16699  9149                     920.7183120  801.66017  12.9%  14.0   26s
+2025-04-23 22:43:18,074 - gurobipy - INFO -  18477 11422  845.82297   37  183  920.71831  802.88576  12.8%  14.2   30s
+2025-04-23 22:43:23,325 - gurobipy - INFO -  26760 16183  833.94412   42  170  920.71831  808.17264  12.2%  15.0   35s
+2025-04-23 22:43:28,293 - gurobipy - INFO -  34186 19408  889.40615   43  155  920.71831  811.78606  11.8%  15.9   40s
+2025-04-23 22:43:33,420 - gurobipy - INFO -  39140 23287  909.68117   49  132  920.71831  814.28539  11.6%  16.1   45s
+2025-04-23 22:43:38,256 - gurobipy - INFO -  45113 26143  856.63565   37  150  920.71831  816.48414  11.3%  16.6   50s
+2025-04-23 22:43:43,385 - gurobipy - INFO -  50166 28150  917.20393   52  121  920.71831  817.96361  11.2%  17.0   55s
+2025-04-23 22:43:48,253 - gurobipy - INFO -  53949 29967  833.82646   39  177  920.71831  818.85209  11.1%  17.2   60s
+2025-04-23 22:43:53,223 - gurobipy - INFO -  56691 31536  865.11665   38  116  920.71831  819.94790  10.9%  17.4   65s
+2025-04-23 22:43:58,294 - gurobipy - INFO -  61179 34880  917.36004   76   94  920.71831  821.10676  10.8%  17.6   70s
+2025-04-23 22:44:02,793 - gurobipy - INFO -  63637 36936  869.38674   49  162  920.71831  821.24031  10.8%  17.7   75s
+2025-04-23 22:44:08,129 - gurobipy - INFO -  69551 40215  877.33307   61  165  920.71831  823.33637  10.6%  18.0   80s
+2025-04-23 22:44:13,222 - gurobipy - INFO -  74559 42350  869.79334   50  161  920.71831  824.38497  10.5%  18.2   85s
+2025-04-23 22:44:18,661 - gurobipy - INFO -  76077 44553  874.28651   43  178  920.71831  824.70282  10.4%  18.2   90s
+2025-04-23 22:44:23,730 - gurobipy - INFO -  81175 46582  871.28535   40  162  920.71831  825.81595  10.3%  18.4   95s
+2025-04-23 22:44:29,081 - gurobipy - INFO -  84932 48615  876.05901   46  156  920.71831  826.51974  10.2%  18.5  101s
+2025-04-23 22:44:33,343 - gurobipy - INFO -  88516 51177  887.73024   39  123  920.71831  827.31435  10.1%  18.6  105s
+2025-04-23 22:44:39,017 - gurobipy - INFO -  93941 54726  869.82138   53  131  920.71831  828.21482  10.0%  18.6  111s
+2025-04-23 22:44:43,560 - gurobipy - INFO -  98115 56492  857.35082   38  188  920.71831  828.94622  10.0%  18.7  115s
+2025-04-23 22:44:48,841 - gurobipy - INFO -  101923 57926  901.29847   33  171  920.71831  829.60941  9.90%  18.8  121s
+2025-04-23 22:44:53,627 - gurobipy - INFO -  102756 59600  919.85475   33   77  920.71831  829.79881  9.87%  18.8  125s
+2025-04-23 22:44:58,306 - gurobipy - INFO -  109987 63252  849.39692   44  136  920.71831  830.77233  9.77%  18.8  130s
+2025-04-23 22:45:03,370 - gurobipy - INFO -  115158 66318  907.67595   57   75  920.71831  831.64576  9.67%  18.9  135s
+2025-04-23 22:45:09,287 - gurobipy - INFO -  121040 68960     cutoff   44       920.71831  832.44509  9.59%  18.9  141s
+2025-04-23 22:45:13,688 - gurobipy - INFO -  126158 71203     cutoff   47       920.71831  833.02256  9.52%  19.0  145s
+2025-04-23 22:45:18,626 - gurobipy - INFO -  129574 73172  865.45278   54  160  920.71831  833.72180  9.45%  19.1  150s
+2025-04-23 22:45:22,916 - gurobipy - INFO -  134089 75325  887.97934   41  135  920.71831  834.14808  9.40%  19.2  155s
+2025-04-23 22:45:28,710 - gurobipy - INFO -  136455 76162  898.12556   64  144  920.71831  834.19668  9.40%  19.2  160s
+2025-04-23 22:45:33,300 - gurobipy - INFO -  138756 78236  913.16951   71  124  920.71831  834.83894  9.33%  19.3  165s
+2025-04-23 22:45:39,098 - gurobipy - INFO -  147187 82164  848.64619   49  203  920.71831  836.00912  9.20%  19.4  171s
+2025-04-23 22:45:44,069 - gurobipy - INFO -  152438 83976  917.34977   45  169  920.71831  836.65315  9.13%  19.5  176s
+2025-04-23 22:45:48,291 - gurobipy - INFO -  156043 86037     cutoff   68       920.71831  837.00764  9.09%  19.5  180s
+2025-04-23 22:45:52,947 - gurobipy - INFO -  159903 87660  862.46427   53  137  920.71831  837.47234  9.04%  19.6  185s
+2025-04-23 22:45:58,774 - gurobipy - INFO -  162685 88456     cutoff   68       920.71831  837.81635  9.00%  19.6  190s
+2025-04-23 22:46:04,050 - gurobipy - INFO -  166506 91381     cutoff   44       920.71831  838.24233  8.96%  19.7  196s
+2025-04-23 22:46:08,582 - gurobipy - INFO -  170990 92989  897.62742   74  134  920.71831  838.62568  8.92%  19.7  200s
+2025-04-23 22:46:13,557 - gurobipy - INFO -  173741 94205  912.53265   57  140  920.71831  838.97808  8.88%  19.7  205s
+2025-04-23 22:46:18,817 - gurobipy - INFO -  178013 96535  899.29878   49  157  920.71831  839.38272  8.83%  19.8  211s
+2025-04-23 22:46:22,811 - gurobipy - INFO -  183463 99965  906.57690   43  195  920.71831  839.96763  8.77%  19.8  215s
+2025-04-23 22:46:29,069 - gurobipy - INFO -  187233 100852  897.09937   52  142  920.71831  840.33138  8.73%  19.8  221s
+2025-04-23 22:46:33,058 - gurobipy - INFO -  191705 104033     cutoff   55       920.71831  840.68551  8.69%  19.8  225s
+2025-04-23 22:46:38,666 - gurobipy - INFO -  200220 107568  874.04579   53  139  920.71831  841.52502  8.60%  19.9  230s
+2025-04-23 22:46:44,143 - gurobipy - INFO -  206247 110798  864.32871   49  139  920.71831  842.10824  8.54%  19.9  236s
+2025-04-23 22:46:48,345 - gurobipy - INFO -  210515 112879  907.12830   49  114  920.71831  842.45690  8.50%  20.0  240s
+2025-04-23 22:46:53,580 - gurobipy - INFO -  215334 115160  886.55699   45  184  920.71831  842.79315  8.46%  20.0  245s
+2025-04-23 22:46:57,844 - gurobipy - INFO -  219670 117171  896.62323   59  113  920.71831  843.07046  8.43%  20.0  250s
+2025-04-23 22:47:01,631 - gurobipy - INFO - H222942 118259                     920.7183099  843.31344  8.41%  20.0  253s
+2025-04-23 22:47:02,989 - gurobipy - INFO - H223047 118648                     920.7183012  843.31344  8.41%  20.0  255s
+2025-04-23 22:47:04,346 - gurobipy - INFO - H224332 119144                     920.7182949  843.39426  8.40%  20.0  256s
+2025-04-23 22:47:05,025 - gurobipy - INFO - 
+2025-04-23 22:47:05,026 - gurobipy - INFO - Cutting planes:
+2025-04-23 22:47:05,028 - gurobipy - INFO -   Gomory: 43
+2025-04-23 22:47:05,028 - gurobipy - INFO -   Lift-and-project: 56
+2025-04-23 22:47:05,029 - gurobipy - INFO -   Cover: 222
+2025-04-23 22:47:05,029 - gurobipy - INFO -   MIR: 15
+2025-04-23 22:47:05,029 - gurobipy - INFO -   StrongCG: 3
+2025-04-23 22:47:05,029 - gurobipy - INFO -   Flow cover: 90
+2025-04-23 22:47:05,029 - gurobipy - INFO -   GUB cover: 3
+2025-04-23 22:47:05,029 - gurobipy - INFO -   Inf proof: 13
+2025-04-23 22:47:05,029 - gurobipy - INFO -   Zero half: 117
+2025-04-23 22:47:05,029 - gurobipy - INFO -   RLT: 35
+2025-04-23 22:47:05,029 - gurobipy - INFO -   Lazy constraints: 92
+2025-04-23 22:47:05,034 - gurobipy - INFO - 
+2025-04-23 22:47:05,034 - gurobipy - INFO - Explored 225944 nodes (4527274 simplex iterations) in 257.25 seconds (227.26 work units)
+2025-04-23 22:47:05,034 - gurobipy - INFO - Thread count was 12 (of 12 available processors)
+2025-04-23 22:47:05,035 - gurobipy - INFO - 
+2025-04-23 22:47:05,035 - gurobipy - INFO - Solution count 10: 920.718 920.718 923.004 ... 1028.77
+2025-04-23 22:47:05,035 - gurobipy - INFO - 
+2025-04-23 22:47:05,035 - gurobipy - INFO - Solve interrupted
+2025-04-23 22:47:05,036 - gurobipy - INFO - Best objective 9.207182948524e+02, best bound 8.435562072798e+02, gap 8.3806%
+2025-04-23 22:47:05,039 - gurobipy - INFO - 
+2025-04-23 22:47:05,039 - gurobipy - INFO - User-callback calls 543240, time in user-callback 2.03 sec
+2025-04-23 22:47:05,041 - src.optimizer - WARNING - Optimization stopped with status 11
+2025-04-23 22:47:05,041 - src.optimizer - INFO - Solution found with 8.38% optimality gap
+2025-04-23 22:47:05,041 - src.optimizer - INFO - After optimization model solving - Memory usage: 941.31 MB
+2025-04-23 22:47:05,041 - __main__ - INFO - After optimization - Memory usage: 941.31 MB
+2025-04-23 22:47:05,044 - __main__ - INFO - Creating visualization
+2025-04-23 22:47:05,044 - src.visualizer - INFO - Creating visualization
+2025-04-23 22:47:07,497 - src.visualizer - INFO - Saved plot to output/plots/result_plot_20250423_224705.png
+2025-04-23 22:47:11,429 - __main__ - INFO - Process completed successfully
+2025-04-23 22:47:11,568 - __main__ - INFO - Disposed Gurobi optimization model
+2025-04-23 22:47:11,569 - __main__ - INFO - Before cleanup - Memory usage: 969.88 MB
+2025-04-23 22:47:11,604 - __main__ - INFO - After cleanup - Memory usage: 969.88 MB
