@@ -9,39 +9,169 @@
              headRotateStart_deg="0"
              headRotateStop_deg="0">
         
-        <!-- 32-channel configuration with typical vertical distribution -->
-        <channel id="0" verticalAngle_deg="-25.00" />
-        <channel id="1" verticalAngle_deg="-23.75" />
-        <channel id="2" verticalAngle_deg="-22.50" />
-        <channel id="3" verticalAngle_deg="-21.25" />
-        <channel id="4" verticalAngle_deg="-20.00" />
-        <channel id="5" verticalAngle_deg="-18.75" />
-        <channel id="6" verticalAngle_deg="-17.50" />
-        <channel id="7" verticalAngle_deg="-16.25" />
-        <channel id="8" verticalAngle_deg="-15.00" />
-        <channel id="9" verticalAngle_deg="-13.75" />
-        <channel id="10" verticalAngle_deg="-12.50" />
-        <channel id="11" verticalAngle_deg="-11.25" />
-        <channel id="12" verticalAngle_deg="-10.00" />
-        <channel id="13" verticalAngle_deg="-8.75" />
-        <channel id="14" verticalAngle_deg="-7.50" />
-        <channel id="15" verticalAngle_deg="-6.25" />
-        <channel id="16" verticalAngle_deg="-5.00" />
-        <channel id="17" verticalAngle_deg="-3.75" />
-        <channel id="18" verticalAngle_deg="-2.50" />
-        <channel id="19" verticalAngle_deg="-1.25" />
-        <channel id="20" verticalAngle_deg="0.00" />
-        <channel id="21" verticalAngle_deg="1.25" />
-        <channel id="22" verticalAngle_deg="2.50" />
-        <channel id="23" verticalAngle_deg="3.75" />
-        <channel id="24" verticalAngle_deg="5.00" />
-        <channel id="25" verticalAngle_deg="6.25" />
-        <channel id="26" verticalAngle_deg="7.50" />
-        <channel id="27" verticalAngle_deg="8.75" />
-        <channel id="28" verticalAngle_deg="10.00" />
-        <channel id="29" verticalAngle_deg="11.25" />
-        <channel id="30" verticalAngle_deg="12.50" />
-        <channel id="31" verticalAngle_deg="15.00" />
+        <!-- 32-channel configuration with beamOrigin structure -->
+        <channels>
+            <channel id="0">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="-25.00"/>
+                </beamOrigin>
+            </channel>
+            <channel id="1">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="-23.75"/>
+                </beamOrigin>
+            </channel>
+            <channel id="2">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="-22.50"/>
+                </beamOrigin>
+            </channel>
+            <channel id="3">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="-21.25"/>
+                </beamOrigin>
+            </channel>
+            <channel id="4">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="-20.00"/>
+                </beamOrigin>
+            </channel>
+            <channel id="5">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="-18.75"/>
+                </beamOrigin>
+            </channel>
+            <channel id="6">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="-17.50"/>
+                </beamOrigin>
+            </channel>
+            <channel id="7">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="-16.25"/>
+                </beamOrigin>
+            </channel>
+            <channel id="8">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="-15.00"/>
+                </beamOrigin>
+            </channel>
+            <channel id="9">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="-13.75"/>
+                </beamOrigin>
+            </channel>
+            <channel id="10">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="-12.50"/>
+                </beamOrigin>
+            </channel>
+            <channel id="11">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="-11.25"/>
+                </beamOrigin>
+            </channel>
+            <channel id="12">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="-10.00"/>
+                </beamOrigin>
+            </channel>
+            <channel id="13">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="-8.75"/>
+                </beamOrigin>
+            </channel>
+            <channel id="14">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="-7.50"/>
+                </beamOrigin>
+            </channel>
+            <channel id="15">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="-6.25"/>
+                </beamOrigin>
+            </channel>
+            <channel id="16">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="-5.00"/>
+                </beamOrigin>
+            </channel>
+            <channel id="17">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="-3.75"/>
+                </beamOrigin>
+            </channel>
+            <channel id="18">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="-2.50"/>
+                </beamOrigin>
+            </channel>
+            <channel id="19">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="-1.25"/>
+                </beamOrigin>
+            </channel>
+            <channel id="20">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="0.00"/>
+                </beamOrigin>
+            </channel>
+            <channel id="21">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="1.25"/>
+                </beamOrigin>
+            </channel>
+            <channel id="22">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="2.50"/>
+                </beamOrigin>
+            </channel>
+            <channel id="23">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="3.75"/>
+                </beamOrigin>
+            </channel>
+            <channel id="24">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="5.00"/>
+                </beamOrigin>
+            </channel>
+            <channel id="25">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="6.25"/>
+                </beamOrigin>
+            </channel>
+            <channel id="26">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="7.50"/>
+                </beamOrigin>
+            </channel>
+            <channel id="27">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="8.75"/>
+                </beamOrigin>
+            </channel>
+            <channel id="28">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="10.00"/>
+                </beamOrigin>
+            </channel>
+            <channel id="29">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="11.25"/>
+                </beamOrigin>
+            </channel>
+            <channel id="30">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="12.50"/>
+                </beamOrigin>
+            </channel>
+            <channel id="31">
+                <beamOrigin x="0" y="0" z="0">
+                    <rot axis="y" angle_deg="15.00"/>
+                </beamOrigin>
+            </channel>
+        </channels>
         
         <!-- Beam properties -->
         <beamDivergence_mrad>3.0</beamDivergence_mrad>

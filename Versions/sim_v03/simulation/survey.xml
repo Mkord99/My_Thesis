@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
     <survey name="human_mobile_scanning_survey" 
-            scene="scene.xml#building_scene" 
+            scene="/home/mo/thesis/My_Thesis/Versions/sim_v03/simulation/scene.xml#building_scene" 
             platform="human_platform.xml#human_with_backpack" 
             scanner="heron_lite_scanner.xml#HeronLite_scanner">
         
