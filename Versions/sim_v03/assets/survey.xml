@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <survey name="building_scan">
+        <scene>assets/scenes/scene.xml</scene>
+        <leg>
+            <platform>
+                <type>ground_vehicle</type>
+                <track_file>assets/trajectory.csv</track_file>
+                <scanner>
+                    <type>velodyne_vlp16</type>
+                    <active>true</active>
+                    <pulseFreq_hz>300000</pulseFreq_hz>
+                    <scanAngle_deg>360</scanAngle_deg>
+                    <scanFreq_hz>10</scanFreq_hz>
+                    <beamDivergence_rad>0.003</beamDivergence_rad>
+                    <position>
+                        <x>0</x>
+                        <y>0</y>
+                        <z>1.75</z>
+                    </position>
+                </scanner>
+            </platform>
+        </leg>
+    </survey>
+</document>

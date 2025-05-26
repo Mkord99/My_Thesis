@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <scanner id="HeronLite_scanner" 
+             name="Heron Lite 32-channel Mobile Scanner"
+             active="true"
+             pulseFreq_hz="600000"
+             scanFreq_hz="24"
+             headRotatePerSec_deg="8640"
+             headRotateStart_deg="0"
+             headRotateStop_deg="0">
+        
+        <!-- 32-channel configuration with typical vertical distribution -->
+        <channel id="0" verticalAngle_deg="-25.00" />
+        <channel id="1" verticalAngle_deg="-23.75" />
+        <channel id="2" verticalAngle_deg="-22.50" />
+        <channel id="3" verticalAngle_deg="-21.25" />
+        <channel id="4" verticalAngle_deg="-20.00" />
+        <channel id="5" verticalAngle_deg="-18.75" />
+        <channel id="6" verticalAngle_deg="-17.50" />
+        <channel id="7" verticalAngle_deg="-16.25" />
+        <channel id="8" verticalAngle_deg="-15.00" />
+        <channel id="9" verticalAngle_deg="-13.75" />
+        <channel id="10" verticalAngle_deg="-12.50" />
+        <channel id="11" verticalAngle_deg="-11.25" />
+        <channel id="12" verticalAngle_deg="-10.00" />
+        <channel id="13" verticalAngle_deg="-8.75" />
+        <channel id="14" verticalAngle_deg="-7.50" />
+        <channel id="15" verticalAngle_deg="-6.25" />
+        <channel id="16" verticalAngle_deg="-5.00" />
+        <channel id="17" verticalAngle_deg="-3.75" />
+        <channel id="18" verticalAngle_deg="-2.50" />
+        <channel id="19" verticalAngle_deg="-1.25" />
+        <channel id="20" verticalAngle_deg="0.00" />
+        <channel id="21" verticalAngle_deg="1.25" />
+        <channel id="22" verticalAngle_deg="2.50" />
+        <channel id="23" verticalAngle_deg="3.75" />
+        <channel id="24" verticalAngle_deg="5.00" />
+        <channel id="25" verticalAngle_deg="6.25" />
+        <channel id="26" verticalAngle_deg="7.50" />
+        <channel id="27" verticalAngle_deg="8.75" />
+        <channel id="28" verticalAngle_deg="10.00" />
+        <channel id="29" verticalAngle_deg="11.25" />
+        <channel id="30" verticalAngle_deg="12.50" />
+        <channel id="31" verticalAngle_deg="15.00" />
+        
+        <!-- Beam properties -->
+        <beamDivergence_mrad>3.0</beamDivergence_mrad>
+        <wavelength_nm>905</wavelength_nm>
+        
+        <!-- Range settings -->
+        <minRange_m>0.05</minRange_m>
+        <maxRange_m>120.0</maxRange_m>
+        
+        <!-- Accuracy settings -->
+        <accuracy_m>0.004</accuracy_m>
+        <rangeStdDev_m>0.002</rangeStdDev_m>
+        
+        <!-- Return settings -->
+        <maxReturnsPerPulse>2</maxReturnsPerPulse>
+        
+        <!-- Pulse settings -->
+        <pulseLength_ns>10</pulseLength_ns>
+        <beamDiameter_mm>12</beamDiameter_mm>
+        
+        <!-- Scanner type -->
+        <scannerType>rotating_multi_beam</scannerType>
+        
+    </scanner>
+</document>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <platform id="human_with_backpack" 
+              name="Human with Heron Lite Backpack"
+              type="linearpath">
+        
+        <!-- Scanner mounting position relative to platform center -->
+        <scannerMount x="0.0" y="0.0" z="2.0">
+            <!-- No rotation needed for perfect vertical alignment -->
+            <!-- If you need rotation, add <rot> elements like: -->
+            <!-- <rot axis="x" angle_deg="0" /> -->
+            <!-- <rot axis="y" angle_deg="0" /> -->
+            <!-- <rot axis="z" angle_deg="0" /> -->
+        </scannerMount>
+        
+        <!-- Platform characteristics -->
+        <platformSettings>
+            <!-- Human walking speed for constant linear movement -->
+            <velocity>0.8</velocity>
+            
+            <!-- Platform dimensions (approximate human with backpack) -->
+            <dimensions>
+                <length>0.5</length>
+                <width>0.6</width>
+                <height>2.0</height>
+            </dimensions>
+        </platformSettings>
+        
+        <!-- No noise/vibration for perfect simulation -->
+        <noise>
+            <position>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </position>
+            <rotation>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </rotation>
+        </noise>
+        
+    </platform>
+</document>

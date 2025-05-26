@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <survey name="human_mobile_scanning_survey" 
+            scene="scene.xml#building_scene" 
+            platform="human_platform.xml#human_with_backpack" 
+            scanner="heron_lite_scanner.xml#HeronLite_scanner">
+        
+        <!-- Single leg for continuous path following -->
+        <leg>
+            <!-- Platform starts at first trajectory point -->
+            <platformSettings x="-6.0" y="2.0" z="2.0" 
+                            onGround="false" 
+                            movePerSec_m="0.8"
+                            trajectoryFile="trajectory.txt"/>
+            
+            <!-- Scanner settings for continuous scanning -->
+            <scannerSettings active="true" 
+                           pulseFreq_hz="600000" 
+                           scanFreq_hz="24" 
+                           headRotatePerSec_deg="8640" 
+                           headRotateStart_deg="0.00" 
+                           headRotateStop_deg="0.00" 
+                           trajectoryTimeInterval_s="0.01"/>
+        </leg>
+        
+    </survey>
+</document>
