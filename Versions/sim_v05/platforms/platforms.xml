@@ -91,6 +91,16 @@
 	
 	<platform id="simple_linearpath" name="Simple Linearpath" type="linearpath">
 	</platform>
+	
+	<platform id="walking_person" name="Walking Person with Head-Mounted Scanner" type="linearpath"
+    		drag="0.002" 
+    		speedup_magnitude="1.5" slowdown_magnitude="1.5" slowdown_distance="2.0">
+    		<scannerMount x="0" y="0" z="0.0" rotations="local">
+        		<rot axis="z" angle_deg="0" />
+        		<rot axis="y" angle_deg="0" />
+    		</scannerMount>
+	</platform>
+	
 	<!-- ###################### END MLS Platforms ###################### -->
 
 

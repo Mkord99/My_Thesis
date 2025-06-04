@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <document>
 	<survey name="buildings_mls" 
-	        platform="platforms/platforms.xml#vmq-1ha-car-0" 
+	        platform="platforms/platforms.xml#walking_person" 
 	        scanner="scanners/scanners_als.xml#riegl_vux-1ha22" 
 	        scene="scenes/building_scene_rotated.xml#building_scene">
 	<!-- platform: car, deflector: rotating -->
@@ -9,31 +9,31 @@
 	
 		<!-- Leg 0: Northwest position -->
 		<leg>
-			<platformSettings  x="-7.0" y="53.0" z="0.000" onGround="true" movePerSec_m="15"/>
+			<platformSettings  x="-7.0" y="53.0" z="2.000" onGround="false" movePerSec_m="1.2"/>
 			<scannerSettings  active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
 		</leg>
 		
 		<!-- Leg 1: Northeast position -->
 		<leg>
-			<platformSettings  x="105.0" y="55.0" z="0.000" onGround="true" movePerSec_m="15"/>
+			<platformSettings  x="105.0" y="55.0" z="2.000" onGround="false" movePerSec_m="1.2"/>
 			<scannerSettings  active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
 		</leg>
 		
 		<!-- Leg 2: Southeast position -->
 		<leg>
-			<platformSettings  x="105.0" y="-5.0" z="0.000" onGround="true" movePerSec_m="15"/>
+			<platformSettings  x="105.0" y="-5.0" z="2.000" onGround="false" movePerSec_m="1.2"/>
 			<scannerSettings  active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
 		</leg>
 		
 		<!-- Leg 3: Southwest position -->
 		<leg>
-    			<platformSettings  x="-10.0" y="-5.0" z="0.0" onGround="true" movePerSec_m="15"/>
+    			<platformSettings  x="-10.0" y="-5.0" z="2.000" onGround="false" movePerSec_m="1.2"/>
     			<scannerSettings  active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
 		</leg>
 		
 		<!-- Leg 4: Northwest position -->
 		<leg>
-			<platformSettings  x="-7.0" y="53.0" z="0.000" onGround="true" movePerSec_m="15"/>
+			<platformSettings  x="-7.0" y="53.0" z="2.000" onGround="false" movePerSec_m="1.2"/>
 			<scannerSettings  active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
 		</leg>
 		
