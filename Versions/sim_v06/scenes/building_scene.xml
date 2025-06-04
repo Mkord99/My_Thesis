@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <scene id="building_scene" name="BuildingsScene">
+        <!-- Ground surface -->
+        <part>
+            <filter type="objloader">
+                <param type="string" key="filepath" value="sceneparts/building00/groundsurface.obj" />
+            </filter>
+        </part>
+        
+        <!-- Building 1 -->
+        <part>
+            <filter type="objloader">
+                <param type="string" key="filepath" value="sceneparts/building00/building1.obj" />
+            </filter>
+        </part>
+        
+        <!-- Building 2 -->
+        <part>
+            <filter type="objloader">
+                <param type="string" key="filepath" value="sceneparts/building00/building2.obj" />
+            </filter>
+        </part>
+        
+        <!-- Obstacle 1 -->
+        <part>
+            <filter type="objloader">
+                <param type="string" key="filepath" value="sceneparts/building00/obstacle1.obj" />
+            </filter>
+        </part>
+        
+        <!-- Obstacle 2 -->
+        <part>
+            <filter type="objloader">
+                <param type="string" key="filepath" value="sceneparts/building00/obstacle2.obj" />
+            </filter>
+        </part>
+    </scene>
+</document>
