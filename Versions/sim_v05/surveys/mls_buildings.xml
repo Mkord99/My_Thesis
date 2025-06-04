@@ -3,7 +3,7 @@
 	<survey name="buildings_mls" 
 	        platform="platforms/platforms.xml#vmq-1ha-car-0" 
 	        scanner="scanners/scanners_als.xml#riegl_vux-1ha22" 
-	        scene="scenes/building_scene.xml#building_scene">
+	        scene="scenes/building_scene_rotated.xml#building_scene">
 	<!-- platform: car, deflector: rotating -->
 	<!-- Custom leg positions for comprehensive building scanning -->
 	
@@ -27,8 +27,15 @@
 		
 		<!-- Leg 3: Southwest position -->
 		<leg>
-			<platformSettings  x="-10.0" y="-5.0" z="0.0" onGround="true" movePerSec_m="15"/>
-			<scannerSettings  active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00"/>
+    			<platformSettings  x="-10.0" y="-5.0" z="0.0" onGround="true" movePerSec_m="15"/>
+    			<scannerSettings  active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
 		</leg>
+		
+		<!-- Leg 4: Northwest position -->
+		<leg>
+			<platformSettings  x="-7.0" y="53.0" z="0.000" onGround="true" movePerSec_m="15"/>
+			<scannerSettings  active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
 	</survey>
 </document>
