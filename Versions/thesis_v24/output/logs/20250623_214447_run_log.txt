@@ -1,0 +1,199 @@
+2025-06-23 21:44:47,497 - __main__ - INFO - Starting visibility path planning with normal vector approach
+2025-06-23 21:44:47,504 - __main__ - INFO - Initial memory usage - Memory usage: 108.64 MB
+2025-06-23 21:44:47,504 - __main__ - INFO - Loading geometry data
+2025-06-23 21:44:47,504 - __main__ - INFO - Building orientation analysis is disabled
+2025-06-23 21:44:47,504 - __main__ - INFO - Before geometry loading - Memory usage: 108.64 MB
+2025-06-23 21:44:47,504 - src.data_handler - INFO - Loading geometries from data/geometry.json
+2025-06-23 21:44:47,505 - src.data_handler - WARNING - Building building2 has an invalid polygon
+2025-06-23 21:44:47,506 - src.data_handler - INFO - Building orientation analysis is disabled
+2025-06-23 21:44:47,506 - __main__ - INFO - After geometry loading - Memory usage: 109.64 MB
+2025-06-23 21:44:47,506 - __main__ - INFO - Building the graph
+2025-06-23 21:44:47,506 - __main__ - INFO - Before graph building - Memory usage: 109.64 MB
+2025-06-23 21:44:47,506 - src.graph_builder - INFO - Building grid graph
+2025-06-23 21:44:47,534 - src.graph_builder - INFO - Generated 193 grid points
+2025-06-23 21:44:48,112 - src.graph_builder - WARNING - The generated graph is not connected.
+2025-06-23 21:44:48,112 - src.graph_builder - INFO - Created graph with 193 nodes and 1704 edges
+2025-06-23 21:44:48,112 - __main__ - INFO - After graph building - Memory usage: 110.64 MB
+2025-06-23 21:44:48,112 - __main__ - INFO - Analyzing visibility with normal vector approach
+2025-06-23 21:44:48,112 - __main__ - INFO - Before visibility analysis - Memory usage: 110.64 MB
+2025-06-23 21:44:48,112 - src.visibility_analyzer - INFO - Using 12 CPU cores for visibility analysis
+2025-06-23 21:44:48,112 - src.visibility_analyzer - INFO - Using touch threshold of 0.1 meters
+2025-06-23 21:44:48,112 - src.visibility_analyzer - INFO - Analyzing visibility
+2025-06-23 21:44:48,112 - src.visibility_analyzer - INFO - Before segment creation - Memory usage: 110.64 MB
+2025-06-23 21:44:48,128 - src.visibility_analyzer - INFO - Created 90 building segments with normal vectors
+2025-06-23 21:44:48,128 - src.visibility_analyzer - INFO - Calculating edge-segment visibility using normal vector approach (parallelized)
+2025-06-23 21:44:48,128 - src.visibility_analyzer - INFO - Before edge-segment visibility calculation - Memory usage: 110.64 MB
+2025-06-23 21:44:48,128 - src.visibility_analyzer - INFO - Dividing 90 segments into 12 chunks for parallel processing
+2025-06-23 21:44:49,798 - src.visibility_analyzer - INFO - After edge-segment visibility calculation - Memory usage: 115.14 MB
+2025-06-23 21:44:49,798 - src.visibility_analyzer - INFO - Calculating particle-based visibility using normal vector approach (parallelized)
+2025-06-23 21:44:49,798 - src.visibility_analyzer - INFO - Before particle visibility calculation - Memory usage: 115.14 MB
+2025-06-23 21:44:49,798 - src.visibility_analyzer - INFO - Dividing 1704 edges into 12 chunks for parallel processing
+2025-06-23 21:45:23,735 - src.visibility_analyzer - INFO - After particle visibility calculation - Memory usage: 116.39 MB
+2025-06-23 21:45:23,738 - src.visibility_analyzer - INFO - Saved segment visibility to output/visibility/segment_visibility.csv
+2025-06-23 21:45:23,739 - src.visibility_analyzer - INFO - Saved edge visibility to output/visibility/edge_visibility.csv
+2025-06-23 21:45:23,739 - __main__ - INFO - After visibility analysis - Memory usage: 116.39 MB
+2025-06-23 21:45:23,739 - __main__ - INFO - Creating thesis plots
+2025-06-23 21:45:23,739 - __main__ - INFO - Creating thesis plots
+2025-06-23 21:45:23,739 - src.graph_builder - INFO - Building original (non-rotated) grid graph for thesis plots
+2025-06-23 21:45:24,460 - src.graph_builder - WARNING - The generated graph is not connected.
+2025-06-23 21:45:24,460 - src.graph_builder - INFO - Created original graph with 193 nodes and 1704 edges
+2025-06-23 21:45:24,460 - src.visualizer - INFO - Creating thesis plots
+2025-06-23 21:45:25,491 - src.visualizer - INFO - Saved thesis plot 1 to output/thesis_plots/1_building_obstacles_footprint_20250623_214524.png
+2025-06-23 21:45:26,714 - src.visualizer - INFO - Saved thesis plot 2 to output/thesis_plots/2_building_with_segments_20250623_214525.png
+2025-06-23 21:45:27,983 - src.visualizer - INFO - Saved thesis plot 3 to output/thesis_plots/3_building_original_graph_20250623_214526.png
+2025-06-23 21:45:27,983 - __main__ - INFO - Creating visibility heatmaps (basic)
+2025-06-23 21:45:27,983 - src.visualizer - INFO - Creating visibility heatmaps
+2025-06-23 21:45:27,987 - src.visualizer - INFO - Edge visibility range: 0 to 7 segments
+2025-06-23 21:45:29,776 - src.visualizer - INFO - Saved edge visibility heatmap to output/visibility_heatmaps/1_edge_visibility_heatmap_20250623_214528.png
+2025-06-23 21:45:29,779 - src.visualizer - INFO - Segment visibility range: 0 to 52 edges
+2025-06-23 21:45:30,982 - src.visualizer - INFO - Saved segment visibility heatmap to output/visibility_heatmaps/2_segment_visibility_heatmap_20250623_214529.png
+2025-06-23 21:45:30,986 - src.visualizer - INFO - Edge VRF range: 0.0000 to 0.7500
+2025-06-23 21:45:32,957 - src.visualizer - INFO - Saved edge VRF heatmap to output/visibility_heatmaps/3_edge_vrf_heatmap_20250623_214531.png
+2025-06-23 21:45:32,957 - __main__ - INFO - Running path optimization
+2025-06-23 21:45:32,957 - __main__ - INFO - Before optimization - Memory usage: 339.00 MB
+2025-06-23 21:45:32,957 - __main__ - INFO - Running garbage collection before optimization
+2025-06-23 21:45:33,018 - src.optimizer - INFO - Setting up optimization model
+2025-06-23 21:45:33,018 - src.optimizer - INFO - Before optimization model creation - Memory usage: 188.76 MB
+2025-06-23 21:45:33,019 - gurobipy - INFO - Set parameter Username
+2025-06-23 21:45:33,019 - gurobipy - INFO - Set parameter LicenseID to value 2654881
+2025-06-23 21:45:33,019 - gurobipy - INFO - Academic license - for non-commercial use only - expires 2026-04-21
+2025-06-23 21:45:33,019 - gurobipy - INFO - Set parameter LazyConstraints to value 1
+2025-06-23 21:45:33,019 - gurobipy - INFO - Set parameter MIPGap to value 0,0001
+2025-06-23 21:45:33,025 - src.optimizer - WARNING - Segment 3 has no visible edges
+2025-06-23 21:45:33,025 - src.optimizer - WARNING - Segment 14 has no visible edges
+2025-06-23 21:45:33,025 - src.optimizer - WARNING - Segment 15 has no visible edges
+2025-06-23 21:45:33,025 - src.optimizer - WARNING - Segment 18 has no visible edges
+2025-06-23 21:45:33,025 - src.optimizer - WARNING - Segment 19 has no visible edges
+2025-06-23 21:45:33,025 - src.optimizer - WARNING - Segment 22 has no visible edges
+2025-06-23 21:45:33,025 - src.optimizer - WARNING - Segment 26 has no visible edges
+2025-06-23 21:45:33,026 - src.optimizer - WARNING - Segment 29 has no visible edges
+2025-06-23 21:45:33,026 - src.optimizer - WARNING - Segment 31 has no visible edges
+2025-06-23 21:45:33,026 - src.optimizer - WARNING - Segment 34 has no visible edges
+2025-06-23 21:45:33,026 - src.optimizer - WARNING - Segment 37 has no visible edges
+2025-06-23 21:45:33,026 - src.optimizer - WARNING - Segment 38 has no visible edges
+2025-06-23 21:45:33,026 - src.optimizer - WARNING - Segment 41 has no visible edges
+2025-06-23 21:45:33,026 - src.optimizer - WARNING - Segment 42 has no visible edges
+2025-06-23 21:45:33,033 - src.optimizer - INFO - No tie points specified in config
+2025-06-23 21:45:33,033 - src.optimizer - INFO - Using original subtour elimination constraints
+2025-06-23 21:45:34,800 - src.optimizer - INFO - Added 156832 subtour elimination constraints
+2025-06-23 21:45:34,800 - src.optimizer - INFO - After optimization model setup - Memory usage: 209.88 MB
+2025-06-23 21:45:34,800 - src.optimizer - INFO - Solving optimization model with progress monitoring
+2025-06-23 21:45:34,818 - gurobipy - INFO - Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+2025-06-23 21:45:34,818 - gurobipy - INFO - 
+2025-06-23 21:45:34,818 - gurobipy - INFO - CPU model: 12th Gen Intel(R) Core(TM) i5-12450H, instruction set [SSE2|AVX|AVX2]
+2025-06-23 21:45:34,818 - gurobipy - INFO - Thread count: 12 physical cores, 12 logical processors, using up to 12 threads
+2025-06-23 21:45:34,818 - gurobipy - INFO - 
+2025-06-23 21:45:34,818 - gurobipy - INFO - Non-default parameters:
+2025-06-23 21:45:34,818 - gurobipy - INFO - LazyConstraints  1
+2025-06-23 21:45:34,818 - gurobipy - INFO - 
+2025-06-23 21:45:34,818 - gurobipy - INFO - Optimize a model with 157101 rows, 1704 columns and 331307 nonzeros
+2025-06-23 21:45:34,820 - gurobipy - INFO - Model fingerprint: 0xc67c0ca6
+2025-06-23 21:45:34,820 - gurobipy - INFO - Variable types: 0 continuous, 1704 integer (1704 binary)
+2025-06-23 21:45:34,820 - gurobipy - INFO - Coefficient statistics:
+2025-06-23 21:45:34,820 - gurobipy - INFO -   Matrix range     [1e+00, 1e+00]
+2025-06-23 21:45:34,820 - gurobipy - INFO -   Objective range  [1e+01, 2e+07]
+2025-06-23 21:45:34,820 - gurobipy - INFO -   Bounds range     [1e+00, 1e+00]
+2025-06-23 21:45:34,820 - gurobipy - INFO -   RHS range        [1e+00, 2e+00]
+2025-06-23 21:45:34,855 - gurobipy - INFO - Presolve removed 152125 rows and 0 columns
+2025-06-23 21:45:34,855 - gurobipy - INFO - Presolve time: 0.02s
+2025-06-23 21:45:34,855 - gurobipy - INFO - Presolved: 4976 rows, 1704 columns, 27059 nonzeros
+2025-06-23 21:45:34,856 - gurobipy - INFO - Variable types: 0 continuous, 1704 integer (1704 binary)
+2025-06-23 21:45:34,861 - gurobipy - INFO - Performing another presolve...
+2025-06-23 21:45:34,879 - gurobipy - INFO - Presolve removed 18 rows and 0 columns
+2025-06-23 21:45:34,879 - gurobipy - INFO - Presolve time: 0.02s
+2025-06-23 21:45:34,887 - gurobipy - INFO - 
+2025-06-23 21:45:34,887 - gurobipy - INFO - Root relaxation: objective 4.970653e+02, 67 iterations, 0.00 seconds (0.00 work units)
+2025-06-23 21:45:34,892 - gurobipy - INFO - 
+2025-06-23 21:45:34,892 - gurobipy - INFO -     Nodes    |    Current Node    |     Objective Bounds      |     Work
+2025-06-23 21:45:34,892 - gurobipy - INFO -  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+2025-06-23 21:45:34,892 - gurobipy - INFO - 
+2025-06-23 21:45:34,892 - gurobipy - INFO -      0     0  497.06532    0   50          -  497.06532      -     -    0s
+2025-06-23 21:45:34,916 - gurobipy - INFO -      0     0  732.56899    0   68          -  732.56899      -     -    0s
+2025-06-23 21:45:34,920 - gurobipy - INFO -      0     0  735.15946    0   69          -  735.15946      -     -    0s
+2025-06-23 21:45:34,933 - gurobipy - INFO -      0     0  908.07632    0   54          -  908.07632      -     -    0s
+2025-06-23 21:45:34,941 - gurobipy - INFO -      0     0  919.90863    0   51          -  919.90863      -     -    0s
+2025-06-23 21:45:34,962 - gurobipy - INFO -      0     0  989.86396    0   21          -  989.86396      -     -    0s
+2025-06-23 21:45:34,968 - gurobipy - INFO -      0     0  998.80351    0   28          -  998.80351      -     -    0s
+2025-06-23 21:45:34,986 - gurobipy - INFO -      0     0 1013.63531    0    9          - 1013.63531      -     -    0s
+2025-06-23 21:45:34,996 - gurobipy - INFO -      0     0 1014.70198    0   15          - 1014.70198      -     -    0s
+2025-06-23 21:45:35,001 - gurobipy - INFO -      0     0 1014.70198    0   15          - 1014.70198      -     -    0s
+2025-06-23 21:45:35,007 - gurobipy - INFO -      0     0 1015.76866    0   20          - 1015.76866      -     -    0s
+2025-06-23 21:45:35,021 - gurobipy - INFO -      0     0 1015.76866    0   16          - 1015.76866      -     -    0s
+2025-06-23 21:45:35,086 - gurobipy - INFO -      0     2 1018.46070    0   20          - 1018.46070      -     -    0s
+2025-06-23 21:45:35,480 - gurobipy - INFO - * 1525  1465              98    2588.1780674 1043.19706  59.7%   9.0    0s
+2025-06-23 21:45:35,480 - src.optimizer - INFO - Optimization progress: 148.10% gap after 0.7 seconds
+2025-06-23 21:45:35,480 - src.optimizer - INFO - Gap improved by inf% to 148.10%
+2025-06-23 21:45:35,529 - gurobipy - INFO - H 1595  1450                    2016.4476687 1043.19706  48.3%   8.9    0s
+2025-06-23 21:45:35,530 - src.optimizer - INFO - Gap improved by 54.81% to 93.29%
+2025-06-23 21:45:35,531 - gurobipy - INFO - H 1609  1373                    1814.5443101 1043.19706  42.5%   8.9    0s
+2025-06-23 21:45:35,533 - gurobipy - INFO - H 1609  1370                    1809.2109471 1043.19706  42.3%   8.9    0s
+2025-06-23 21:45:35,533 - src.optimizer - INFO - Gap improved by 19.87% to 73.43%
+2025-06-23 21:45:35,620 - gurobipy - INFO - H 1746  1423                    1761.2111284 1043.19706  40.8%   9.2    0s
+2025-06-23 21:45:35,622 - src.optimizer - INFO - Gap improved by 4.60% to 68.83%
+2025-06-23 21:45:35,623 - gurobipy - INFO - H 1754  1408                    1745.2114902 1043.19706  40.2%   9.2    0s
+2025-06-23 21:45:35,624 - src.optimizer - INFO - Gap improved by 1.53% to 67.29%
+2025-06-23 21:45:35,714 - gurobipy - INFO - H 1941  1378                    1619.3454100 1043.19706  35.6%   9.1    0s
+2025-06-23 21:45:35,715 - src.optimizer - INFO - Gap improved by 12.07% to 55.23%
+2025-06-23 21:45:35,804 - gurobipy - INFO - H 2075  1463                    1608.6788171 1043.19706  35.2%   9.0    0s
+2025-06-23 21:45:35,805 - src.optimizer - INFO - Gap improved by 1.02% to 54.21%
+2025-06-23 21:45:35,970 - src.optimizer - INFO - Gap improved by 6.08% to 48.12%
+2025-06-23 21:45:35,990 - src.optimizer - INFO - Gap improved by 1.45% to 46.68%
+2025-06-23 21:45:36,039 - src.optimizer - INFO - Gap improved by 9.47% to 37.21%
+2025-06-23 21:45:36,086 - src.optimizer - INFO - Gap improved by 3.69% to 32.71%
+2025-06-23 21:45:36,146 - src.optimizer - INFO - Gap improved by 2.04% to 29.56%
+2025-06-23 21:45:42,472 - gurobipy - INFO - H 2354  1552                    1538.2791457 1425.88552  7.31%   8.0    7s
+2025-06-23 21:45:42,582 - src.optimizer - INFO - Gap improved by 4.94% to 7.88%
+2025-06-23 21:45:44,835 - gurobipy - INFO -   2484  1641 1538.27915   56  332 1538.27915 1482.09931  3.65%  11.1   10s
+2025-06-23 21:45:46,278 - gurobipy - INFO - H 2587  1617                    1510.5460436 1492.65736  1.18%  12.1   11s
+2025-06-23 21:45:46,278 - src.optimizer - INFO - Gap improved by 1.86% to 1.20%
+2025-06-23 21:45:46,438 - gurobipy - INFO - 
+2025-06-23 21:45:46,439 - gurobipy - INFO - Cutting planes:
+2025-06-23 21:45:46,439 - gurobipy - INFO -   Gomory: 7
+2025-06-23 21:45:46,439 - gurobipy - INFO -   Lift-and-project: 8
+2025-06-23 21:45:46,439 - gurobipy - INFO -   Cover: 20
+2025-06-23 21:45:46,439 - gurobipy - INFO -   MIR: 57
+2025-06-23 21:45:46,439 - gurobipy - INFO -   Flow cover: 84
+2025-06-23 21:45:46,440 - gurobipy - INFO -   GUB cover: 3
+2025-06-23 21:45:46,440 - gurobipy - INFO -   Zero half: 45
+2025-06-23 21:45:46,440 - gurobipy - INFO -   RLT: 14
+2025-06-23 21:45:46,440 - gurobipy - INFO -   Lazy constraints: 1
+2025-06-23 21:45:46,441 - gurobipy - INFO - 
+2025-06-23 21:45:46,441 - gurobipy - INFO - Explored 2763 nodes (36553 simplex iterations) in 11.62 seconds (9.73 work units)
+2025-06-23 21:45:46,442 - gurobipy - INFO - Thread count was 12 (of 12 available processors)
+2025-06-23 21:45:46,442 - gurobipy - INFO - 
+2025-06-23 21:45:46,442 - gurobipy - INFO - Solution count 10: 1510.55 1538.28 1608.68 ... 2588.18
+2025-06-23 21:45:46,442 - gurobipy - INFO - 
+2025-06-23 21:45:46,442 - gurobipy - INFO - Optimal solution found (tolerance 1.00e-04)
+2025-06-23 21:45:46,443 - gurobipy - INFO - Best objective 1.510546043603e+03, best bound 1.510546043603e+03, gap 0.0000%
+2025-06-23 21:45:46,445 - gurobipy - INFO - 
+2025-06-23 21:45:46,445 - gurobipy - INFO - User-callback calls 12388, time in user-callback 0.12 sec
+2025-06-23 21:45:46,446 - src.optimizer - INFO - Optimization successful, selected 50 edges
+2025-06-23 21:45:46,446 - src.optimizer - INFO - After optimization model solving - Memory usage: 411.88 MB
+2025-06-23 21:45:46,446 - __main__ - INFO - After optimization - Memory usage: 411.88 MB
+2025-06-23 21:45:46,448 - __main__ - INFO - Added starting node at the end to close the tour
+2025-06-23 21:45:46,448 - __main__ - INFO - Saved tour path with 51 points to output/path/path.txt
+2025-06-23 21:45:46,448 - __main__ - INFO - Tour visits 49 unique nodes with 50 total steps
+2025-06-23 21:45:46,448 - __main__ - INFO - Tour includes 1 revisited nodes (tie points)
+2025-06-23 21:45:46,448 - __main__ - INFO - Creating VRF heatmap with optimized path overlay
+2025-06-23 21:45:46,448 - src.visualizer - INFO - Creating visibility heatmaps
+2025-06-23 21:45:46,452 - src.visualizer - INFO - Edge visibility range: 0 to 7 segments
+2025-06-23 21:45:48,282 - src.visualizer - INFO - Saved edge visibility heatmap to output/visibility_heatmaps/1_edge_visibility_heatmap_20250623_214546.png
+2025-06-23 21:45:48,286 - src.visualizer - INFO - Segment visibility range: 0 to 52 edges
+2025-06-23 21:45:49,481 - src.visualizer - INFO - Saved segment visibility heatmap to output/visibility_heatmaps/2_segment_visibility_heatmap_20250623_214548.png
+2025-06-23 21:45:49,485 - src.visualizer - INFO - Edge VRF range: 0.0000 to 0.7500
+2025-06-23 21:45:51,539 - src.visualizer - INFO - Saved edge VRF heatmap to output/visibility_heatmaps/3_edge_vrf_heatmap_20250623_214550.png
+2025-06-23 21:45:51,543 - src.visualizer - INFO - VRF with path overlay - VRF range: 0.0000 to 0.7500
+2025-06-23 21:45:51,994 - __main__ - ERROR - Error during execution: draw_networkx_nodes() got an unexpected keyword argument 'zorder'
+Traceback (most recent call last):
+  File "/home/mo/thesis/My_Thesis/Versions/thesis_v24/main.py", line 519, in main
+    visualizer.create_visibility_heatmaps(G, building, obstacles, segments, edge_visibility, segment_visibility, vrf, selected_edges)
+  File "/home/mo/thesis/My_Thesis/Versions/thesis_v24/src/visualizer.py", line 400, in create_visibility_heatmaps
+    self._plot_vrf_with_optimized_path(G, building, obstacles, vrf, selected_edges, heatmaps_dir)
+  File "/home/mo/thesis/My_Thesis/Versions/thesis_v24/src/visualizer.py", line 248, in _plot_vrf_with_optimized_path
+    nx.draw_networkx_nodes(G, pos, node_color='lightgray', node_size=20,
+TypeError: draw_networkx_nodes() got an unexpected keyword argument 'zorder'
+2025-06-23 21:45:51,995 - src.visualizer - INFO - Creating visualization
+2025-06-23 21:45:54,233 - src.visualizer - INFO - Saved plot to output/plots/result_plot_20250623_214552.png
+2025-06-23 21:47:51,486 - __main__ - INFO - Disposed Gurobi optimization model
+2025-06-23 21:47:51,487 - __main__ - INFO - Before cleanup - Memory usage: 475.87 MB
+2025-06-23 21:47:51,566 - __main__ - INFO - After cleanup - Memory usage: 467.92 MB

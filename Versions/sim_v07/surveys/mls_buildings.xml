@@ -1,0 +1,322 @@
+<?xml version="1.0"?>
+<document>
+	<survey name="buildings_walking_person_custom" 
+	        platform="platforms/platforms.xml#walking_person" 
+	        scanner="scanners/scanners_als.xml#riegl_vux-1ha22" 
+	        scene="scenes/building_scene_rotated.xml#building_scene">
+	<!-- Custom walking person survey with detailed 52-point trajectory -->
+	
+		<!-- Leg 1 -->
+		<leg>
+			<platformSettings x="-6" y="2" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 2 -->
+		<leg>
+			<platformSettings x="2" y="-6" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 3 -->
+		<leg>
+			<platformSettings x="10" y="-6" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 4 -->
+		<leg>
+			<platformSettings x="18" y="-6" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 5 -->
+		<leg>
+			<platformSettings x="26" y="-6" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 6 -->
+		<leg>
+			<platformSettings x="42" y="-6" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 7 -->
+		<leg>
+			<platformSettings x="50" y="2" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 8 -->
+		<leg>
+			<platformSettings x="50" y="18" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 9 -->
+		<leg>
+			<platformSettings x="58" y="26" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 10 -->
+		<leg>
+			<platformSettings x="58" y="34" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 11 -->
+		<leg>
+			<platformSettings x="50" y="26" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 12 -->
+		<leg>
+			<platformSettings x="42" y="34" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 13 -->
+		<leg>
+			<platformSettings x="42" y="26" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 14 -->
+		<leg>
+			<platformSettings x="42" y="18" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 15 -->
+		<leg>
+			<platformSettings x="50" y="10" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 16 -->
+		<leg>
+			<platformSettings x="50" y="2" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 17 -->
+		<leg>
+			<platformSettings x="58" y="-6" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 18 -->
+		<leg>
+			<platformSettings x="66" y="-6" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 19 -->
+		<leg>
+			<platformSettings x="74" y="2" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 20 -->
+		<leg>
+			<platformSettings x="82" y="2" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 21 -->
+		<leg>
+			<platformSettings x="82" y="-6" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 22 -->
+		<leg>
+			<platformSettings x="90" y="-6" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 23 -->
+		<leg>
+			<platformSettings x="98" y="-6" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 24 -->
+		<leg>
+			<platformSettings x="106" y="2" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 25 -->
+		<leg>
+			<platformSettings x="106" y="10" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 26 -->
+		<leg>
+			<platformSettings x="106" y="18" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 27 -->
+		<leg>
+			<platformSettings x="106" y="26" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 28 -->
+		<leg>
+			<platformSettings x="106" y="34" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 29 -->
+		<leg>
+			<platformSettings x="106" y="42" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 30 -->
+		<leg>
+			<platformSettings x="106" y="50" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 31 -->
+		<leg>
+			<platformSettings x="98" y="58" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 32 -->
+		<leg>
+			<platformSettings x="90" y="58" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 33 -->
+		<leg>
+			<platformSettings x="82" y="50" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 34 -->
+		<leg>
+			<platformSettings x="82" y="42" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 35 -->
+		<leg>
+			<platformSettings x="82" y="58" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 36 -->
+		<leg>
+			<platformSettings x="74" y="58" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 37 -->
+		<leg>
+			<platformSettings x="66" y="58" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 38 -->
+		<leg>
+			<platformSettings x="58" y="50" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 39 -->
+		<leg>
+			<platformSettings x="50" y="42" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 40 -->
+		<leg>
+			<platformSettings x="42" y="50" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 41 -->
+		<leg>
+			<platformSettings x="34" y="58" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 42 -->
+		<leg>
+			<platformSettings x="26" y="50" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 43 -->
+		<leg>
+			<platformSettings x="26" y="42" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 44 -->
+		<leg>
+			<platformSettings x="18" y="50" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 45 -->
+		<leg>
+			<platformSettings x="10" y="58" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 46 -->
+		<leg>
+			<platformSettings x="2" y="58" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 47 -->
+		<leg>
+			<platformSettings x="-6" y="50" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 48 -->
+		<leg>
+			<platformSettings x="-6" y="34" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 49 -->
+		<leg>
+			<platformSettings x="-6" y="26" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 50 -->
+		<leg>
+			<platformSettings x="-6" y="18" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 51 -->
+		<leg>
+			<platformSettings x="-6" y="10" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+		<!-- Leg 52 -->
+		<leg>
+			<platformSettings x="-6" y="2" z="2.0" onGround="false" movePerSec_m="1.2"/>
+			<scannerSettings active="true" pulseFreq_hz="100000" scanAngle_deg="180" scanFreq_hz="50" headRotatePerSec_deg="0.00" headRotateStart_deg="0.00" headRotateStop_deg="0.00" trajectoryTimeInterval_s="0.05"/>
+		</leg>
+		
+	</survey>
+</document>

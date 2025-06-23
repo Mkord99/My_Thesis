@@ -7,7 +7,7 @@
     }
   },
   "rotation": {
-    "enabled": true,
+    "enabled": false,
     "save_original_path": true,
     "debug_visualization": true,
     "force_target_angle": null
@@ -21,8 +21,8 @@
     "segment_size": 5,
     "visibility_constraints": {
       "min_distance": 4,
-      "max_distance": 20,
-      "max_normal_angle": 30
+      "max_distance": 12,
+      "max_normal_angle": 35
     },
     "particle_visibility": {
       "enabled": true,
@@ -33,7 +33,7 @@
     "enabled": true,
     "use_vrf_weight": true,
     "epsilon": 1e-6,
-    "tie_points": [98],
+    "tie_points": [95],
     "eliminate_subtours": true,
     "time_limit": null
   },
@@ -59,7 +59,7 @@
       "path": "output/visibility/"
     },
     "thesis_plots": {
-      "enabled": false,
+      "enabled": true,
       "path": "output/thesis_plots/",
       "format": "png",
       "dpi": 600

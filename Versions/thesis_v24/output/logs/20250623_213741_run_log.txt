@@ -1,0 +1,72 @@
+2025-06-23 21:37:41,122 - __main__ - INFO - Starting visibility path planning with grid aligned to building orientation (debug enabled)
+2025-06-23 21:37:41,128 - __main__ - INFO - Initial memory usage - Memory usage: 108.56 MB
+2025-06-23 21:37:41,128 - __main__ - INFO - Loading geometry data
+2025-06-23 21:37:41,128 - __main__ - INFO - Building orientation analysis is enabled
+2025-06-23 21:37:41,128 - __main__ - INFO - Debug visualization is enabled
+2025-06-23 21:37:41,128 - __main__ - INFO - Before geometry loading - Memory usage: 108.56 MB
+2025-06-23 21:37:41,128 - src.data_handler - INFO - Loading geometries from data/geometry.json
+2025-06-23 21:37:41,129 - src.data_handler - WARNING - Building building2 has an invalid polygon
+2025-06-23 21:37:41,130 - src.data_handler - INFO - Building orientation analysis is enabled
+2025-06-23 21:37:41,134 - src.rotation_utils - INFO - Longest edge length: 18.00, angle with north: 90.00 degrees
+2025-06-23 21:37:41,134 - src.rotation_utils - INFO - Target angle: 90 degrees
+2025-06-23 21:37:41,134 - src.rotation_utils - INFO - Rotation angle needed: 0.00 degrees (clockwise)
+2025-06-23 21:37:41,134 - src.rotation_utils - INFO - Rotation center: (50.63920951381602, 26.90398740818468)
+2025-06-23 21:37:41,228 - src.data_handler - INFO - Saved orientation information to output/orientation/orientation_info.json
+2025-06-23 21:37:41,228 - src.data_handler - INFO - Building orientation: Longest edge at 90.00°, Target angle 90°
+2025-06-23 21:37:41,228 - src.data_handler - INFO - Grid alignment: Will use rotation angle of 0.00° around (50.63920951381602, 26.90398740818468)
+2025-06-23 21:37:41,447 - __main__ - INFO - After geometry loading - Memory usage: 164.83 MB
+2025-06-23 21:37:41,447 - __main__ - INFO - Building the graph
+2025-06-23 21:37:41,447 - __main__ - INFO - Before graph building - Memory usage: 164.83 MB
+2025-06-23 21:37:41,447 - src.graph_builder - INFO - Building grid graph
+2025-06-23 21:37:41,447 - src.graph_builder - INFO - Grid will be aligned with building orientation (rotated by -0.00°)
+2025-06-23 21:37:41,465 - src.graph_builder - INFO - Generated 193 grid points
+2025-06-23 21:37:42,047 - src.graph_builder - WARNING - The generated graph is not connected.
+2025-06-23 21:37:42,047 - src.graph_builder - INFO - Created graph with 193 nodes and 1704 edges
+2025-06-23 21:37:42,048 - __main__ - INFO - After graph building - Memory usage: 165.45 MB
+2025-06-23 21:37:42,048 - __main__ - INFO - Analyzing visibility with normal vector approach
+2025-06-23 21:37:42,048 - __main__ - INFO - Before visibility analysis - Memory usage: 165.45 MB
+2025-06-23 21:37:42,048 - src.visibility_analyzer - INFO - Using 12 CPU cores for visibility analysis
+2025-06-23 21:37:42,048 - src.visibility_analyzer - INFO - Using touch threshold of 0.1 meters
+2025-06-23 21:37:42,048 - src.visibility_analyzer - INFO - Analyzing visibility
+2025-06-23 21:37:42,048 - src.visibility_analyzer - INFO - Before segment creation - Memory usage: 165.45 MB
+2025-06-23 21:37:42,062 - src.visibility_analyzer - INFO - Created 90 building segments with normal vectors
+2025-06-23 21:37:42,062 - src.visibility_analyzer - INFO - Calculating edge-segment visibility using normal vector approach (parallelized)
+2025-06-23 21:37:42,063 - src.visibility_analyzer - INFO - Before edge-segment visibility calculation - Memory usage: 165.45 MB
+2025-06-23 21:37:42,063 - src.visibility_analyzer - INFO - Dividing 90 segments into 12 chunks for parallel processing
+2025-06-23 21:37:44,136 - src.visibility_analyzer - INFO - After edge-segment visibility calculation - Memory usage: 170.45 MB
+2025-06-23 21:37:44,136 - src.visibility_analyzer - INFO - Calculating particle-based visibility using normal vector approach (parallelized)
+2025-06-23 21:37:44,136 - src.visibility_analyzer - INFO - Before particle visibility calculation - Memory usage: 170.45 MB
+2025-06-23 21:37:44,136 - src.visibility_analyzer - INFO - Dividing 1704 edges into 12 chunks for parallel processing
+2025-06-23 21:38:22,997 - src.visibility_analyzer - INFO - After particle visibility calculation - Memory usage: 171.83 MB
+2025-06-23 21:38:23,000 - src.visibility_analyzer - INFO - Saved segment visibility to output/visibility/segment_visibility.csv
+2025-06-23 21:38:23,001 - src.visibility_analyzer - INFO - Saved edge visibility to output/visibility/edge_visibility.csv
+2025-06-23 21:38:23,002 - __main__ - INFO - After visibility analysis - Memory usage: 171.83 MB
+2025-06-23 21:38:23,002 - __main__ - INFO - Creating thesis plots
+2025-06-23 21:38:23,002 - __main__ - INFO - Creating thesis plots
+2025-06-23 21:38:23,002 - src.graph_builder - INFO - Building original (non-rotated) grid graph for thesis plots
+2025-06-23 21:38:23,680 - src.graph_builder - WARNING - The generated graph is not connected.
+2025-06-23 21:38:23,680 - src.graph_builder - INFO - Created original graph with 193 nodes and 1704 edges
+2025-06-23 21:38:23,680 - src.graph_builder - INFO - Building rotated grid graph for thesis plots
+2025-06-23 21:38:24,354 - src.graph_builder - WARNING - The generated graph is not connected.
+2025-06-23 21:38:24,354 - src.graph_builder - INFO - Created rotated graph with 193 nodes and 1704 edges
+2025-06-23 21:38:24,354 - src.visualizer - INFO - Creating thesis plots
+2025-06-23 21:38:25,305 - src.visualizer - INFO - Saved thesis plot 1 to output/thesis_plots/1_building_obstacles_footprint_20250623_213824.png
+2025-06-23 21:38:26,463 - src.visualizer - INFO - Saved thesis plot 2 to output/thesis_plots/2_building_with_segments_20250623_213825.png
+2025-06-23 21:38:27,659 - src.visualizer - INFO - Saved thesis plot 3 to output/thesis_plots/3_building_original_graph_20250623_213826.png
+2025-06-23 21:38:28,886 - src.visualizer - INFO - Saved thesis plot 4 to output/thesis_plots/4_building_rotated_graph_20250623_213827.png
+2025-06-23 21:38:28,886 - __main__ - INFO - Creating visibility heatmaps (basic)
+2025-06-23 21:38:28,886 - src.visualizer - INFO - Creating visibility heatmaps
+2025-06-23 21:38:28,889 - src.visualizer - INFO - Edge visibility range: 0 to 11 segments
+2025-06-23 21:38:30,615 - src.visualizer - INFO - Saved edge visibility heatmap to output/visibility_heatmaps/1_edge_visibility_heatmap_20250623_213829.png
+2025-06-23 21:38:30,619 - src.visualizer - INFO - Segment visibility range: 0 to 74 edges
+2025-06-23 21:38:31,822 - src.visualizer - INFO - Saved segment visibility heatmap to output/visibility_heatmaps/2_segment_visibility_heatmap_20250623_213830.png
+2025-06-23 21:38:31,826 - src.visualizer - INFO - Edge VRF range: 0.0000 to 1.1250
+2025-06-23 21:38:33,696 - src.visualizer - INFO - Saved edge VRF heatmap to output/visibility_heatmaps/3_edge_vrf_heatmap_20250623_213832.png
+2025-06-23 21:38:33,696 - __main__ - INFO - Optimization is disabled in config - skipping optimization step
+2025-06-23 21:38:33,696 - __main__ - INFO - Creating visualization without optimization results
+2025-06-23 21:38:33,696 - src.visualizer - INFO - Creating visualization
+2025-06-23 21:38:33,776 - src.visualizer - WARNING - No selected edges to plot
+2025-06-23 21:38:35,711 - src.visualizer - INFO - Saved plot to output/plots/result_plot_20250623_213833.png
+2025-06-23 21:38:40,703 - __main__ - INFO - Process completed successfully
+2025-06-23 21:38:40,704 - __main__ - INFO - Before cleanup - Memory usage: 377.03 MB
+2025-06-23 21:38:40,800 - __main__ - INFO - After cleanup - Memory usage: 226.86 MB
