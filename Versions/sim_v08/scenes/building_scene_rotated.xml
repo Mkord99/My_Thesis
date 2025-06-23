@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
-    <scene id="building_scene" name="BuildingsScene" up="z">
-        <!-- Ground surface -->
-        <part id="0">
-            <filter type="objloader">
-                <param type="string" key="filepath" value="sceneparts/building00/groundsurface.obj" />
-            </filter>
-            <filter type="rotate">
-                <param key="rotation" type="rotation">
-                    <rot angle_deg="90" axis="x"/>
-                </param>
-            </filter>
-        </part>
+    <scene id="building_scene" name="BuildingsScene">
         
         <!-- Building 1 -->
-        <part id="1">
+        <part>
             <filter type="objloader">
                 <param type="string" key="filepath" value="sceneparts/building00/building1.obj" />
             </filter>
@@ -26,7 +15,7 @@
         </part>
         
         <!-- Building 2 -->
-        <part id="2">
+        <part>
             <filter type="objloader">
                 <param type="string" key="filepath" value="sceneparts/building00/building2.obj" />
             </filter>
@@ -38,7 +27,7 @@
         </part>
         
         <!-- Obstacle 1 -->
-        <part id="3">
+        <part>
             <filter type="objloader">
                 <param type="string" key="filepath" value="sceneparts/building00/obstacle1.obj" />
             </filter>
@@ -50,7 +39,7 @@
         </part>
         
         <!-- Obstacle 2 -->
-        <part id="4">
+        <part>
             <filter type="objloader">
                 <param type="string" key="filepath" value="sceneparts/building00/obstacle2.obj" />
             </filter>

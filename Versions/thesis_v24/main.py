@@ -146,6 +146,10 @@ def create_output_directories(config):
     path_dir = os.path.join("output", "path")
     os.makedirs(path_dir, exist_ok=True)
     
+    # Create path nodes directory
+    path_nodes_dir = os.path.join("output", "path_nodes")
+    os.makedirs(path_nodes_dir, exist_ok=True)
+    
     # Create orientation data directory if rotation is enabled
     if config.get('rotation', {}).get('enabled', False):
         orientation_dir = os.path.join("output", "orientation")
@@ -163,71 +167,92 @@ def create_output_directories(config):
 
 def reconstruct_tour_from_edges(selected_edges):
     """
-    Reconstruct the tour from selected edges by following the directed path.
-    This creates a proper tour that starts at one node and follows the edges
-    in the correct direction until returning to the starting node.
+    Reconstruct the tour by following the directed edges in sequence.
+    Simple approach: pick a start node and follow the edge directions.
     
     Args:
-        selected_edges: List of selected edges (i, j)
+        selected_edges: List of selected edges (i, j) - directed edges
         
     Returns:
-        List of nodes in tour order
+        List of nodes in correct tour order forming a closed loop
     """
     if not selected_edges:
         return []
     
-    # Build adjacency list for outgoing edges
+    logger = logging.getLogger(__name__)
+    logger.info(f"Reconstructing tour from {len(selected_edges)} directed edges")
+    
+    # Build adjacency dictionary: node -> [list of next nodes]
     adjacency = {}
-    edge_count = {}  # Track how many times each edge should be used
+    all_nodes = set()
     
     for i, j in selected_edges:
+        all_nodes.add(i)
+        all_nodes.add(j)
+        
         if i not in adjacency:
             adjacency[i] = []
         adjacency[i].append(j)
-        
-        # Count edge occurrences (for cases where an edge might be selected multiple times)
-        edge = (i, j)
-        edge_count[edge] = edge_count.get(edge, 0) + 1
     
-    # Start from the first node of the first edge
-    start_node = selected_edges[0][0]
+    logger.info(f"Graph has {len(all_nodes)} nodes")
     
-    # Follow the path
+    # Pick any node from the selected edges as starting point
+    start_node = selected_edges[0][0]  # Start from first edge's source node
+    logger.info(f"Starting tour from node {start_node}")
+    
+    # Follow the directed edges to build the path
     tour = []
     current_node = start_node
-    used_edges = {}  # Track how many times each edge has been used
+    visited_edges = set()
     
-    # Initialize used_edges counter
-    for edge in selected_edges:
-        used_edges[edge] = 0
-    
-    while len([e for e, count in used_edges.items() if count < edge_count[e]]) > 0:
+    while True:
         tour.append(current_node)
         
-        # Find next available edge from current node
+        # Find the next node by following an unused outgoing edge
         next_node = None
-        selected_edge = None
+        edge_to_use = None
         
         if current_node in adjacency:
-            for candidate in adjacency[current_node]:
-                edge = (current_node, candidate)
-                if edge in used_edges and used_edges[edge] < edge_count[edge]:
-                    next_node = candidate
-                    selected_edge = edge
+            for candidate_next in adjacency[current_node]:
+                edge = (current_node, candidate_next)
+                if edge in selected_edges and edge not in visited_edges:
+                    next_node = candidate_next
+                    edge_to_use = edge
                     break
         
-        if next_node is not None:
-            used_edges[selected_edge] += 1
-            current_node = next_node
-        else:
-            # No available edges from current node, tour might be incomplete
+        if next_node is None:
+            # No more unused edges from current node
             break
+        
+        # Mark this edge as used and move to next node
+        visited_edges.add(edge_to_use)
+        current_node = next_node
+        
+        # Check if we've returned to start (closed the loop)
+        if current_node == start_node and len(visited_edges) == len(selected_edges):
+            tour.append(start_node)  # Close the loop
+            break
+    
+    # Verify we used all edges
+    if len(visited_edges) != len(selected_edges):
+        logger.warning(f"Used {len(visited_edges)} edges out of {len(selected_edges)} total edges")
+        logger.warning("Path may not form a single connected tour")
+    else:
+        logger.info("Successfully used all edges in sequence")
+    
+    # Ensure the tour is closed
+    if len(tour) > 1 and tour[0] != tour[-1]:
+        tour.append(tour[0])
+        logger.info("Manually closed the tour by adding starting node at the end")
+    
+    logger.info(f"Final tour: {len(tour)} nodes, visits {len(set(tour))} unique nodes")
+    logger.info(f"Tour is closed: {tour[0] == tour[-1] if len(tour) > 1 else False}")
     
     return tour
 
 def save_path_to_file(G, selected_edges):
     """
-    Save the path to a file as a proper tour sequence.
+    Save the path to files as a proper tour sequence in multiple formats.
     
     Args:
         G: networkx DiGraph
@@ -239,9 +264,11 @@ def save_path_to_file(G, selected_edges):
         logger.warning("No path to save")
         return
     
-    # Create the output directory if it doesn't exist
-    output_dir = os.path.join("output", "path")
-    os.makedirs(output_dir, exist_ok=True)
+    # Create the output directories if they don't exist
+    path_dir = os.path.join("output", "path")
+    path_nodes_dir = os.path.join("output", "path_nodes")
+    os.makedirs(path_dir, exist_ok=True)
+    os.makedirs(path_nodes_dir, exist_ok=True)
     
     # Reconstruct the tour from selected edges
     tour_nodes = reconstruct_tour_from_edges(selected_edges)
@@ -256,38 +283,95 @@ def save_path_to_file(G, selected_edges):
         pos = G.nodes[node]['pos']
         path_coords.append((pos[0], pos[1]))
     
-    # Close the tour by adding the first node at the end if it's not already closed
-    if len(tour_nodes) > 1 and tour_nodes[-1] != tour_nodes[0]:
-        pos = G.nodes[tour_nodes[0]]['pos']
-        path_coords.append((pos[0], pos[1]))
-        logger.info("Added starting node at the end to close the tour")
+    # Save to path_nodes directory (NEW - for GIS software)
+    # Format 1: Simple coordinate pairs (CSV-like for GIS)
+    gis_coords_file = os.path.join(path_nodes_dir, "path_coordinates.txt")
+    with open(gis_coords_file, 'w') as f:
+        f.write("# Path coordinates for GIS software\n")
+        f.write("# Format: X,Y (one coordinate pair per line)\n")
+        f.write("# This forms a closed tour - first and last coordinates are the same\n")
+        for x, y in path_coords:
+            f.write(f"{x:.6f},{y:.6f}\n")
     
-    # Save path coordinates
-    with open(os.path.join(output_dir, "path.txt"), 'w') as f:
+    # Format 2: CSV with headers (for easy import into GIS)
+    csv_file = os.path.join(path_nodes_dir, "path_coordinates.csv")
+    with open(csv_file, 'w') as f:
+        f.write("X,Y,Point_ID\n")
+        for i, (x, y) in enumerate(path_coords):
+            f.write(f"{x:.6f},{y:.6f},{i+1}\n")
+    
+    # Format 3: Node sequence with coordinates
+    node_coords_file = os.path.join(path_nodes_dir, "node_sequence_with_coordinates.txt")
+    with open(node_coords_file, 'w') as f:
+        f.write("# Node sequence with coordinates\n")
+        f.write("# Format: NodeID X Y\n")
+        f.write("# Closed tour: first and last nodes are the same\n")
+        for i, node in enumerate(tour_nodes):
+            pos = G.nodes[node]['pos']
+            f.write(f"{node} {pos[0]:.6f} {pos[1]:.6f}\n")
+    
+    # Format 4: WKT (Well-Known Text) format for GIS
+    wkt_file = os.path.join(path_nodes_dir, "path_linestring.wkt")
+    with open(wkt_file, 'w') as f:
+        f.write("# Path as WKT LINESTRING for GIS software\n")
+        coord_str = ", ".join([f"{x:.6f} {y:.6f}" for x, y in path_coords])
+        f.write(f"LINESTRING({coord_str})\n")
+    
+    # Original format in path directory (keep for compatibility)
+    with open(os.path.join(path_dir, "path.txt"), 'w') as f:
         f.write("# Path coordinates in tour order (closed tour)\n")
         f.write("# Format: x, y\n")
         f.write("# Tour starts and ends at the same node\n")
-        for i, (x, y) in enumerate(path_coords):
+        for x, y in path_coords:
             f.write(f"{x:.4f}, {y:.4f}\n")
     
-    # Also save tour node sequence
-    with open(os.path.join(output_dir, "tour_nodes.txt"), 'w') as f:
+    # Save tour node sequence
+    with open(os.path.join(path_dir, "tour_nodes.txt"), 'w') as f:
         f.write("# Tour node sequence\n")
         f.write("# Node indices in tour order\n")
-        for i, node in enumerate(tour_nodes):
+        for node in tour_nodes:
             f.write(f"{node}\n")
-        # Add starting node at the end if not already there
-        if len(tour_nodes) > 1 and tour_nodes[-1] != tour_nodes[0]:
-            f.write(f"{tour_nodes[0]}\n")
     
-    logger.info(f"Saved tour path with {len(path_coords)} points to {output_dir}/path.txt")
-    logger.info(f"Tour visits {len(set(tour_nodes))} unique nodes with {len(tour_nodes)} total steps")
+    # Create summary file
+    summary_file = os.path.join(path_nodes_dir, "path_summary.txt")
+    with open(summary_file, 'w') as f:
+        f.write("# Path Summary\n")
+        f.write(f"Total nodes in tour: {len(tour_nodes)}\n")
+        f.write(f"Unique nodes visited: {len(set(tour_nodes))}\n")
+        f.write(f"Total edges used: {len(selected_edges)}\n")
+        f.write(f"Tour is closed: {'Yes' if tour_nodes[0] == tour_nodes[-1] else 'No'}\n")
+        f.write(f"Starting/ending node: {tour_nodes[0]}\n")
+        
+        # Calculate total path length
+        total_length = 0
+        for i in range(len(path_coords) - 1):
+            x1, y1 = path_coords[i]
+            x2, y2 = path_coords[i + 1]
+            total_length += ((x2 - x1)**2 + (y2 - y1)**2)**0.5
+        f.write(f"Total path length: {total_length:.2f} units\n")
+        
+        f.write("\n# Available files:\n")
+        f.write("# - path_coordinates.txt: Simple X,Y format\n")
+        f.write("# - path_coordinates.csv: CSV format with headers\n")
+        f.write("# - node_sequence_with_coordinates.txt: Node IDs with coordinates\n")
+        f.write("# - path_linestring.wkt: WKT format for GIS import\n")
     
-    # Log some tour statistics
-    unique_nodes = len(set(tour_nodes))
-    total_steps = len(tour_nodes)
-    if unique_nodes < total_steps:
-        logger.info(f"Tour includes {total_steps - unique_nodes} revisited nodes (tie points)")
+    logger.info(f"Saved path in multiple formats to {path_nodes_dir}/")
+    logger.info(f"Tour with {len(path_coords)} points, visiting {len(set(tour_nodes))} unique nodes")
+    logger.info(f"Tour is properly closed: {tour_nodes[0] == tour_nodes[-1]}")
+    
+    # Validate tour connectivity
+    if len(tour_nodes) > 1:
+        missing_edges = []
+        for i in range(len(tour_nodes) - 1):
+            edge = (tour_nodes[i], tour_nodes[i + 1])
+            if edge not in selected_edges:
+                missing_edges.append(edge)
+        
+        if missing_edges:
+            logger.warning(f"Tour contains {len(missing_edges)} edges not in selected_edges")
+        else:
+            logger.info("Tour successfully uses all selected edges in correct sequence")
 
 def print_orientation_info(rotation_angle, rotation_center, longest_edge_angle, target_angle):
     """

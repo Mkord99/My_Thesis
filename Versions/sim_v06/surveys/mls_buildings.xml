@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <document>
 	<survey name="buildings_walking_person_custom" 
-	        platform="platforms/platforms.xml#walking_person" 
-	        scanner="scanners/scanners_als.xml#riegl_vux-1ha22" 
-	        scene="scenes/building_scene_rotated.xml#building_scene">
+	        platform="/home/mo/thesis/My_Thesis/Versions/sim_v06/platforms/platforms.xml#walking_person" 
+	        scanner="/home/mo/thesis/My_Thesis/Versions/sim_v06/scanners/scanners_als.xml#riegl_vux-1uav" 
+	        scene="/home/mo/thesis/My_Thesis/Versions/sim_v06/scenes/building_scene_rotated.xml#building_scene">
 	<!-- Custom walking person survey with detailed 52-point trajectory -->
 	
 		<!-- Leg 1 -->

@@ -200,7 +200,7 @@ def load_all_point_clouds_parallel(directory_path, n_processes=None):
             # Wait for all results and collect them
             for result in results:
                 filename, points, intensity, num_points, success, removed_count = result.get()
-                if success and points is not None and len(points) > 0:  # Only add non-empty point clouds
+                if success and points is not None:
                     point_clouds.append((filename, points, intensity))
         
         # Calculate processing time
@@ -262,13 +262,13 @@ def load_all_point_clouds_parallel_v2(directory_path, n_processes=None):
         for i, (filename, points, intensity, num_points, success, removed_count) in enumerate(results, 1):
             progress_percent = (i / total_files) * 100
             
-            if success and points is not None and len(points) > 0:  # Only add non-empty point clouds
+            if success and points is not None:
                 point_clouds.append((filename, points, intensity))
                 intensity_info = " (with intensity)" if intensity is not None else ""
                 removed_info = f" (removed {removed_count} low-z points)" if removed_count > 0 else ""
                 print(f"[{i:3d}/{total_files}] ({progress_percent:5.1f}%) ✓ {filename} - {num_points:,} points{intensity_info}{removed_info}")
             else:
-                print(f"[{i:3d}/{total_files}] ({progress_percent:5.1f}%) ✗ {filename} - Failed to load or empty")
+                print(f"[{i:3d}/{total_files}] ({progress_percent:5.1f}%) ✗ {filename} - Failed to load")
             
             # Add visual separator every 10 files
             if i % 10 == 0 and i < total_files:
@@ -290,82 +290,6 @@ def load_all_point_clouds_parallel_v2(directory_path, n_processes=None):
     
     return point_clouds
 
-def test_multiprocessing():
-    """Test if multiprocessing is working correctly"""
-    def square_number(x):
-        return x * x
-    
-    try:
-        n_cores = mp.cpu_count()
-        print(f"🧪 Testing multiprocessing with {n_cores} cores...")
-        
-        # Use a module-level function to avoid pickle issues
-        with mp.Pool(processes=2) as pool:
-            test_data = [1, 2, 3, 4]
-            results = pool.map(square_number, test_data)
-            
-        if results == [1, 4, 9, 16]:
-            print("✅ Multiprocessing test passed!")
-            return True
-        else:
-            print("❌ Multiprocessing test failed - unexpected results")
-            return False
-            
-    except Exception as e:
-        print(f"❌ Multiprocessing test failed: {e}")
-        return False
-
-def square_number(x):
-    """Helper function for multiprocessing test"""
-    return x * x
-
-def load_all_point_clouds(directory_path):
-    """
-    Load all .xyz files from the specified directory (sequential processing).
-    Returns a list of tuples: (filename, point_cloud_array, intensity_array)
-    """
-    # Find all .xyz files in the directory
-    xyz_pattern = os.path.join(directory_path, "*.xyz")
-    xyz_files = glob.glob(xyz_pattern)
-    
-    if not xyz_files:
-        print(f"No .xyz files found in {directory_path}")
-        return []
-    
-    print(f"Found {len(xyz_files)} .xyz files")
-    print("Using sequential processing")
-    print("=" * 60)
-    
-    point_clouds = []
-    total_files = len(xyz_files)
-    start_time = time.time()
-    
-    for i, filepath in enumerate(xyz_files, 1):
-        filename = os.path.basename(filepath)
-        
-        # Progress indicator
-        progress_percent = (i / total_files) * 100
-        print(f"[{i:3d}/{total_files}] ({progress_percent:5.1f}%) Loading {filename}...")
-        
-        points, intensity = read_xyz_file(filepath)
-        if points is not None and len(points) > 0:  # Only add non-empty point clouds
-            point_clouds.append((filename, points, intensity))
-            intensity_info = f" (with intensity)" if intensity is not None else ""
-            print(f"           ✓ Loaded {len(points):,} points{intensity_info} (z ≥ 0.03)")
-        else:
-            print(f"           ✗ Failed to load {filename} or empty after filtering")
-        
-        # Add a visual separator every 10 files for better readability
-        if i % 10 == 0 and i < total_files:
-            print("-" * 40)
-    
-    end_time = time.time()
-    processing_time = end_time - start_time
-    print("=" * 60)
-    print(f"Sequential loading completed in {processing_time:.2f} seconds")
-    
-    return point_clouds
-
 def calculate_point_density(point_clouds, grid_size=0.1):
     """
     Calculate point density for all point clouds combined.
@@ -383,11 +307,9 @@ def calculate_point_density(point_clouds, grid_size=0.1):
     # Combine all points
     all_points = []
     for _, points, _ in point_clouds:
-        if len(points) > 0:  # Only add non-empty point clouds
-            all_points.append(points)
+        all_points.append(points)
     
     if not all_points:
-        print("   No points to calculate density")
         return {}
     
     combined_points = np.vstack(all_points)
@@ -418,8 +340,7 @@ def calculate_point_density(point_clouds, grid_size=0.1):
         point_density[tuple(center_coords)] = count
     
     print(f"   Created density grid with {len(point_density)} occupied cells")
-    if density_dict:
-        print(f"   Density range: {min(density_dict.values())} to {max(density_dict.values())} points per cell")
+    print(f"   Density range: {min(density_dict.values())} to {max(density_dict.values())} points per cell")
     
     return point_density
 
@@ -440,120 +361,309 @@ def create_density_arrays(point_clouds, grid_size=0.1):
     densities = np.array(list(density_dict.values()))
     
     return coords, densities
-
-def plot_point_clouds_3d(point_clouds, max_points_per_cloud=10000):
     """
-    Plot all point clouds in separate 3D figures:
-    1. Regular point cloud visualization (same color)
-    2. Point density heatmap (based on number of points per location)
+    Load all .xyz files from the specified directory (sequential processing).
+    Returns a list of tuples: (filename, point_cloud_array, intensity_array)
+    """
+    # Find all .xyz files in the directory
+    xyz_pattern = os.path.join(directory_path, "*.xyz")
+    xyz_files = glob.glob(xyz_pattern)
+    
+    if not xyz_files:
+        print(f"No .xyz files found in {directory_path}")
+        return []
+    
+    print(f"Found {len(xyz_files)} .xyz files")
+    print("Using sequential processing")
+    print("=" * 60)
+    
+    point_clouds = []
+    total_files = len(xyz_files)
+    start_time = time.time()
+    
+    for i, filepath in enumerate(xyz_files, 1):
+        filename = os.path.basename(filepath)
+        
+        # Progress indicator
+        progress_percent = (i / total_files) * 100
+        print(f"[{i:3d}/{total_files}] ({progress_percent:5.1f}%) Loading {filename}...")
+        
+        points, intensity = read_xyz_file(filepath)
+        if points is not None:
+            point_clouds.append((filename, points, intensity))
+            intensity_info = f" (with intensity)" if intensity is not None else ""
+            print(f"           ✓ Loaded {len(points):,} points{intensity_info} (z ≥ 0.03)")
+        else:
+            print(f"           ✗ Failed to load {filename}")
+        
+        # Add a visual separator every 10 files for better readability
+        if i % 10 == 0 and i < total_files:
+            print("-" * 40)
+    
+    end_time = time.time()
+    processing_time = end_time - start_time
+    print("=" * 60)
+    print(f"Sequential loading completed in {processing_time:.2f} seconds")
+    
+    return point_clouds
+
+def test_multiprocessing():
+    """Test if multiprocessing is working correctly"""
+    try:
+        n_cores = mp.cpu_count()
+        print(f"🧪 Testing multiprocessing with {n_cores} cores...")
+        
+        # Simple test without local functions to avoid pickle issues
+        with mp.Pool(processes=2) as pool:
+            test_data = [1, 2, 3, 4]
+            # Use a built-in function or lambda that can be pickled
+            results = pool.map(lambda x: x * x, test_data)
+            
+        if results == [1, 4, 9, 16]:
+            print("✅ Multiprocessing test passed!")
+            return True
+        else:
+            print("❌ Multiprocessing test failed - unexpected results")
+            return False
+            
+    except Exception as e:
+        print(f"❌ Multiprocessing test failed: {e}")
+        return False
+
+def load_all_point_clouds(directory_path):
+    """
+    Load all .xyz files from the specified directory (sequential processing).
+    Returns a list of tuples: (filename, point_cloud_array, intensity_array)
+    """
+    # Find all .xyz files in the directory
+    xyz_pattern = os.path.join(directory_path, "*.xyz")
+    xyz_files = glob.glob(xyz_pattern)
+    
+    if not xyz_files:
+        print(f"No .xyz files found in {directory_path}")
+        return []
+    
+    print(f"Found {len(xyz_files)} .xyz files")
+    print("Using sequential processing")
+    print("=" * 60)
+    
+    point_clouds = []
+    total_files = len(xyz_files)
+    start_time = time.time()
+    
+    for i, filepath in enumerate(xyz_files, 1):
+        filename = os.path.basename(filepath)
+        
+        # Progress indicator
+        progress_percent = (i / total_files) * 100
+        print(f"[{i:3d}/{total_files}] ({progress_percent:5.1f}%) Loading {filename}...")
+        
+        points, intensity = read_xyz_file(filepath)
+        if points is not None:
+            point_clouds.append((filename, points, intensity))
+            intensity_info = f" (with intensity)" if intensity is not None else ""
+            print(f"           ✓ Loaded {len(points):,} points{intensity_info} (z ≥ 0.03)")
+        else:
+            print(f"           ✗ Failed to load {filename}")
+        
+        # Add a visual separator every 10 files for better readability
+        if i % 10 == 0 and i < total_files:
+            print("-" * 40)
+    
+    end_time = time.time()
+    processing_time = end_time - start_time
+    print("=" * 60)
+    print(f"Sequential loading completed in {processing_time:.2f} seconds")
+    
+    return point_clouds
+    """Test if multiprocessing is working correctly"""
+    def test_function(x):
+        return x * x
+    
+    try:
+        n_cores = mp.cpu_count()
+        print(f"🧪 Testing multiprocessing with {n_cores} cores...")
+        
+        with mp.Pool(processes=2) as pool:
+            test_data = [1, 2, 3, 4]
+            results = pool.map(test_function, test_data)
+            
+        if results == [1, 4, 9, 16]:
+            print("✅ Multiprocessing test passed!")
+            return True
+        else:
+            print("❌ Multiprocessing test failed - unexpected results")
+            return False
+            
+    except Exception as e:
+        print(f"❌ Multiprocessing test failed: {e}")
+        return False
+    """
+    Load all .xyz files from the specified directory (sequential processing).
+    Returns a list of tuples: (filename, point_cloud_array, intensity_array)
+    """
+    # Find all .xyz files in the directory
+    xyz_pattern = os.path.join(directory_path, "*.xyz")
+    xyz_files = glob.glob(xyz_pattern)
+    
+    if not xyz_files:
+        print(f"No .xyz files found in {directory_path}")
+        return []
+    
+    print(f"Found {len(xyz_files)} .xyz files")
+    print("Using sequential processing")
+    print("=" * 60)
+    
+    point_clouds = []
+    total_files = len(xyz_files)
+    start_time = time.time()
+    
+    for i, filepath in enumerate(xyz_files, 1):
+        filename = os.path.basename(filepath)
+        
+        # Progress indicator
+        progress_percent = (i / total_files) * 100
+        print(f"[{i:3d}/{total_files}] ({progress_percent:5.1f}%) Loading {filename}...")
+        
+        points, intensity = read_xyz_file(filepath)
+        if points is not None:
+            point_clouds.append((filename, points, intensity))
+            intensity_info = f" (with intensity)" if intensity is not None else ""
+            print(f"           ✓ Loaded {len(points):,} points{intensity_info}")
+        else:
+            print(f"           ✗ Failed to load {filename}")
+        
+        # Add a visual separator every 10 files for better readability
+        if i % 10 == 0 and i < total_files:
+            print("-" * 40)
+    
+    end_time = time.time()
+    processing_time = end_time - start_time
+    print("=" * 60)
+    print(f"Sequential loading completed in {processing_time:.2f} seconds")
+    
+    return point_clouds
+
+def plot_point_clouds_3d(point_clouds, max_points_per_cloud=10000, single_color=True, plot_intensity_heatmap=True):
+    """
+    Plot all point clouds in a single 3D figure.
     
     Args:
         point_clouds: List of tuples (filename, points_array, intensity_array)
         max_points_per_cloud: Maximum number of points to plot per cloud (for performance)
+        single_color: If True, use same color for all clouds
+        plot_intensity_heatmap: If True, create intensity-based heatmap when intensity data available
     """
     if not point_clouds:
         print("No point clouds to plot")
         return
     
-    # Filter out empty point clouds
-    non_empty_clouds = [(filename, points, intensity) for filename, points, intensity in point_clouds if len(points) > 0]
+    # Check if any point cloud has intensity data
+    has_intensity = any(intensity is not None for _, _, intensity in point_clouds)
     
-    if not non_empty_clouds:
-        print("No non-empty point clouds to plot")
-        return
+    if has_intensity and plot_intensity_heatmap:
+        # Create two plots: regular and intensity heatmap
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 8), subplot_kw={'projection': '3d'})
+        axes = [ax1, ax2]
+        titles = ['3D Point Cloud Visualization (Same Color)', 'Intensity Heatmap']
+    else:
+        # Create single plot
+        fig = plt.figure(figsize=(12, 10))
+        ax1 = fig.add_subplot(111, projection='3d')
+        axes = [ax1]
+        titles = ['3D Point Cloud Visualization (Same Color)']
     
-    print("🎨 Creating visualization 1: Regular Point Cloud (same color)")
+    # Combine all points for global intensity scaling
+    if has_intensity and plot_intensity_heatmap:
+        all_intensities = []
+        for _, points, intensity in point_clouds:
+            if intensity is not None:
+                all_intensities.extend(intensity)
+        
+        if all_intensities:
+            global_intensity_min = np.min(all_intensities)
+            global_intensity_max = np.max(all_intensities)
+            print(f"Intensity range: {global_intensity_min:.3f} to {global_intensity_max:.3f}")
     
-    # === FIGURE 1: Regular Point Cloud ===
-    fig1 = plt.figure(figsize=(12, 10))
-    ax1 = fig1.add_subplot(111, projection='3d')
-    
+    # Plot each point cloud
     total_points_plotted = 0
     
-    # Plot each point cloud with same color
-    for i, (filename, points, intensity) in enumerate(non_empty_clouds):
-        # Subsample points if there are too many (for better performance)
-        if len(points) > max_points_per_cloud:
-            indices = np.random.choice(len(points), max_points_per_cloud, replace=False)
-            points_to_plot = points[indices]
-            print(f"  Subsampling {filename}: {len(points):,} -> {max_points_per_cloud:,} points")
-        else:
-            points_to_plot = points
+    for plot_idx, (ax, title) in enumerate(zip(axes, titles)):
+        print(f"\nCreating {title.lower()}...")
         
-        # Plot with same blue color
-        ax1.scatter(points_to_plot[:, 0], 
-                   points_to_plot[:, 1], 
-                   points_to_plot[:, 2],
-                   c='blue', 
-                   s=1,  # Point size
-                   alpha=0.6)
+        for i, (filename, points, intensity) in enumerate(point_clouds):
+            # Subsample points if there are too many (for better performance)
+            if len(points) > max_points_per_cloud:
+                indices = np.random.choice(len(points), max_points_per_cloud, replace=False)
+                points_to_plot = points[indices]
+                intensity_to_plot = intensity[indices] if intensity is not None else None
+                print(f"  Subsampling {filename}: {len(points):,} -> {max_points_per_cloud:,} points")
+            else:
+                points_to_plot = points
+                intensity_to_plot = intensity
+            
+            # Determine color scheme based on plot type
+            if plot_idx == 0:  # Regular plot with same color
+                color = 'blue'
+                ax.scatter(points_to_plot[:, 0], 
+                          points_to_plot[:, 1], 
+                          points_to_plot[:, 2],
+                          c=color, 
+                          s=1,  # Point size
+                          alpha=0.6)
+            
+            elif plot_idx == 1 and intensity_to_plot is not None:  # Intensity heatmap
+                # Normalize intensity for colormap
+                if len(all_intensities) > 0:
+                    norm_intensity = (intensity_to_plot - global_intensity_min) / (global_intensity_max - global_intensity_min)
+                else:
+                    norm_intensity = intensity_to_plot
+                
+                scatter = ax.scatter(points_to_plot[:, 0], 
+                                   points_to_plot[:, 1], 
+                                   points_to_plot[:, 2],
+                                   c=intensity_to_plot,
+                                   cmap='viridis',  # You can change to 'plasma', 'inferno', 'hot', etc.
+                                   s=1,
+                                   alpha=0.7,
+                                   vmin=global_intensity_min,
+                                   vmax=global_intensity_max)
+                
+                # Add colorbar for intensity plot
+                if i == len(point_clouds) - 1:  # Add colorbar after last point cloud
+                    cbar = plt.colorbar(scatter, ax=ax, shrink=0.5, aspect=20)
+                    cbar.set_label('Intensity', rotation=270, labelpad=15)
+            
+            elif plot_idx == 1:  # Intensity plot but no intensity data
+                # Fall back to same color
+                ax.scatter(points_to_plot[:, 0], 
+                          points_to_plot[:, 1], 
+                          points_to_plot[:, 2],
+                          c='blue', 
+                          s=1,
+                          alpha=0.6)
+            
+            total_points_plotted += len(points_to_plot)
         
-        total_points_plotted += len(points_to_plot)
-    
-    # Set labels and title for figure 1
-    ax1.set_xlabel('X (m)')
-    ax1.set_ylabel('Y (m)')
-    ax1.set_zlabel('Z (m)')
-    ax1.set_title(f'Point Cloud Visualization (z ≥ 0.03m)\n{len(non_empty_clouds)} files, {total_points_plotted:,} points plotted')
-    
-    # Set equal aspect ratio for figure 1
-    if non_empty_clouds:
+        # Set labels and title
+        ax.set_xlabel('X')
+        ax.set_ylabel('Y')
+        ax.set_zlabel('Z')
+        ax.set_title(f'{title}\n{len(point_clouds)} files, {total_points_plotted:,} points plotted')
+        
+        # Set equal aspect ratio
         max_range = 0
-        for _, points, _ in non_empty_clouds:
-            if len(points) > 0:  # Double check for non-empty
-                ranges = [points[:, i].max() - points[:, i].min() for i in range(3)]
-                max_range = max(max_range, max(ranges))
+        for _, points, _ in point_clouds:
+            ranges = [points[:, i].max() - points[:, i].min() for i in range(3)]
+            max_range = max(max_range, max(ranges))
         
         # Center the plot
-        all_points = np.vstack([points for _, points, _ in non_empty_clouds if len(points) > 0])
+        all_points = np.vstack([points for _, points, _ in point_clouds])
         center = [np.mean(all_points[:, i]) for i in range(3)]
         
-        ax1.set_xlim(center[0] - max_range/2, center[0] + max_range/2)
-        ax1.set_ylim(center[1] - max_range/2, center[1] + max_range/2)
-        ax1.set_zlim(center[2] - max_range/2, center[2] + max_range/2)
-    
-    plt.tight_layout()
-    plt.show()
-    
-    # === FIGURE 2: Point Density Heatmap ===
-    print("🌈 Creating visualization 2: Point Density Heatmap")
-    
-    # Calculate point density
-    density_coords, density_values = create_density_arrays(non_empty_clouds, grid_size=0.05)  # 5cm grid
-    
-    if len(density_coords) == 0:
-        print("❌ No density data to plot")
-        return
-    
-    fig2 = plt.figure(figsize=(12, 10))
-    ax2 = fig2.add_subplot(111, projection='3d')
-    
-    # Create density heatmap
-    scatter = ax2.scatter(density_coords[:, 0], 
-                         density_coords[:, 1], 
-                         density_coords[:, 2],
-                         c=density_values,
-                         cmap='viridis',  # Color map
-                         s=20,  # Larger points for density visualization
-                         alpha=0.8,
-                         vmin=np.min(density_values),
-                         vmax=np.max(density_values))
-    
-    # Add colorbar for density
-    cbar = plt.colorbar(scatter, ax=ax2, shrink=0.6, aspect=20)
-    cbar.set_label('Point Density (points per 5cm³ cell)', rotation=270, labelpad=20)
-    
-    # Set labels and title for figure 2
-    ax2.set_xlabel('X (m)')
-    ax2.set_ylabel('Y (m)')
-    ax2.set_zlabel('Z (m)')
-    ax2.set_title(f'Point Density Heatmap (z ≥ 0.03m)\n{len(density_coords):,} grid cells, density range: {np.min(density_values)}-{np.max(density_values)} points/cell')
-    
-    # Use same axis limits as figure 1
-    if non_empty_clouds:
-        ax2.set_xlim(center[0] - max_range/2, center[0] + max_range/2)
-        ax2.set_ylim(center[1] - max_range/2, center[1] + max_range/2)
-        ax2.set_zlim(center[2] - max_range/2, center[2] + max_range/2)
+        ax.set_xlim(center[0] - max_range/2, center[0] + max_range/2)
+        ax.set_ylim(center[1] - max_range/2, center[1] + max_range/2)
+        ax.set_zlim(center[2] - max_range/2, center[2] + max_range/2)
     
     plt.tight_layout()
     plt.show()
@@ -566,21 +676,14 @@ def plot_individual_clouds(point_clouds, max_points_per_cloud=10000):
         print("No point clouds to plot")
         return
     
-    # Filter out empty point clouds
-    non_empty_clouds = [(filename, points, intensity) for filename, points, intensity in point_clouds if len(points) > 0]
-    
-    if not non_empty_clouds:
-        print("No non-empty point clouds to plot")
-        return
-    
     # Determine subplot grid
-    n_clouds = len(non_empty_clouds)
+    n_clouds = len(point_clouds)
     cols = min(4, n_clouds)
     rows = (n_clouds + cols - 1) // cols
     
     fig = plt.figure(figsize=(5*cols, 4*rows))
     
-    for i, (filename, points, intensity) in enumerate(non_empty_clouds):
+    for i, (filename, points, intensity) in enumerate(point_clouds):
         ax = fig.add_subplot(rows, cols, i+1, projection='3d')
         
         # Subsample if necessary
@@ -608,7 +711,7 @@ def plot_individual_clouds(point_clouds, max_points_per_cloud=10000):
 
 def main():
     # Directory containing the .xyz files
-    directory_path = "/home/mo/thesis/My_Thesis/Versions/sim_v07/output/buildings_walking_person_custom/2025-06-24_00-35-57" 
+    directory_path = "/home/mo/thesis/My_Thesis/Versions/sim_v08/output/buildings_walking_person_custom/2025-06-24_00-50-37"
     
     # Check if directory exists
     if not os.path.exists(directory_path):
@@ -648,7 +751,6 @@ def main():
         point_clouds = load_all_point_clouds(directory_path)
     
     if not point_clouds:
-        print("❌ No valid point clouds loaded!")
         return
     
     print(f"\n✅ Successfully loaded {len(point_clouds)} point clouds")
@@ -706,7 +808,7 @@ def main_with_options(use_parallel=True, n_processes=None, parallel_method=2):
         parallel_method: 1 or 2 (different parallel approaches)
     """
     # Directory containing the .xyz files
-    directory_path = "/home/mo/thesis/My_Thesis/Versions/sim_v07/output/buildings_walking_person_custom/2025-06-24_00-35-57"
+    directory_path = "/home/mo/thesis/My_Thesis/Versions/sim_v08/output/buildings_walking_person_custom/2025-06-24_00-50-37"
     
     # Check if directory exists
     if not os.path.exists(directory_path):
