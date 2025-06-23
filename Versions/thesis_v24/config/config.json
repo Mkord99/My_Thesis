@@ -1,0 +1,84 @@
+{
+  "data": {
+    "geometry_file": "data/geometry.json",
+    "buffer_distances": {
+      "inner": 1,
+      "outer": 30
+    }
+  },
+  "rotation": {
+    "enabled": true,
+    "save_original_path": true,
+    "debug_visualization": true,
+    "force_target_angle": null
+  },
+  "graph": {
+    "grid_spacing": 8,
+    "max_edge_distance": 11.5,
+    "use_buffer_constraint": true
+  },
+  "visibility": {
+    "segment_size": 5,
+    "visibility_constraints": {
+      "min_distance": 4,
+      "max_distance": 20,
+      "max_normal_angle": 30
+    },
+    "particle_visibility": {
+      "enabled": true,
+      "spacing": 1
+    }
+  },
+  "optimization": {
+    "enabled": true,
+    "use_vrf_weight": true,
+    "epsilon": 1e-6,
+    "tie_points": [98],
+    "eliminate_subtours": true,
+    "time_limit": null
+  },
+  "performance": {
+    "num_cores": null
+  },
+  "output": {
+    "logs": {
+      "enabled": true,
+      "path": "output/logs/",
+      "filename": "run_log.txt"
+    },
+    "plots": {
+      "save": true,
+      "display": true,
+      "path": "output/plots/",
+      "filename": "result_plot.png",
+      "format": "png",
+      "dpi": 600
+    },
+    "visibility": {
+      "save": true,
+      "path": "output/visibility/"
+    },
+    "thesis_plots": {
+      "enabled": false,
+      "path": "output/thesis_plots/",
+      "format": "png",
+      "dpi": 600
+    },
+    "visibility_heatmaps": {
+      "enabled": true,
+      "path": "output/visibility_heatmaps/",
+      "format": "png",
+      "dpi": 600
+    }
+  },
+  "visualization": {
+    "show_grid": true,
+    "show_building_ids": true,
+    "show_segment_ids": true,
+    "show_node_ids": true,
+    "node_id_font_size": 10,
+    "node_size": 30,
+    "edge_width": 1.0,
+    "selected_edge_width": 2.0
+  }
+}
