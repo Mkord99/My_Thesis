@@ -1,0 +1,63 @@
+2025-06-25 18:29:58,003 - __main__ - INFO - Starting visibility path planning with grid aligned to building orientation (debug enabled)
+2025-06-25 18:29:58,010 - __main__ - INFO - Initial memory usage - Memory usage: 111.98 MB
+2025-06-25 18:29:58,010 - __main__ - INFO - Loading geometry data
+2025-06-25 18:29:58,010 - __main__ - INFO - Building orientation analysis is enabled
+2025-06-25 18:29:58,010 - __main__ - INFO - Debug visualization is enabled
+2025-06-25 18:29:58,010 - __main__ - INFO - Before geometry loading - Memory usage: 111.98 MB
+2025-06-25 18:29:58,010 - src.data_handler - INFO - Loading geometries from data/geometry.json
+2025-06-25 18:29:58,012 - src.data_handler - INFO - Building orientation analysis is enabled
+2025-06-25 18:29:58,015 - src.rotation_utils - INFO - Longest edge length: 59.75, angle with north: 75.91 degrees
+2025-06-25 18:29:58,015 - src.rotation_utils - INFO - Target angle: 90 degrees
+2025-06-25 18:29:58,015 - src.rotation_utils - INFO - Rotation angle needed: 14.09 degrees (counter-clockwise)
+2025-06-25 18:29:58,015 - src.rotation_utils - INFO - Rotation center: (555525.2944589057, 4806748.958783473)
+2025-06-25 18:29:58,111 - src.data_handler - INFO - Saved orientation information to output/orientation/orientation_info.json
+2025-06-25 18:29:58,111 - src.data_handler - INFO - Building orientation: Longest edge at 75.91°, Target angle 90°
+2025-06-25 18:29:58,111 - src.data_handler - INFO - Grid alignment: Will use rotation angle of 14.09° around (555525.2944589057, 4806748.958783473)
+2025-06-25 18:29:58,423 - __main__ - INFO - After geometry loading - Memory usage: 172.20 MB
+2025-06-25 18:29:58,423 - __main__ - INFO - Building the graph
+2025-06-25 18:29:58,423 - __main__ - INFO - Before graph building - Memory usage: 172.20 MB
+2025-06-25 18:29:58,423 - src.graph_builder - INFO - Building grid graph
+2025-06-25 18:29:58,423 - src.graph_builder - INFO - Grid will be aligned with building orientation (rotated by -14.09°)
+2025-06-25 18:29:58,461 - src.graph_builder - INFO - Generated 215 grid points
+2025-06-25 18:29:59,173 - src.graph_builder - WARNING - The generated graph is not connected.
+2025-06-25 18:29:59,173 - src.graph_builder - INFO - Created graph with 215 nodes and 1672 edges
+2025-06-25 18:29:59,174 - __main__ - INFO - After graph building - Memory usage: 173.07 MB
+2025-06-25 18:29:59,174 - __main__ - INFO - Analyzing visibility with normal vector approach
+2025-06-25 18:29:59,174 - __main__ - INFO - Before visibility analysis - Memory usage: 173.07 MB
+2025-06-25 18:29:59,174 - src.visibility_analyzer - INFO - Using 12 CPU cores for visibility analysis
+2025-06-25 18:29:59,174 - src.visibility_analyzer - INFO - Using touch threshold of 0.1 meters
+2025-06-25 18:29:59,174 - src.visibility_analyzer - INFO - Analyzing visibility
+2025-06-25 18:29:59,174 - src.visibility_analyzer - INFO - Before segment creation - Memory usage: 173.07 MB
+2025-06-25 18:29:59,185 - src.visibility_analyzer - INFO - Created 71 building segments with normal vectors
+2025-06-25 18:29:59,185 - src.visibility_analyzer - INFO - Calculating edge-segment visibility using normal vector approach (parallelized)
+2025-06-25 18:29:59,186 - src.visibility_analyzer - INFO - Before edge-segment visibility calculation - Memory usage: 173.07 MB
+2025-06-25 18:29:59,186 - src.visibility_analyzer - INFO - Dividing 71 segments into 12 chunks for parallel processing
+2025-06-25 18:30:02,054 - src.visibility_analyzer - INFO - After edge-segment visibility calculation - Memory usage: 177.70 MB
+2025-06-25 18:30:02,054 - src.visibility_analyzer - INFO - Calculating particle-based visibility using normal vector approach (parallelized)
+2025-06-25 18:30:02,054 - src.visibility_analyzer - INFO - Before particle visibility calculation - Memory usage: 177.70 MB
+2025-06-25 18:30:02,055 - src.visibility_analyzer - INFO - Dividing 1672 edges into 12 chunks for parallel processing
+2025-06-25 18:30:05,255 - src.visibility_analyzer - INFO - After particle visibility calculation - Memory usage: 177.95 MB
+2025-06-25 18:30:05,257 - src.visibility_analyzer - INFO - Saved segment visibility to output/visibility/segment_visibility.csv
+2025-06-25 18:30:05,258 - src.visibility_analyzer - INFO - Saved edge visibility to output/visibility/edge_visibility.csv
+2025-06-25 18:30:05,258 - __main__ - INFO - After visibility analysis - Memory usage: 177.95 MB
+2025-06-25 18:30:05,258 - __main__ - INFO - Creating thesis plots
+2025-06-25 18:30:05,258 - __main__ - INFO - Creating thesis plots
+2025-06-25 18:30:05,258 - src.graph_builder - INFO - Building original (non-rotated) grid graph for thesis plots
+2025-06-25 18:30:06,144 - src.graph_builder - WARNING - The generated graph is not connected.
+2025-06-25 18:30:06,144 - src.graph_builder - INFO - Created original graph with 223 nodes and 1696 edges
+2025-06-25 18:30:06,144 - src.graph_builder - INFO - Building rotated grid graph for thesis plots
+2025-06-25 18:30:06,896 - src.graph_builder - WARNING - The generated graph is not connected.
+2025-06-25 18:30:06,896 - src.graph_builder - INFO - Created rotated graph with 215 nodes and 1672 edges
+2025-06-25 18:30:06,896 - src.visualizer - INFO - Creating thesis plots
+2025-06-25 18:30:08,036 - src.visualizer - INFO - Saved thesis plot 1 to output/thesis_plots/1_building_obstacles_footprint_20250625_183006.png
+2025-06-25 18:30:09,446 - src.visualizer - INFO - Saved thesis plot 2 to output/thesis_plots/2_building_with_segments_20250625_183008.png
+2025-06-25 18:30:10,572 - src.visualizer - INFO - Saved thesis plot 3 to output/thesis_plots/3_building_original_graph_20250625_183009.png
+2025-06-25 18:30:11,802 - src.visualizer - INFO - Saved thesis plot 4 to output/thesis_plots/4_building_rotated_graph_20250625_183010.png
+2025-06-25 18:30:11,802 - __main__ - INFO - Optimization is disabled in config - skipping optimization step
+2025-06-25 18:30:11,802 - __main__ - INFO - Creating visualization without optimization results
+2025-06-25 18:30:11,802 - src.visualizer - INFO - Creating visualization
+2025-06-25 18:30:11,927 - src.visualizer - WARNING - No selected edges to plot
+2025-06-25 18:30:13,812 - src.visualizer - INFO - Saved plot to output/plots/result_plot_20250625_183011.png
+2025-06-25 18:30:20,171 - __main__ - INFO - Process completed successfully
+2025-06-25 18:30:20,171 - __main__ - INFO - Before cleanup - Memory usage: 612.39 MB
+2025-06-25 18:30:20,230 - __main__ - INFO - After cleanup - Memory usage: 217.36 MB

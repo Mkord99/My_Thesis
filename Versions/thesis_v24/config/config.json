@@ -7,22 +7,22 @@
     }
   },
   "rotation": {
-    "enabled": false,
+    "enabled": true,
     "save_original_path": true,
     "debug_visualization": true,
     "force_target_angle": null
   },
   "graph": {
     "grid_spacing": 8,
-    "max_edge_distance": 11.5,
+    "max_edge_distance": 11,
     "use_buffer_constraint": true
   },
   "visibility": {
     "segment_size": 5,
     "visibility_constraints": {
-      "min_distance": 4,
-      "max_distance": 12,
-      "max_normal_angle": 35
+      "min_distance": 2,
+      "max_distance": 20,
+      "max_normal_angle": 45
     },
     "particle_visibility": {
       "enabled": true,
@@ -30,10 +30,10 @@
     }
   },
   "optimization": {
-    "enabled": true,
-    "use_vrf_weight": true,
+    "enabled": false,
+    "use_vrf_weight": false,
     "epsilon": 1e-6,
-    "tie_points": [95],
+    "tie_points": [],
     "eliminate_subtours": true,
     "time_limit": null
   },

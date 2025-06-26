@@ -1,0 +1,627 @@
+2025-06-25 23:34:23,013 - __main__ - INFO - Starting visibility path planning with grid aligned to building orientation (debug enabled)
+2025-06-25 23:34:23,020 - __main__ - INFO - Initial memory usage - Memory usage: 108.75 MB
+2025-06-25 23:34:23,020 - __main__ - INFO - Loading geometry data
+2025-06-25 23:34:23,020 - __main__ - INFO - Building orientation analysis is enabled
+2025-06-25 23:34:23,020 - __main__ - INFO - Debug visualization is enabled
+2025-06-25 23:34:23,020 - __main__ - INFO - Before geometry loading - Memory usage: 108.75 MB
+2025-06-25 23:34:23,020 - src.data_handler - INFO - Loading geometries from data/geometry.json
+2025-06-25 23:34:23,021 - src.data_handler - WARNING - Building building2 has an invalid polygon
+2025-06-25 23:34:23,022 - src.data_handler - INFO - Building orientation analysis is enabled
+2025-06-25 23:34:23,026 - src.rotation_utils - INFO - Longest edge length: 20.00, angle with north: 90.00 degrees
+2025-06-25 23:34:23,027 - src.rotation_utils - INFO - Target angle: 90 degrees
+2025-06-25 23:34:23,027 - src.rotation_utils - INFO - Rotation angle needed: 0.00 degrees (clockwise)
+2025-06-25 23:34:23,027 - src.rotation_utils - INFO - Rotation center: (50.65934065934066, 26.788804945054945)
+2025-06-25 23:34:23,123 - src.data_handler - INFO - Saved orientation information to output/orientation/orientation_info.json
+2025-06-25 23:34:23,123 - src.data_handler - INFO - Building orientation: Longest edge at 90.00°, Target angle 90°
+2025-06-25 23:34:23,123 - src.data_handler - INFO - Grid alignment: Will use rotation angle of 0.00° around (50.65934065934066, 26.788804945054945)
+2025-06-25 23:34:23,347 - __main__ - INFO - After geometry loading - Memory usage: 165.10 MB
+2025-06-25 23:34:23,347 - __main__ - INFO - Building the graph
+2025-06-25 23:34:23,347 - __main__ - INFO - Before graph building - Memory usage: 165.10 MB
+2025-06-25 23:34:23,348 - src.graph_builder - INFO - Building grid graph
+2025-06-25 23:34:23,348 - src.graph_builder - INFO - Grid will be aligned with building orientation (rotated by -0.00°)
+2025-06-25 23:34:23,366 - src.graph_builder - INFO - Generated 193 grid points
+2025-06-25 23:34:23,959 - src.graph_builder - INFO - Created graph with 193 nodes and 1194 edges
+2025-06-25 23:34:23,959 - __main__ - INFO - After graph building - Memory usage: 165.72 MB
+2025-06-25 23:34:23,959 - __main__ - INFO - Analyzing visibility with normal vector approach
+2025-06-25 23:34:23,959 - __main__ - INFO - Before visibility analysis - Memory usage: 165.72 MB
+2025-06-25 23:34:23,959 - src.visibility_analyzer - INFO - Using 12 CPU cores for visibility analysis
+2025-06-25 23:34:23,959 - src.visibility_analyzer - INFO - Using touch threshold of 0.1 meters
+2025-06-25 23:34:23,959 - src.visibility_analyzer - INFO - Analyzing visibility
+2025-06-25 23:34:23,960 - src.visibility_analyzer - INFO - Before segment creation - Memory usage: 165.72 MB
+2025-06-25 23:34:23,974 - src.visibility_analyzer - INFO - Created 86 building segments with normal vectors
+2025-06-25 23:34:23,974 - src.visibility_analyzer - INFO - Calculating edge-segment visibility using normal vector approach (parallelized)
+2025-06-25 23:34:23,974 - src.visibility_analyzer - INFO - Before edge-segment visibility calculation - Memory usage: 165.72 MB
+2025-06-25 23:34:23,974 - src.visibility_analyzer - INFO - Dividing 86 segments into 12 chunks for parallel processing
+2025-06-25 23:34:25,295 - src.visibility_analyzer - INFO - After edge-segment visibility calculation - Memory usage: 169.22 MB
+2025-06-25 23:34:25,295 - src.visibility_analyzer - INFO - Calculating particle-based visibility using normal vector approach (parallelized)
+2025-06-25 23:34:25,295 - src.visibility_analyzer - INFO - Before particle visibility calculation - Memory usage: 169.22 MB
+2025-06-25 23:34:25,296 - src.visibility_analyzer - INFO - Dividing 1194 edges into 12 chunks for parallel processing
+2025-06-25 23:34:45,215 - src.visibility_analyzer - INFO - After particle visibility calculation - Memory usage: 170.10 MB
+2025-06-25 23:34:45,217 - src.visibility_analyzer - INFO - Saved segment visibility to output/visibility/segment_visibility.csv
+2025-06-25 23:34:45,218 - src.visibility_analyzer - INFO - Saved edge visibility to output/visibility/edge_visibility.csv
+2025-06-25 23:34:45,218 - __main__ - INFO - After visibility analysis - Memory usage: 170.22 MB
+2025-06-25 23:34:45,218 - __main__ - INFO - Creating visibility heatmaps (basic)
+2025-06-25 23:34:45,218 - src.visualizer - INFO - Creating visibility heatmaps
+2025-06-25 23:34:45,223 - src.visualizer - INFO - Edge visibility range: 0 to 7 segments
+2025-06-25 23:34:46,803 - src.visualizer - INFO - Saved edge visibility heatmap to output/visibility_heatmaps/1_edge_visibility_heatmap_20250625_233445.png
+2025-06-25 23:34:46,806 - src.visualizer - INFO - Segment visibility range: 0 to 20 edges
+2025-06-25 23:34:47,976 - src.visualizer - INFO - Saved segment visibility heatmap to output/visibility_heatmaps/2_segment_visibility_heatmap_20250625_233446.png
+2025-06-25 23:34:47,980 - src.visualizer - INFO - Edge VRF range: 0.0000 to 0.6250
+2025-06-25 23:34:49,806 - src.visualizer - INFO - Saved edge VRF heatmap to output/visibility_heatmaps/3_edge_vrf_heatmap_20250625_233448.png
+2025-06-25 23:34:49,807 - __main__ - INFO - Running path optimization
+2025-06-25 23:34:49,807 - __main__ - INFO - Before optimization - Memory usage: 346.78 MB
+2025-06-25 23:34:49,807 - __main__ - INFO - Running garbage collection before optimization
+2025-06-25 23:34:49,870 - src.optimizer - INFO - Setting up optimization model
+2025-06-25 23:34:49,870 - src.optimizer - INFO - Before optimization model creation - Memory usage: 197.35 MB
+2025-06-25 23:34:49,871 - gurobipy - INFO - Set parameter Username
+2025-06-25 23:34:49,871 - gurobipy - INFO - Set parameter LicenseID to value 2654881
+2025-06-25 23:34:49,871 - gurobipy - INFO - Academic license - for non-commercial use only - expires 2026-04-21
+2025-06-25 23:34:49,871 - gurobipy - INFO - Set parameter LazyConstraints to value 1
+2025-06-25 23:34:49,871 - gurobipy - INFO - Set parameter MIPGap to value 0,0001
+2025-06-25 23:34:49,875 - src.optimizer - WARNING - Segment 1 has no visible edges
+2025-06-25 23:34:49,875 - src.optimizer - WARNING - Segment 2 has no visible edges
+2025-06-25 23:34:49,875 - src.optimizer - WARNING - Segment 6 has no visible edges
+2025-06-25 23:34:49,876 - src.optimizer - WARNING - Segment 10 has no visible edges
+2025-06-25 23:34:49,876 - src.optimizer - WARNING - Segment 13 has no visible edges
+2025-06-25 23:34:49,876 - src.optimizer - WARNING - Segment 14 has no visible edges
+2025-06-25 23:34:49,876 - src.optimizer - WARNING - Segment 20 has no visible edges
+2025-06-25 23:34:49,876 - src.optimizer - WARNING - Segment 22 has no visible edges
+2025-06-25 23:34:49,876 - src.optimizer - WARNING - Segment 24 has no visible edges
+2025-06-25 23:34:49,876 - src.optimizer - WARNING - Segment 27 has no visible edges
+2025-06-25 23:34:49,876 - src.optimizer - WARNING - Segment 29 has no visible edges
+2025-06-25 23:34:49,876 - src.optimizer - WARNING - Segment 31 has no visible edges
+2025-06-25 23:34:49,876 - src.optimizer - WARNING - Segment 34 has no visible edges
+2025-06-25 23:34:49,876 - src.optimizer - WARNING - Segment 35 has no visible edges
+2025-06-25 23:34:49,876 - src.optimizer - WARNING - Segment 39 has no visible edges
+2025-06-25 23:34:49,876 - src.optimizer - WARNING - Segment 40 has no visible edges
+2025-06-25 23:34:49,881 - src.optimizer - INFO - Adding constraints for tie points: [94, 98]
+2025-06-25 23:34:49,881 - src.optimizer - INFO - Added tie point constraints for node 94
+2025-06-25 23:34:49,881 - src.optimizer - INFO - Added tie point constraints for node 98
+2025-06-25 23:34:49,881 - src.optimizer - INFO - Using original subtour elimination constraints
+2025-06-25 23:34:51,255 - src.optimizer - INFO - Added 111223 subtour elimination constraints
+2025-06-25 23:34:51,256 - src.optimizer - INFO - After optimization model setup - Memory usage: 212.10 MB
+2025-06-25 23:34:51,256 - src.optimizer - INFO - Solving optimization model with progress monitoring
+2025-06-25 23:34:51,268 - gurobipy - INFO - Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+2025-06-25 23:34:51,268 - gurobipy - INFO - 
+2025-06-25 23:34:51,268 - gurobipy - INFO - CPU model: 12th Gen Intel(R) Core(TM) i5-12450H, instruction set [SSE2|AVX|AVX2]
+2025-06-25 23:34:51,268 - gurobipy - INFO - Thread count: 12 physical cores, 12 logical processors, using up to 12 threads
+2025-06-25 23:34:51,268 - gurobipy - INFO - 
+2025-06-25 23:34:51,268 - gurobipy - INFO - Non-default parameters:
+2025-06-25 23:34:51,268 - gurobipy - INFO - LazyConstraints  1
+2025-06-25 23:34:51,268 - gurobipy - INFO - 
+2025-06-25 23:34:51,268 - gurobipy - INFO - Optimize a model with 111490 rows, 1194 columns and 231398 nonzeros
+2025-06-25 23:34:51,269 - gurobipy - INFO - Model fingerprint: 0x3a0e098d
+2025-06-25 23:34:51,269 - gurobipy - INFO - Variable types: 0 continuous, 1194 integer (1194 binary)
+2025-06-25 23:34:51,270 - gurobipy - INFO - Coefficient statistics:
+2025-06-25 23:34:51,270 - gurobipy - INFO -   Matrix range     [1e+00, 1e+00]
+2025-06-25 23:34:51,270 - gurobipy - INFO -   Objective range  [1e+01, 1e+07]
+2025-06-25 23:34:51,270 - gurobipy - INFO -   Bounds range     [1e+00, 1e+00]
+2025-06-25 23:34:51,270 - gurobipy - INFO -   RHS range        [1e+00, 2e+00]
+2025-06-25 23:34:51,291 - gurobipy - INFO - Presolve removed 108947 rows and 0 columns
+2025-06-25 23:34:51,291 - gurobipy - INFO - Presolve time: 0.01s
+2025-06-25 23:34:51,291 - gurobipy - INFO - Presolved: 2543 rows, 1194 columns, 13504 nonzeros
+2025-06-25 23:34:51,292 - gurobipy - INFO - Variable types: 0 continuous, 1194 integer (1194 binary)
+2025-06-25 23:34:51,295 - gurobipy - INFO - Performing another presolve...
+2025-06-25 23:34:51,307 - gurobipy - INFO - Presolve removed 15 rows and 0 columns
+2025-06-25 23:34:51,307 - gurobipy - INFO - Presolve time: 0.01s
+2025-06-25 23:34:51,314 - gurobipy - INFO - 
+2025-06-25 23:34:51,314 - gurobipy - INFO - Root relaxation: objective 9.514627e+02, 92 iterations, 0.00 seconds (0.00 work units)
+2025-06-25 23:34:51,318 - gurobipy - INFO - 
+2025-06-25 23:34:51,318 - gurobipy - INFO -     Nodes    |    Current Node    |     Objective Bounds      |     Work
+2025-06-25 23:34:51,318 - gurobipy - INFO -  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+2025-06-25 23:34:51,318 - gurobipy - INFO - 
+2025-06-25 23:34:51,318 - gurobipy - INFO -      0     0  951.46267    0   64          -  951.46267      -     -    0s
+2025-06-25 23:34:51,332 - gurobipy - INFO -      0     0 1438.82510    0   78          - 1438.82510      -     -    0s
+2025-06-25 23:34:51,344 - gurobipy - INFO -      0     0 1577.31405    0   93          - 1577.31405      -     -    0s
+2025-06-25 23:34:51,346 - gurobipy - INFO -      0     0 1598.64715    0   88          - 1598.64715      -     -    0s
+2025-06-25 23:34:51,361 - gurobipy - INFO -      0     0 1648.94769    0  107          - 1648.94769      -     -    0s
+2025-06-25 23:34:51,364 - gurobipy - INFO -      0     0 1649.13929    0  108          - 1649.13929      -     -    0s
+2025-06-25 23:34:51,379 - gurobipy - INFO -      0     0 1676.34654    0  106          - 1676.34654      -     -    0s
+2025-06-25 23:34:51,381 - gurobipy - INFO -      0     0 1676.37345    0  110          - 1676.37345      -     -    0s
+2025-06-25 23:34:51,387 - gurobipy - INFO -      0     0 1681.24208    0  121          - 1681.24208      -     -    0s
+2025-06-25 23:34:51,391 - gurobipy - INFO -      0     0 1681.70684    0  119          - 1681.70684      -     -    0s
+2025-06-25 23:34:51,392 - gurobipy - INFO -      0     0 1681.71319    0  121          - 1681.71319      -     -    0s
+2025-06-25 23:34:51,400 - gurobipy - INFO -      0     0 1686.66120    0  118          - 1686.66120      -     -    0s
+2025-06-25 23:34:51,404 - gurobipy - INFO -      0     0 1686.66683    0  114          - 1686.66683      -     -    0s
+2025-06-25 23:34:51,410 - gurobipy - INFO -      0     0 1687.18830    0  108          - 1687.18830      -     -    0s
+2025-06-25 23:34:51,413 - gurobipy - INFO -      0     0 1687.41406    0  114          - 1687.41406      -     -    0s
+2025-06-25 23:34:51,415 - gurobipy - INFO -      0     0 1687.41406    0  115          - 1687.41406      -     -    0s
+2025-06-25 23:34:51,421 - gurobipy - INFO -      0     0 1687.54557    0  117          - 1687.54557      -     -    0s
+2025-06-25 23:34:51,433 - gurobipy - INFO -      0     0 1687.66016    0  111          - 1687.66016      -     -    0s
+2025-06-25 23:34:51,459 - gurobipy - INFO -      0     2 1687.96006    0  109          - 1687.96006      -     -    0s
+2025-06-25 23:34:51,566 - gurobipy - INFO - *  467   460              23    8001966.0090 1706.46892   100%  13.1    0s
+2025-06-25 23:34:51,566 - src.optimizer - INFO - Optimization progress: 468819.53% gap after 0.3 seconds
+2025-06-25 23:34:51,566 - src.optimizer - INFO - Gap improved by inf% to 468819.53%
+2025-06-25 23:34:51,588 - gurobipy - INFO - H  483   472                    8001875.1905 1706.46892   100%  13.2    0s
+2025-06-25 23:34:51,589 - src.optimizer - INFO - Gap improved by 5.32% to 468814.21%
+2025-06-25 23:34:51,591 - gurobipy - INFO - H  515   478                    8001861.4763 1706.46892   100%  12.8    0s
+2025-06-25 23:34:51,591 - src.optimizer - INFO - Gap improved by 420.64% to 468392.76%
+2025-06-25 23:34:51,592 - gurobipy - INFO - H  555   484                    8001847.4573 1708.00109   100%  12.1    0s
+2025-06-25 23:34:51,594 - src.optimizer - INFO - Gap improved by 840.40% to 467551.54%
+2025-06-25 23:34:51,646 - src.optimizer - INFO - Gap improved by 43.78% to 467507.77%
+2025-06-25 23:34:51,707 - src.optimizer - INFO - Gap improved by 3143.22% to 464364.54%
+2025-06-25 23:34:51,811 - src.optimizer - INFO - Gap improved by 2533.16% to 461831.39%
+2025-06-25 23:34:51,914 - src.optimizer - INFO - Gap improved by 2210.66% to 459620.73%
+2025-06-25 23:34:51,917 - src.optimizer - INFO - Gap improved by 2503.06% to 457117.67%
+2025-06-25 23:34:51,948 - src.optimizer - INFO - Gap improved by 773.85% to 456343.81%
+2025-06-25 23:34:51,948 - src.optimizer - INFO - Gap improved by 379.55% to 455964.26%
+2025-06-25 23:34:52,134 - src.optimizer - INFO - Gap improved by 5702.33% to 450261.93%
+2025-06-25 23:34:52,136 - src.optimizer - INFO - Gap improved by 354.02% to 449907.91%
+2025-06-25 23:34:52,138 - src.optimizer - INFO - Gap improved by 69.90% to 449838.01%
+2025-06-25 23:34:52,139 - src.optimizer - INFO - Gap improved by 27.54% to 449810.48%
+2025-06-25 23:34:52,155 - src.optimizer - INFO - Gap improved by 14506.19% to 435304.29%
+2025-06-25 23:34:52,159 - src.optimizer - INFO - Gap improved by 43.06% to 435261.22%
+2025-06-25 23:34:52,163 - src.optimizer - INFO - Gap improved by 1014.64% to 434246.59%
+2025-06-25 23:34:52,166 - src.optimizer - INFO - Gap improved by 15.91% to 434230.67%
+2025-06-25 23:34:52,187 - src.optimizer - INFO - Gap improved by 6150.17% to 428080.50%
+2025-06-25 23:34:52,195 - src.optimizer - INFO - Gap improved by 2034.02% to 426046.48%
+2025-06-25 23:34:52,199 - src.optimizer - INFO - Gap improved by 275.56% to 425770.92%
+2025-06-25 23:34:52,202 - src.optimizer - INFO - Gap improved by 10.45% to 425760.47%
+2025-06-25 23:34:52,224 - src.optimizer - INFO - Gap improved by 1647.84% to 424112.63%
+2025-06-25 23:34:52,244 - src.optimizer - INFO - Gap improved by 640.59% to 423472.04%
+2025-06-25 23:34:52,246 - src.optimizer - INFO - Gap improved by 88.48% to 423383.56%
+2025-06-25 23:34:52,249 - src.optimizer - INFO - Gap improved by 61.83% to 423321.72%
+2025-06-25 23:34:52,250 - src.optimizer - INFO - Gap improved by 5.62% to 423316.11%
+2025-06-25 23:34:52,271 - src.optimizer - INFO - Gap improved by 2444.29% to 420871.72%
+2025-06-25 23:34:52,278 - src.optimizer - INFO - Gap improved by 959.64% to 419912.07%
+2025-06-25 23:34:52,282 - src.optimizer - INFO - Gap improved by 263.55% to 419648.53%
+2025-06-25 23:34:52,283 - src.optimizer - INFO - Gap improved by 13.48% to 419635.04%
+2025-06-25 23:34:52,285 - src.optimizer - INFO - Gap improved by 6.97% to 419628.07%
+2025-06-25 23:34:52,303 - src.optimizer - INFO - Gap improved by 833.03% to 418795.04%
+2025-06-25 23:34:52,311 - src.optimizer - INFO - Gap improved by 1949.58% to 416845.46%
+2025-06-25 23:34:52,315 - src.optimizer - INFO - Gap improved by 435.20% to 416410.26%
+2025-06-25 23:34:52,317 - src.optimizer - INFO - Gap improved by 40.52% to 416369.74%
+2025-06-25 23:34:52,319 - src.optimizer - INFO - Gap improved by 12.76% to 416356.98%
+2025-06-25 23:34:52,339 - src.optimizer - INFO - Gap improved by 1929.26% to 414427.72%
+2025-06-25 23:34:52,344 - src.optimizer - INFO - Gap improved by 141.34% to 414286.38%
+2025-06-25 23:34:52,346 - src.optimizer - INFO - Gap improved by 52.74% to 414233.64%
+2025-06-25 23:34:52,349 - src.optimizer - INFO - Gap improved by 3.28% to 414230.35%
+2025-06-25 23:34:52,351 - src.optimizer - INFO - Gap improved by 7.58% to 414222.77%
+2025-06-25 23:34:52,370 - src.optimizer - INFO - Gap improved by 793.93% to 413428.84%
+2025-06-25 23:34:52,375 - src.optimizer - INFO - Gap improved by 15.37% to 413413.47%
+2025-06-25 23:34:52,377 - src.optimizer - INFO - Gap improved by 9.09% to 413404.38%
+2025-06-25 23:34:52,379 - src.optimizer - INFO - Gap improved by 4.85% to 413399.53%
+2025-06-25 23:34:52,401 - src.optimizer - INFO - Gap improved by 1523.66% to 411875.87%
+2025-06-25 23:34:52,405 - src.optimizer - INFO - Gap improved by 30.38% to 411845.49%
+2025-06-25 23:34:52,408 - src.optimizer - INFO - Gap improved by 9.19% to 411836.30%
+2025-06-25 23:34:52,410 - src.optimizer - INFO - Gap improved by 4.52% to 411831.78%
+2025-06-25 23:34:52,412 - src.optimizer - INFO - Gap improved by 1.68% to 411830.10%
+2025-06-25 23:34:52,435 - src.optimizer - INFO - Gap improved by 1575.35% to 410254.75%
+2025-06-25 23:34:52,441 - src.optimizer - INFO - Gap improved by 156.78% to 410097.97%
+2025-06-25 23:34:52,444 - src.optimizer - INFO - Gap improved by 37.25% to 410060.72%
+2025-06-25 23:34:52,445 - src.optimizer - INFO - Gap improved by 14.40% to 410046.32%
+2025-06-25 23:34:52,448 - src.optimizer - INFO - Gap improved by 2.92% to 410043.40%
+2025-06-25 23:34:52,473 - src.optimizer - INFO - Gap improved by 4921.57% to 405120.85%
+2025-06-25 23:34:52,484 - src.optimizer - INFO - Gap improved by 703.87% to 404416.97%
+2025-06-25 23:34:52,486 - src.optimizer - INFO - Gap improved by 101.79% to 404315.19%
+2025-06-25 23:34:52,488 - src.optimizer - INFO - Gap improved by 34.15% to 404281.03%
+2025-06-25 23:34:52,490 - src.optimizer - INFO - Gap improved by 9.63% to 404271.40%
+2025-06-25 23:34:52,492 - src.optimizer - INFO - Gap improved by 4.73% to 404266.67%
+2025-06-25 23:34:52,517 - src.optimizer - INFO - Gap improved by 631.66% to 403634.66%
+2025-06-25 23:34:52,525 - src.optimizer - INFO - Gap improved by 524.92% to 403109.74%
+2025-06-25 23:34:52,529 - src.optimizer - INFO - Gap improved by 38.10% to 403071.64%
+2025-06-25 23:34:52,531 - src.optimizer - INFO - Gap improved by 1.75% to 403069.89%
+2025-06-25 23:34:52,554 - src.optimizer - INFO - Gap improved by 1648.03% to 401421.86%
+2025-06-25 23:34:52,560 - src.optimizer - INFO - Gap improved by 106.18% to 401315.68%
+2025-06-25 23:34:52,563 - src.optimizer - INFO - Gap improved by 27.99% to 401287.69%
+2025-06-25 23:34:52,565 - src.optimizer - INFO - Gap improved by 5.09% to 401282.60%
+2025-06-25 23:34:52,568 - src.optimizer - INFO - Gap improved by 1.42% to 401281.18%
+2025-06-25 23:34:52,590 - src.optimizer - INFO - Gap improved by 573.78% to 400707.40%
+2025-06-25 23:34:52,596 - src.optimizer - INFO - Gap improved by 151.05% to 400556.34%
+2025-06-25 23:34:52,599 - src.optimizer - INFO - Gap improved by 20.69% to 400535.66%
+2025-06-25 23:34:52,641 - src.optimizer - INFO - Gap improved by 634.40% to 399900.82%
+2025-06-25 23:34:52,647 - src.optimizer - INFO - Gap improved by 177.65% to 399723.18%
+2025-06-25 23:34:52,649 - src.optimizer - INFO - Gap improved by 12.61% to 399710.56%
+2025-06-25 23:34:52,651 - src.optimizer - INFO - Gap improved by 9.65% to 399700.91%
+2025-06-25 23:34:52,656 - src.optimizer - INFO - Gap improved by 37.08% to 399663.83%
+2025-06-25 23:34:52,658 - src.optimizer - INFO - Gap improved by 4.50% to 399659.33%
+2025-06-25 23:34:52,703 - src.optimizer - INFO - Gap improved by 405.60% to 399253.74%
+2025-06-25 23:34:52,710 - src.optimizer - INFO - Gap improved by 231.37% to 399022.37%
+2025-06-25 23:34:52,714 - src.optimizer - INFO - Gap improved by 39.60% to 398982.76%
+2025-06-25 23:34:52,717 - src.optimizer - INFO - Gap improved by 11.06% to 398971.71%
+2025-06-25 23:34:52,719 - src.optimizer - INFO - Gap improved by 3.82% to 398967.89%
+2025-06-25 23:34:52,721 - src.optimizer - INFO - Gap improved by 3.55% to 398964.33%
+2025-06-25 23:34:52,744 - src.optimizer - INFO - Gap improved by 494.18% to 398469.67%
+2025-06-25 23:34:52,762 - src.optimizer - INFO - Gap improved by 296.03% to 398173.63%
+2025-06-25 23:34:52,766 - src.optimizer - INFO - Gap improved by 80.73% to 398092.91%
+2025-06-25 23:34:52,768 - src.optimizer - INFO - Gap improved by 35.14% to 398057.77%
+2025-06-25 23:34:52,770 - src.optimizer - INFO - Gap improved by 120.89% to 397936.88%
+2025-06-25 23:34:52,771 - src.optimizer - INFO - Gap improved by 12.30% to 397924.58%
+2025-06-25 23:34:52,773 - src.optimizer - INFO - Gap improved by 5.60% to 397918.98%
+2025-06-25 23:34:52,789 - src.optimizer - INFO - Gap improved by 396.75% to 397522.23%
+2025-06-25 23:34:52,794 - src.optimizer - INFO - Gap improved by 218.73% to 397303.50%
+2025-06-25 23:34:52,796 - src.optimizer - INFO - Gap improved by 73.02% to 397230.47%
+2025-06-25 23:34:52,798 - src.optimizer - INFO - Gap improved by 9.93% to 397220.54%
+2025-06-25 23:34:52,800 - src.optimizer - INFO - Gap improved by 8.47% to 397212.08%
+2025-06-25 23:34:52,802 - src.optimizer - INFO - Gap improved by 2.30% to 397209.78%
+2025-06-25 23:34:52,817 - src.optimizer - INFO - Gap improved by 436.17% to 396773.61%
+2025-06-25 23:34:52,821 - src.optimizer - INFO - Gap improved by 116.02% to 396657.58%
+2025-06-25 23:34:52,823 - src.optimizer - INFO - Gap improved by 3.03% to 396654.56%
+2025-06-25 23:34:52,825 - src.optimizer - INFO - Gap improved by 21.84% to 396632.72%
+2025-06-25 23:34:52,842 - src.optimizer - INFO - Gap improved by 135.57% to 396497.15%
+2025-06-25 23:34:52,848 - src.optimizer - INFO - Gap improved by 119.22% to 396377.94%
+2025-06-25 23:34:52,850 - src.optimizer - INFO - Gap improved by 25.33% to 396352.60%
+2025-06-25 23:34:52,866 - src.optimizer - INFO - Gap improved by 870.88% to 395481.72%
+2025-06-25 23:34:52,872 - src.optimizer - INFO - Gap improved by 255.01% to 395226.71%
+2025-06-25 23:34:52,874 - src.optimizer - INFO - Gap improved by 149.92% to 395076.80%
+2025-06-25 23:34:52,876 - src.optimizer - INFO - Gap improved by 29.07% to 395047.73%
+2025-06-25 23:34:52,878 - src.optimizer - INFO - Gap improved by 16.48% to 395031.25%
+2025-06-25 23:34:52,880 - src.optimizer - INFO - Gap improved by 2.91% to 395028.34%
+2025-06-25 23:34:52,895 - src.optimizer - INFO - Gap improved by 611.39% to 394416.95%
+2025-06-25 23:34:52,901 - src.optimizer - INFO - Gap improved by 142.66% to 394274.29%
+2025-06-25 23:34:52,903 - src.optimizer - INFO - Gap improved by 53.79% to 394220.50%
+2025-06-25 23:34:52,905 - src.optimizer - INFO - Gap improved by 15.93% to 394204.57%
+2025-06-25 23:34:52,921 - src.optimizer - INFO - Gap improved by 298.45% to 393906.08%
+2025-06-25 23:34:52,930 - src.optimizer - INFO - Gap improved by 75.96% to 393830.12%
+2025-06-25 23:34:52,932 - src.optimizer - INFO - Gap improved by 44.57% to 393785.55%
+2025-06-25 23:34:52,950 - src.optimizer - INFO - Gap improved by 108.24% to 393677.14%
+2025-06-25 23:34:52,955 - src.optimizer - INFO - Gap improved by 2.14% to 393675.00%
+2025-06-25 23:34:53,026 - src.optimizer - INFO - Gap improved by 83.12% to 393591.87%
+2025-06-25 23:34:53,043 - src.optimizer - INFO - Gap improved by 50.75% to 393540.49%
+2025-06-25 23:34:53,062 - src.optimizer - INFO - Gap improved by 53.18% to 393487.31%
+2025-06-25 23:34:53,066 - src.optimizer - INFO - Gap improved by 23.01% to 393464.30%
+2025-06-25 23:34:53,086 - src.optimizer - INFO - Gap improved by 147.43% to 393316.88%
+2025-06-25 23:34:53,089 - src.optimizer - INFO - Gap improved by 20.96% to 393295.91%
+2025-06-25 23:34:53,109 - src.optimizer - INFO - Gap improved by 164.49% to 393131.42%
+2025-06-25 23:34:53,112 - src.optimizer - INFO - Gap improved by 8.10% to 393123.32%
+2025-06-25 23:34:53,114 - src.optimizer - INFO - Gap improved by 92.92% to 393030.40%
+2025-06-25 23:34:53,155 - src.optimizer - INFO - Gap improved by 93.31% to 392935.95%
+2025-06-25 23:34:53,178 - src.optimizer - INFO - Gap improved by 16.63% to 392919.33%
+2025-06-25 23:34:53,228 - src.optimizer - INFO - Gap improved by 247.73% to 392671.21%
+2025-06-25 23:34:53,250 - src.optimizer - INFO - Gap improved by 575.68% to 392095.53%
+2025-06-25 23:34:53,254 - src.optimizer - INFO - Gap improved by 68.12% to 392027.40%
+2025-06-25 23:34:53,255 - src.optimizer - INFO - Gap improved by 17.23% to 392010.17%
+2025-06-25 23:34:53,257 - src.optimizer - INFO - Gap improved by 1.26% to 392008.91%
+2025-06-25 23:34:53,275 - src.optimizer - INFO - Gap improved by 20.93% to 391987.98%
+2025-06-25 23:34:53,279 - src.optimizer - INFO - Gap improved by 20.88% to 391967.10%
+2025-06-25 23:34:53,281 - src.optimizer - INFO - Gap improved by 12.22% to 391954.88%
+2025-06-25 23:34:53,283 - src.optimizer - INFO - Gap improved by 1.65% to 391953.23%
+2025-06-25 23:34:53,301 - src.optimizer - INFO - Gap improved by 81.79% to 391871.44%
+2025-06-25 23:34:53,307 - src.optimizer - INFO - Gap improved by 42.45% to 391828.98%
+2025-06-25 23:34:53,326 - src.optimizer - INFO - Gap improved by 325.46% to 391503.52%
+2025-06-25 23:34:53,331 - src.optimizer - INFO - Gap improved by 152.21% to 391351.31%
+2025-06-25 23:34:53,333 - src.optimizer - INFO - Gap improved by 38.22% to 391313.10%
+2025-06-25 23:34:53,334 - src.optimizer - INFO - Gap improved by 24.71% to 391288.39%
+2025-06-25 23:34:53,336 - src.optimizer - INFO - Gap improved by 10.94% to 391277.44%
+2025-06-25 23:34:53,358 - src.optimizer - INFO - Gap improved by 79.58% to 391197.86%
+2025-06-25 23:34:53,364 - src.optimizer - INFO - Gap improved by 17.78% to 391180.09%
+2025-06-25 23:34:53,386 - src.optimizer - INFO - Gap improved by 322.90% to 390856.27%
+2025-06-25 23:34:53,391 - src.optimizer - INFO - Gap improved by 165.52% to 390690.75%
+2025-06-25 23:34:53,393 - src.optimizer - INFO - Gap improved by 53.49% to 390637.26%
+2025-06-25 23:34:53,395 - src.optimizer - INFO - Gap improved by 43.73% to 390593.53%
+2025-06-25 23:34:53,398 - src.optimizer - INFO - Gap improved by 18.54% to 390574.99%
+2025-06-25 23:34:53,400 - src.optimizer - INFO - Gap improved by 4.60% to 390570.39%
+2025-06-25 23:34:53,437 - src.optimizer - INFO - Gap improved by 379.80% to 390190.59%
+2025-06-25 23:34:53,442 - src.optimizer - INFO - Gap improved by 114.59% to 390076.00%
+2025-06-25 23:34:53,444 - src.optimizer - INFO - Gap improved by 131.07% to 389944.93%
+2025-06-25 23:34:53,447 - src.optimizer - INFO - Gap improved by 7.97% to 389936.96%
+2025-06-25 23:34:53,449 - src.optimizer - INFO - Gap improved by 1.54% to 389935.42%
+2025-06-25 23:34:53,476 - src.optimizer - INFO - Gap improved by 89.67% to 389845.75%
+2025-06-25 23:34:53,482 - src.optimizer - INFO - Gap improved by 122.66% to 389723.09%
+2025-06-25 23:34:53,485 - src.optimizer - INFO - Gap improved by 4.81% to 389718.28%
+2025-06-25 23:34:53,487 - src.optimizer - INFO - Gap improved by 2.00% to 389716.28%
+2025-06-25 23:34:53,505 - src.optimizer - INFO - Gap improved by 81.90% to 389634.39%
+2025-06-25 23:34:53,520 - src.optimizer - INFO - Gap improved by 81.57% to 389552.81%
+2025-06-25 23:34:53,521 - src.optimizer - INFO - Gap improved by 3.50% to 389549.31%
+2025-06-25 23:34:53,539 - src.optimizer - INFO - Gap improved by 54.32% to 389494.99%
+2025-06-25 23:34:53,545 - src.optimizer - INFO - Gap improved by 20.38% to 389474.61%
+2025-06-25 23:34:53,565 - src.optimizer - INFO - Gap improved by 64.96% to 389409.65%
+2025-06-25 23:34:53,569 - src.optimizer - INFO - Gap improved by 53.62% to 389356.03%
+2025-06-25 23:34:53,571 - src.optimizer - INFO - Gap improved by 8.37% to 389347.65%
+2025-06-25 23:34:53,586 - src.optimizer - INFO - Gap improved by 306.27% to 389041.38%
+2025-06-25 23:34:53,592 - src.optimizer - INFO - Gap improved by 198.38% to 388843.01%
+2025-06-25 23:34:53,594 - src.optimizer - INFO - Gap improved by 7.54% to 388835.47%
+2025-06-25 23:34:53,597 - src.optimizer - INFO - Gap improved by 20.08% to 388815.39%
+2025-06-25 23:34:53,599 - src.optimizer - INFO - Gap improved by 20.15% to 388795.24%
+2025-06-25 23:34:53,602 - src.optimizer - INFO - Gap improved by 1.27% to 388793.96%
+2025-06-25 23:34:53,623 - src.optimizer - INFO - Gap improved by 136.60% to 388657.36%
+2025-06-25 23:34:53,631 - src.optimizer - INFO - Gap improved by 61.65% to 388595.71%
+2025-06-25 23:34:53,634 - src.optimizer - INFO - Gap improved by 49.42% to 388546.30%
+2025-06-25 23:34:53,637 - src.optimizer - INFO - Gap improved by 15.45% to 388530.84%
+2025-06-25 23:34:53,663 - src.optimizer - INFO - Gap improved by 491.23% to 388038.77%
+2025-06-25 23:34:53,672 - src.optimizer - INFO - Gap improved by 630.31% to 387408.46%
+2025-06-25 23:34:53,675 - src.optimizer - INFO - Gap improved by 86.10% to 387322.37%
+2025-06-25 23:34:53,677 - src.optimizer - INFO - Gap improved by 17.21% to 387305.16%
+2025-06-25 23:34:53,680 - src.optimizer - INFO - Gap improved by 2.86% to 387302.30%
+2025-06-25 23:34:53,683 - src.optimizer - INFO - Gap improved by 3.50% to 387298.81%
+2025-06-25 23:34:53,706 - src.optimizer - INFO - Gap improved by 529.12% to 386769.00%
+2025-06-25 23:34:53,712 - src.optimizer - INFO - Gap improved by 144.07% to 386624.93%
+2025-06-25 23:34:53,714 - src.optimizer - INFO - Gap improved by 47.41% to 386577.52%
+2025-06-25 23:34:53,717 - src.optimizer - INFO - Gap improved by 11.70% to 386565.83%
+2025-06-25 23:34:53,719 - src.optimizer - INFO - Gap improved by 7.27% to 386558.55%
+2025-06-25 23:34:53,721 - src.optimizer - INFO - Gap improved by 1.85% to 386556.70%
+2025-06-25 23:34:53,739 - src.optimizer - INFO - Gap improved by 66.78% to 386489.92%
+2025-06-25 23:34:53,743 - src.optimizer - INFO - Gap improved by 9.61% to 386480.31%
+2025-06-25 23:34:53,762 - src.optimizer - INFO - Gap improved by 20.50% to 386459.00%
+2025-06-25 23:34:53,782 - src.optimizer - INFO - Gap improved by 61.28% to 386397.38%
+2025-06-25 23:34:53,786 - src.optimizer - INFO - Gap improved by 96.62% to 386300.76%
+2025-06-25 23:34:53,788 - src.optimizer - INFO - Gap improved by 8.91% to 386291.86%
+2025-06-25 23:34:53,789 - src.optimizer - INFO - Gap improved by 3.19% to 386288.66%
+2025-06-25 23:34:53,791 - src.optimizer - INFO - Gap improved by 3.27% to 386285.39%
+2025-06-25 23:34:53,809 - src.optimizer - INFO - Gap improved by 178.36% to 386107.03%
+2025-06-25 23:34:53,830 - src.optimizer - INFO - Gap improved by 222.43% to 385884.61%
+2025-06-25 23:34:53,832 - src.optimizer - INFO - Gap improved by 3.14% to 385881.47%
+2025-06-25 23:34:53,849 - src.optimizer - INFO - Gap improved by 89.79% to 385791.67%
+2025-06-25 23:34:53,854 - src.optimizer - INFO - Gap improved by 58.00% to 385733.68%
+2025-06-25 23:34:53,856 - src.optimizer - INFO - Gap improved by 30.23% to 385703.44%
+2025-06-25 23:34:53,858 - src.optimizer - INFO - Gap improved by 7.50% to 385695.95%
+2025-06-25 23:34:53,859 - src.optimizer - INFO - Gap improved by 4.63% to 385691.31%
+2025-06-25 23:34:53,877 - src.optimizer - INFO - Gap improved by 586.27% to 385104.48%
+2025-06-25 23:34:53,880 - src.optimizer - INFO - Gap improved by 29.83% to 385074.65%
+2025-06-25 23:34:53,882 - src.optimizer - INFO - Gap improved by 27.73% to 385046.93%
+2025-06-25 23:34:53,884 - src.optimizer - INFO - Gap improved by 7.70% to 385039.23%
+2025-06-25 23:34:53,900 - src.optimizer - INFO - Gap improved by 251.67% to 384787.56%
+2025-06-25 23:34:53,905 - src.optimizer - INFO - Gap improved by 59.09% to 384728.47%
+2025-06-25 23:34:53,906 - src.optimizer - INFO - Gap improved by 16.02% to 384712.45%
+2025-06-25 23:34:53,923 - src.optimizer - INFO - Gap improved by 142.24% to 384569.55%
+2025-06-25 23:34:53,926 - src.optimizer - INFO - Gap improved by 16.98% to 384552.57%
+2025-06-25 23:34:53,928 - src.optimizer - INFO - Gap improved by 19.38% to 384533.19%
+2025-06-25 23:34:53,943 - src.optimizer - INFO - Gap improved by 76.68% to 384456.51%
+2025-06-25 23:34:53,948 - src.optimizer - INFO - Gap improved by 20.61% to 384435.90%
+2025-06-25 23:34:53,950 - src.optimizer - INFO - Gap improved by 70.97% to 384364.94%
+2025-06-25 23:34:53,951 - src.optimizer - INFO - Gap improved by 18.95% to 384345.98%
+2025-06-25 23:34:53,953 - src.optimizer - INFO - Gap improved by 7.61% to 384338.37%
+2025-06-25 23:34:53,954 - src.optimizer - INFO - Gap improved by 2.22% to 384336.15%
+2025-06-25 23:34:53,968 - src.optimizer - INFO - Gap improved by 137.93% to 384198.22%
+2025-06-25 23:34:53,971 - src.optimizer - INFO - Gap improved by 52.68% to 384145.54%
+2025-06-25 23:34:53,987 - src.optimizer - INFO - Gap improved by 97.83% to 384047.09%
+2025-06-25 23:34:53,992 - src.optimizer - INFO - Gap improved by 48.15% to 383998.93%
+2025-06-25 23:34:53,994 - src.optimizer - INFO - Gap improved by 59.81% to 383939.12%
+2025-06-25 23:34:54,009 - src.optimizer - INFO - Gap improved by 17.49% to 383921.63%
+2025-06-25 23:34:54,012 - src.optimizer - INFO - Gap improved by 3.83% to 383917.80%
+2025-06-25 23:34:54,014 - src.optimizer - INFO - Gap improved by 6.20% to 383911.61%
+2025-06-25 23:34:54,050 - src.optimizer - INFO - Gap improved by 10.78% to 383899.78%
+2025-06-25 23:34:54,050 - src.optimizer - INFO - Gap improved by 12.75% to 383887.03%
+2025-06-25 23:34:54,074 - src.optimizer - INFO - Gap improved by 1.41% to 383885.62%
+2025-06-25 23:34:54,095 - src.optimizer - INFO - Gap improved by 17.85% to 383867.77%
+2025-06-25 23:34:54,139 - src.optimizer - INFO - Gap improved by 147.58% to 383720.19%
+2025-06-25 23:34:54,139 - src.optimizer - INFO - Gap improved by 542.67% to 383177.52%
+2025-06-25 23:34:54,168 - src.optimizer - INFO - Gap improved by 30.00% to 383147.51%
+2025-06-25 23:34:54,185 - src.optimizer - INFO - Gap improved by 4152.03% to 378995.49%
+2025-06-25 23:34:54,199 - src.optimizer - INFO - Gap improved by 191.48% to 378804.01%
+2025-06-25 23:34:54,199 - src.optimizer - INFO - Gap improved by 1307.92% to 377496.09%
+2025-06-25 23:34:54,256 - src.optimizer - INFO - Gap improved by 132.14% to 377363.95%
+2025-06-25 23:34:54,257 - src.optimizer - INFO - Gap improved by 9.78% to 377354.17%
+2025-06-25 23:34:54,315 - src.optimizer - INFO - Gap improved by 240.19% to 377113.98%
+2025-06-25 23:34:54,357 - src.optimizer - INFO - Gap improved by 24.17% to 377089.81%
+2025-06-25 23:34:54,591 - src.optimizer - INFO - Gap improved by 108.38% to 376981.43%
+2025-06-25 23:34:54,592 - src.optimizer - INFO - Gap improved by 37.13% to 376944.29%
+2025-06-25 23:34:54,890 - src.optimizer - INFO - Gap improved by 1491.26% to 375453.03%
+2025-06-25 23:34:54,922 - src.optimizer - INFO - Gap improved by 516.81% to 374936.22%
+2025-06-25 23:34:54,955 - src.optimizer - INFO - Gap improved by 19.97% to 374916.26%
+2025-06-25 23:34:54,957 - src.optimizer - INFO - Gap improved by 1046.45% to 373869.81%
+2025-06-25 23:34:55,058 - src.optimizer - INFO - Gap improved by 802.49% to 373067.32%
+2025-06-25 23:34:55,091 - gurobipy - INFO - * 5921  2792              39    8001844.4097 2144.30553   100%  13.1    3s
+2025-06-25 23:34:55,092 - src.optimizer - INFO - Gap improved by 2526.41% to 370540.76%
+2025-06-25 23:34:55,106 - src.optimizer - INFO - Gap improved by 883.24% to 369657.53%
+2025-06-25 23:34:55,106 - src.optimizer - INFO - Gap improved by 30.07% to 369627.46%
+2025-06-25 23:34:55,107 - src.optimizer - INFO - Gap improved by 992.14% to 368635.27%
+2025-06-25 23:34:55,107 - src.optimizer - INFO - Gap improved by 3.12% to 368632.16%
+2025-06-25 23:34:55,108 - src.optimizer - INFO - Gap improved by 102.18% to 368529.98%
+2025-06-25 23:34:55,108 - src.optimizer - INFO - Gap improved by 1073.31% to 367456.66%
+2025-06-25 23:34:55,108 - src.optimizer - INFO - Gap improved by 67.45% to 367389.21%
+2025-06-25 23:34:55,109 - src.optimizer - INFO - Gap improved by 447.06% to 366942.15%
+2025-06-25 23:34:55,109 - src.optimizer - INFO - Gap improved by 398.47% to 366543.69%
+2025-06-25 23:34:55,109 - src.optimizer - INFO - Gap improved by 78.51% to 366465.18%
+2025-06-25 23:34:55,110 - src.optimizer - INFO - Gap improved by 2690.66% to 363774.52%
+2025-06-25 23:34:55,110 - src.optimizer - INFO - Gap improved by 1997.53% to 361776.99%
+2025-06-25 23:34:55,110 - src.optimizer - INFO - Gap improved by 3234.88% to 358542.12%
+2025-06-25 23:34:55,110 - src.optimizer - INFO - Gap improved by 7365.20% to 351176.92%
+2025-06-25 23:34:55,110 - src.optimizer - INFO - Gap improved by 1485.76% to 349691.16%
+2025-06-25 23:34:55,110 - src.optimizer - INFO - Gap improved by 1199.75% to 348491.41%
+2025-06-25 23:34:55,110 - src.optimizer - INFO - Gap improved by 1832.12% to 346659.30%
+2025-06-25 23:34:55,111 - src.optimizer - INFO - Gap improved by 1952.19% to 344707.11%
+2025-06-25 23:34:55,111 - src.optimizer - INFO - Gap improved by 1925.90% to 342781.21%
+2025-06-25 23:34:55,111 - src.optimizer - INFO - Gap improved by 1742.01% to 341039.20%
+2025-06-25 23:34:55,111 - src.optimizer - INFO - Gap improved by 1608.52% to 339430.68%
+2025-06-25 23:34:55,111 - src.optimizer - INFO - Gap improved by 1852.20% to 337578.48%
+2025-06-25 23:34:55,111 - src.optimizer - INFO - Gap improved by 1448.29% to 336130.19%
+2025-06-25 23:34:55,112 - src.optimizer - INFO - Gap improved by 1848.47% to 334281.71%
+2025-06-25 23:34:55,112 - src.optimizer - INFO - Gap improved by 2073.57% to 332208.15%
+2025-06-25 23:34:55,112 - src.optimizer - INFO - Gap improved by 1479.74% to 330728.40%
+2025-06-25 23:34:55,112 - src.optimizer - INFO - Gap improved by 1152.49% to 329575.91%
+2025-06-25 23:34:55,112 - src.optimizer - INFO - Gap improved by 794.88% to 328781.03%
+2025-06-25 23:34:55,112 - src.optimizer - INFO - Gap improved by 545.10% to 328235.93%
+2025-06-25 23:34:55,112 - src.optimizer - INFO - Gap improved by 863.44% to 327372.49%
+2025-06-25 23:34:55,113 - src.optimizer - INFO - Gap improved by 1455.24% to 325917.25%
+2025-06-25 23:34:55,113 - src.optimizer - INFO - Gap improved by 1966.66% to 323950.59%
+2025-06-25 23:34:55,113 - src.optimizer - INFO - Gap improved by 563.78% to 323386.81%
+2025-06-25 23:34:55,113 - src.optimizer - INFO - Gap improved by 651.44% to 322735.37%
+2025-06-25 23:34:55,113 - src.optimizer - INFO - Gap improved by 1110.80% to 321624.57%
+2025-06-25 23:34:55,113 - src.optimizer - INFO - Gap improved by 953.21% to 320671.36%
+2025-06-25 23:34:55,114 - src.optimizer - INFO - Gap improved by 521.69% to 320149.68%
+2025-06-25 23:34:55,114 - src.optimizer - INFO - Gap improved by 1238.67% to 318911.00%
+2025-06-25 23:34:55,114 - src.optimizer - INFO - Gap improved by 619.11% to 318291.89%
+2025-06-25 23:34:55,114 - src.optimizer - INFO - Gap improved by 1246.50% to 317045.39%
+2025-06-25 23:34:55,115 - src.optimizer - INFO - Gap improved by 900.76% to 316144.63%
+2025-06-25 23:34:55,115 - src.optimizer - INFO - Gap improved by 462.75% to 315681.88%
+2025-06-25 23:34:55,115 - src.optimizer - INFO - Gap improved by 701.88% to 314980.01%
+2025-06-25 23:34:55,115 - src.optimizer - INFO - Gap improved by 396.54% to 314583.47%
+2025-06-25 23:34:55,115 - src.optimizer - INFO - Gap improved by 527.53% to 314055.93%
+2025-06-25 23:34:55,115 - src.optimizer - INFO - Gap improved by 611.46% to 313444.48%
+2025-06-25 23:34:55,115 - src.optimizer - INFO - Gap improved by 772.17% to 312672.31%
+2025-06-25 23:34:55,115 - src.optimizer - INFO - Gap improved by 533.14% to 312139.17%
+2025-06-25 23:34:55,115 - src.optimizer - INFO - Gap improved by 230.31% to 311908.86%
+2025-06-25 23:34:55,115 - src.optimizer - INFO - Gap improved by 1458.96% to 310449.90%
+2025-06-25 23:34:55,115 - src.optimizer - INFO - Gap improved by 498.28% to 309951.62%
+2025-06-25 23:34:55,115 - src.optimizer - INFO - Gap improved by 772.86% to 309178.77%
+2025-06-25 23:34:55,115 - src.optimizer - INFO - Gap improved by 382.29% to 308796.47%
+2025-06-25 23:34:55,116 - src.optimizer - INFO - Gap improved by 507.89% to 308288.58%
+2025-06-25 23:34:55,122 - src.optimizer - INFO - Gap improved by 632.63% to 307655.95%
+2025-06-25 23:34:55,122 - src.optimizer - INFO - Gap improved by 72.08% to 307583.87%
+2025-06-25 23:34:55,122 - src.optimizer - INFO - Gap improved by 105.48% to 307478.40%
+2025-06-25 23:34:55,122 - src.optimizer - INFO - Gap improved by 20.79% to 307457.60%
+2025-06-25 23:34:55,123 - src.optimizer - INFO - Gap improved by 24.00% to 307433.55%
+2025-06-25 23:34:55,123 - src.optimizer - INFO - Gap improved by 114.40% to 307319.15%
+2025-06-25 23:34:55,124 - src.optimizer - INFO - Gap improved by 53.05% to 307266.08%
+2025-06-25 23:34:55,124 - src.optimizer - INFO - Gap improved by 562.97% to 306703.12%
+2025-06-25 23:34:55,124 - src.optimizer - INFO - Gap improved by 393.97% to 306309.15%
+2025-06-25 23:34:55,124 - src.optimizer - INFO - Gap improved by 603.74% to 305705.41%
+2025-06-25 23:34:55,124 - src.optimizer - INFO - Gap improved by 1553.02% to 304152.39%
+2025-06-25 23:34:55,124 - src.optimizer - INFO - Gap improved by 683.57% to 303468.81%
+2025-06-25 23:34:55,124 - src.optimizer - INFO - Gap improved by 484.37% to 302984.44%
+2025-06-25 23:34:55,124 - src.optimizer - INFO - Gap improved by 1486.64% to 301497.80%
+2025-06-25 23:34:55,124 - src.optimizer - INFO - Gap improved by 235.27% to 301262.53%
+2025-06-25 23:34:55,124 - src.optimizer - INFO - Gap improved by 345.33% to 300917.20%
+2025-06-25 23:34:55,124 - src.optimizer - INFO - Gap improved by 603.10% to 300314.10%
+2025-06-25 23:34:55,124 - src.optimizer - INFO - Gap improved by 480.34% to 299833.76%
+2025-06-25 23:34:55,124 - src.optimizer - INFO - Gap improved by 302.23% to 299531.53%
+2025-06-25 23:34:55,124 - src.optimizer - INFO - Gap improved by 534.81% to 298996.73%
+2025-06-25 23:34:55,124 - src.optimizer - INFO - Gap improved by 859.03% to 298137.70%
+2025-06-25 23:34:55,124 - src.optimizer - INFO - Gap improved by 565.20% to 297572.50%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 471.70% to 297100.79%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 470.24% to 296630.55%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 618.96% to 296011.59%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 649.97% to 295361.63%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 484.08% to 294877.54%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 336.26% to 294541.29%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 547.45% to 293993.84%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 842.96% to 293150.88%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 620.94% to 292529.94%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 969.57% to 291560.37%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 743.65% to 290816.72%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 498.55% to 290318.16%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 641.09% to 289677.08%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 494.83% to 289182.25%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 736.69% to 288445.56%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 706.25% to 287739.31%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 367.79% to 287371.52%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 1144.40% to 286227.11%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 1227.97% to 284999.14%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 670.34% to 284328.80%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 700.41% to 283628.39%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 1421.20% to 282207.19%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 1216.49% to 280990.70%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 525.74% to 280464.96%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 727.34% to 279737.62%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 857.61% to 278880.01%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 498.04% to 278381.97%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 697.13% to 277684.85%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 1024.76% to 276660.08%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 766.29% to 275893.80%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 901.28% to 274992.52%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 718.68% to 274273.84%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 743.20% to 273530.64%
+2025-06-25 23:34:55,125 - src.optimizer - INFO - Gap improved by 341.96% to 273188.68%
+2025-06-25 23:34:55,126 - src.optimizer - INFO - Gap improved by 618.52% to 272570.16%
+2025-06-25 23:34:55,126 - src.optimizer - INFO - Gap improved by 676.03% to 271894.13%
+2025-06-25 23:34:55,132 - src.optimizer - INFO - Gap improved by 1576.41% to 270317.72%
+2025-06-25 23:34:55,132 - src.optimizer - INFO - Gap improved by 416.92% to 269900.80%
+2025-06-25 23:34:55,133 - src.optimizer - INFO - Gap improved by 7.14% to 269893.65%
+2025-06-25 23:34:55,133 - src.optimizer - INFO - Gap improved by 32.26% to 269861.39%
+2025-06-25 23:34:55,134 - src.optimizer - INFO - Gap improved by 30.15% to 269831.24%
+2025-06-25 23:34:55,134 - src.optimizer - INFO - Gap improved by 2.16% to 269829.08%
+2025-06-25 23:34:55,134 - src.optimizer - INFO - Gap improved by 55.48% to 269773.59%
+2025-06-25 23:34:55,135 - src.optimizer - INFO - Gap improved by 294.13% to 269479.47%
+2025-06-25 23:34:55,135 - src.optimizer - INFO - Gap improved by 118.92% to 269360.55%
+2025-06-25 23:34:55,135 - src.optimizer - INFO - Gap improved by 55.42% to 269305.12%
+2025-06-25 23:34:55,136 - src.optimizer - INFO - Gap improved by 193.39% to 269111.73%
+2025-06-25 23:34:55,136 - src.optimizer - INFO - Gap improved by 138.10% to 268973.63%
+2025-06-25 23:34:55,137 - src.optimizer - INFO - Gap improved by 1016.18% to 267957.45%
+2025-06-25 23:34:55,137 - src.optimizer - INFO - Gap improved by 940.79% to 267016.66%
+2025-06-25 23:34:55,137 - src.optimizer - INFO - Gap improved by 1298.29% to 265718.37%
+2025-06-25 23:34:55,137 - src.optimizer - INFO - Gap improved by 1018.77% to 264699.60%
+2025-06-25 23:34:55,137 - src.optimizer - INFO - Gap improved by 373.32% to 264326.28%
+2025-06-25 23:34:55,137 - src.optimizer - INFO - Gap improved by 842.00% to 263484.28%
+2025-06-25 23:34:55,137 - src.optimizer - INFO - Gap improved by 561.92% to 262922.36%
+2025-06-25 23:34:55,138 - src.optimizer - INFO - Gap improved by 997.47% to 261924.89%
+2025-06-25 23:34:55,138 - src.optimizer - INFO - Gap improved by 1365.62% to 260559.27%
+2025-06-25 23:34:55,138 - src.optimizer - INFO - Gap improved by 1204.00% to 259355.27%
+2025-06-25 23:34:55,138 - src.optimizer - INFO - Gap improved by 1940.21% to 257415.06%
+2025-06-25 23:34:55,138 - src.optimizer - INFO - Gap improved by 956.42% to 256458.64%
+2025-06-25 23:34:55,138 - src.optimizer - INFO - Gap improved by 1234.88% to 255223.76%
+2025-06-25 23:34:55,138 - src.optimizer - INFO - Gap improved by 1714.10% to 253509.66%
+2025-06-25 23:34:55,138 - src.optimizer - INFO - Gap improved by 1093.40% to 252416.26%
+2025-06-25 23:34:55,139 - src.optimizer - INFO - Gap improved by 1368.76% to 251047.49%
+2025-06-25 23:34:55,139 - src.optimizer - INFO - Gap improved by 857.79% to 250189.71%
+2025-06-25 23:34:55,139 - src.optimizer - INFO - Gap improved by 605.00% to 249584.71%
+2025-06-25 23:34:55,139 - src.optimizer - INFO - Gap improved by 963.87% to 248620.84%
+2025-06-25 23:34:55,139 - src.optimizer - INFO - Gap improved by 1067.43% to 247553.40%
+2025-06-25 23:34:55,139 - src.optimizer - INFO - Gap improved by 868.95% to 246684.45%
+2025-06-25 23:34:55,139 - src.optimizer - INFO - Gap improved by 1146.78% to 245537.68%
+2025-06-25 23:34:55,139 - src.optimizer - INFO - Gap improved by 1280.16% to 244257.52%
+2025-06-25 23:34:55,140 - src.optimizer - INFO - Gap improved by 917.39% to 243340.13%
+2025-06-25 23:34:55,140 - src.optimizer - INFO - Gap improved by 989.19% to 242350.94%
+2025-06-25 23:34:55,140 - src.optimizer - INFO - Gap improved by 690.12% to 241660.81%
+2025-06-25 23:34:55,140 - src.optimizer - INFO - Gap improved by 1098.79% to 240562.02%
+2025-06-25 23:34:55,140 - src.optimizer - INFO - Gap improved by 1083.30% to 239478.72%
+2025-06-25 23:34:55,140 - src.optimizer - INFO - Gap improved by 1098.95% to 238379.77%
+2025-06-25 23:34:55,140 - src.optimizer - INFO - Gap improved by 1499.46% to 236880.32%
+2025-06-25 23:34:55,140 - src.optimizer - INFO - Gap improved by 491.06% to 236389.26%
+2025-06-25 23:34:55,141 - src.optimizer - INFO - Gap improved by 848.76% to 235540.50%
+2025-06-25 23:34:55,141 - src.optimizer - INFO - Gap improved by 1366.92% to 234173.58%
+2025-06-25 23:34:55,141 - src.optimizer - INFO - Gap improved by 1019.80% to 233153.78%
+2025-06-25 23:34:55,141 - src.optimizer - INFO - Gap improved by 1113.43% to 232040.36%
+2025-06-25 23:34:55,141 - src.optimizer - INFO - Gap improved by 746.89% to 231293.47%
+2025-06-25 23:34:55,141 - src.optimizer - INFO - Gap improved by 1270.88% to 230022.59%
+2025-06-25 23:34:55,141 - src.optimizer - INFO - Gap improved by 1000.67% to 229021.92%
+2025-06-25 23:34:55,141 - src.optimizer - INFO - Gap improved by 1519.48% to 227502.44%
+2025-06-25 23:34:55,142 - src.optimizer - INFO - Gap improved by 1109.22% to 226393.22%
+2025-06-25 23:34:55,142 - src.optimizer - INFO - Gap improved by 746.47% to 225646.75%
+2025-06-25 23:34:55,142 - src.optimizer - INFO - Gap improved by 1331.27% to 224315.47%
+2025-06-25 23:34:55,142 - src.optimizer - INFO - Gap improved by 1815.45% to 222500.03%
+2025-06-25 23:34:55,142 - src.optimizer - INFO - Gap improved by 1773.82% to 220726.21%
+2025-06-25 23:34:55,142 - src.optimizer - INFO - Gap improved by 854.20% to 219872.02%
+2025-06-25 23:34:55,142 - src.optimizer - INFO - Gap improved by 1652.18% to 218219.84%
+2025-06-25 23:34:55,142 - src.optimizer - INFO - Gap improved by 1545.54% to 216674.30%
+2025-06-25 23:34:55,143 - src.optimizer - INFO - Gap improved by 1205.93% to 215468.37%
+2025-06-25 23:34:55,143 - src.optimizer - INFO - Gap improved by 1354.22% to 214114.15%
+2025-06-25 23:34:55,143 - src.optimizer - INFO - Gap improved by 2487.40% to 211626.75%
+2025-06-25 23:34:55,143 - src.optimizer - INFO - Gap improved by 1129.33% to 210497.43%
+2025-06-25 23:34:55,143 - src.optimizer - INFO - Gap improved by 2338.53% to 208158.90%
+2025-06-25 23:34:55,143 - src.optimizer - INFO - Gap improved by 2505.14% to 205653.76%
+2025-06-25 23:34:55,143 - src.optimizer - INFO - Gap improved by 1908.92% to 203744.84%
+2025-06-25 23:34:55,144 - src.optimizer - INFO - Gap improved by 2732.39% to 201012.45%
+2025-06-25 23:34:55,144 - src.optimizer - INFO - Gap improved by 2809.93% to 198202.52%
+2025-06-25 23:34:55,144 - src.optimizer - INFO - Gap improved by 12437.32% to 185765.20%
+2025-06-25 23:34:55,145 - gurobipy - INFO - 
+2025-06-25 23:34:55,146 - gurobipy - INFO - Cutting planes:
+2025-06-25 23:34:55,146 - gurobipy - INFO -   Gomory: 9
+2025-06-25 23:34:55,146 - gurobipy - INFO -   Cover: 25
+2025-06-25 23:34:55,146 - gurobipy - INFO -   MIR: 13
+2025-06-25 23:34:55,146 - gurobipy - INFO -   Flow cover: 97
+2025-06-25 23:34:55,147 - gurobipy - INFO -   GUB cover: 3
+2025-06-25 23:34:55,147 - gurobipy - INFO -   Inf proof: 5
+2025-06-25 23:34:55,147 - gurobipy - INFO -   Zero half: 82
+2025-06-25 23:34:55,147 - gurobipy - INFO -   Mod-K: 2
+2025-06-25 23:34:55,147 - gurobipy - INFO -   RLT: 24
+2025-06-25 23:34:55,148 - gurobipy - INFO -   Lazy constraints: 36
+2025-06-25 23:34:55,149 - gurobipy - INFO - 
+2025-06-25 23:34:55,149 - gurobipy - INFO - Explored 8052 nodes (80411 simplex iterations) in 3.88 seconds (3.31 work units)
+2025-06-25 23:34:55,150 - gurobipy - INFO - Thread count was 12 (of 12 available processors)
+2025-06-25 23:34:55,150 - gurobipy - INFO - 
+2025-06-25 23:34:55,150 - gurobipy - INFO - Solution count 5: 8.00184e+06 8.00185e+06 8.00186e+06 ... 8.00197e+06
+2025-06-25 23:34:55,150 - gurobipy - INFO - 
+2025-06-25 23:34:55,150 - gurobipy - INFO - Optimal solution found (tolerance 1.00e-04)
+2025-06-25 23:34:55,151 - gurobipy - INFO - Best objective 8.001844409732e+06, best bound 8.001844409732e+06, gap 0.0000%
+2025-06-25 23:34:55,152 - gurobipy - INFO - 
+2025-06-25 23:34:55,152 - gurobipy - INFO - User-callback calls 18508, time in user-callback 0.16 sec
+2025-06-25 23:34:55,153 - src.optimizer - INFO - Optimization successful, selected 48 edges
+2025-06-25 23:34:55,154 - src.optimizer - INFO - After optimization model solving - Memory usage: 358.10 MB
+2025-06-25 23:34:55,154 - __main__ - INFO - After optimization - Memory usage: 358.10 MB
+2025-06-25 23:34:55,155 - __main__ - INFO - Saved 48 selected edges with coordinates to output/path_nodes/
+2025-06-25 23:34:55,155 - __main__ - INFO - Each line contains coordinates of both nodes for one edge
+2025-06-25 23:34:55,155 - __main__ - INFO - Involves 46 unique nodes
+2025-06-25 23:34:55,155 - __main__ - INFO - Creating VRF heatmap with optimized path overlay
+2025-06-25 23:34:55,155 - src.visualizer - INFO - Creating visibility heatmaps
+2025-06-25 23:34:55,159 - src.visualizer - INFO - Edge visibility range: 0 to 7 segments
+2025-06-25 23:34:56,750 - src.visualizer - INFO - Saved edge visibility heatmap to output/visibility_heatmaps/1_edge_visibility_heatmap_20250625_233455.png
+2025-06-25 23:34:56,754 - src.visualizer - INFO - Segment visibility range: 0 to 20 edges
+2025-06-25 23:34:57,973 - src.visualizer - INFO - Saved segment visibility heatmap to output/visibility_heatmaps/2_segment_visibility_heatmap_20250625_233456.png
+2025-06-25 23:34:57,977 - src.visualizer - INFO - Edge VRF range: 0.0000 to 0.6250
+2025-06-25 23:34:59,751 - src.visualizer - INFO - Saved edge VRF heatmap to output/visibility_heatmaps/3_edge_vrf_heatmap_20250625_233458.png
+2025-06-25 23:34:59,755 - src.visualizer - INFO - VRF with path overlay - VRF range: 0.0000 to 0.6250
+2025-06-25 23:35:00,090 - __main__ - ERROR - Error during execution: draw_networkx_nodes() got an unexpected keyword argument 'zorder'
+Traceback (most recent call last):
+  File "/home/mo/thesis/My_Thesis/Versions/thesis_v24/main.py", line 490, in main
+    visualizer.create_visibility_heatmaps(G, building, obstacles, segments, edge_visibility, segment_visibility, vrf, selected_edges)
+  File "/home/mo/thesis/My_Thesis/Versions/thesis_v24/src/visualizer.py", line 400, in create_visibility_heatmaps
+    self._plot_vrf_with_optimized_path(G, building, obstacles, vrf, selected_edges, heatmaps_dir)
+  File "/home/mo/thesis/My_Thesis/Versions/thesis_v24/src/visualizer.py", line 248, in _plot_vrf_with_optimized_path
+    nx.draw_networkx_nodes(G, pos, node_color='lightgray', node_size=20,
+TypeError: draw_networkx_nodes() got an unexpected keyword argument 'zorder'
+2025-06-25 23:35:00,091 - src.visualizer - INFO - Creating visualization
+2025-06-25 23:35:02,459 - src.visualizer - INFO - Saved plot to output/plots/result_plot_20250625_233500.png
+2025-06-25 23:35:10,897 - __main__ - INFO - Disposed Gurobi optimization model
+2025-06-25 23:35:10,897 - __main__ - INFO - Before cleanup - Memory usage: 409.93 MB
+2025-06-25 23:35:11,000 - __main__ - INFO - After cleanup - Memory usage: 400.90 MB

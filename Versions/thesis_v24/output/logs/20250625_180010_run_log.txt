@@ -1,0 +1,51 @@
+2025-06-25 18:00:10,355 - __main__ - INFO - Starting visibility path planning with normal vector approach
+2025-06-25 18:00:10,362 - __main__ - INFO - Initial memory usage - Memory usage: 111.96 MB
+2025-06-25 18:00:10,362 - __main__ - INFO - Loading geometry data
+2025-06-25 18:00:10,362 - __main__ - INFO - Building orientation analysis is disabled
+2025-06-25 18:00:10,362 - __main__ - INFO - Before geometry loading - Memory usage: 111.96 MB
+2025-06-25 18:00:10,362 - src.data_handler - INFO - Loading geometries from data/geometry.json
+2025-06-25 18:00:10,362 - src.data_handler - WARNING - Building building2 has an invalid polygon
+2025-06-25 18:00:10,363 - src.data_handler - INFO - Building orientation analysis is disabled
+2025-06-25 18:00:10,363 - __main__ - INFO - After geometry loading - Memory usage: 112.96 MB
+2025-06-25 18:00:10,363 - __main__ - INFO - Building the graph
+2025-06-25 18:00:10,363 - __main__ - INFO - Before graph building - Memory usage: 112.96 MB
+2025-06-25 18:00:10,363 - src.graph_builder - INFO - Building grid graph
+2025-06-25 18:00:10,393 - src.graph_builder - INFO - Generated 193 grid points
+2025-06-25 18:00:10,956 - src.graph_builder - WARNING - The generated graph is not connected.
+2025-06-25 18:00:10,956 - src.graph_builder - INFO - Created graph with 193 nodes and 1700 edges
+2025-06-25 18:00:10,957 - __main__ - INFO - After graph building - Memory usage: 113.46 MB
+2025-06-25 18:00:10,957 - __main__ - INFO - Analyzing visibility with normal vector approach
+2025-06-25 18:00:10,957 - __main__ - INFO - Before visibility analysis - Memory usage: 113.46 MB
+2025-06-25 18:00:10,957 - src.visibility_analyzer - INFO - Using 12 CPU cores for visibility analysis
+2025-06-25 18:00:10,957 - src.visibility_analyzer - INFO - Using touch threshold of 0.1 meters
+2025-06-25 18:00:10,957 - src.visibility_analyzer - INFO - Analyzing visibility
+2025-06-25 18:00:10,957 - src.visibility_analyzer - INFO - Before segment creation - Memory usage: 113.46 MB
+2025-06-25 18:00:10,971 - src.visibility_analyzer - INFO - Created 85 building segments with normal vectors
+2025-06-25 18:00:10,971 - src.visibility_analyzer - INFO - Calculating edge-segment visibility using normal vector approach (parallelized)
+2025-06-25 18:00:10,971 - src.visibility_analyzer - INFO - Before edge-segment visibility calculation - Memory usage: 113.59 MB
+2025-06-25 18:00:10,971 - src.visibility_analyzer - INFO - Dividing 85 segments into 12 chunks for parallel processing
+2025-06-25 18:00:14,061 - src.visibility_analyzer - INFO - After edge-segment visibility calculation - Memory usage: 117.96 MB
+2025-06-25 18:00:14,061 - src.visibility_analyzer - INFO - Calculating particle-based visibility using normal vector approach (parallelized)
+2025-06-25 18:00:14,061 - src.visibility_analyzer - INFO - Before particle visibility calculation - Memory usage: 117.96 MB
+2025-06-25 18:00:14,061 - src.visibility_analyzer - INFO - Dividing 1700 edges into 12 chunks for parallel processing
+2025-06-25 18:00:46,916 - src.visibility_analyzer - INFO - After particle visibility calculation - Memory usage: 118.71 MB
+2025-06-25 18:00:46,918 - src.visibility_analyzer - INFO - Saved segment visibility to output/visibility/segment_visibility.csv
+2025-06-25 18:00:46,919 - src.visibility_analyzer - INFO - Saved edge visibility to output/visibility/edge_visibility.csv
+2025-06-25 18:00:46,920 - __main__ - INFO - After visibility analysis - Memory usage: 118.71 MB
+2025-06-25 18:00:46,920 - __main__ - INFO - Creating thesis plots
+2025-06-25 18:00:46,920 - __main__ - INFO - Creating thesis plots
+2025-06-25 18:00:46,920 - src.graph_builder - INFO - Building original (non-rotated) grid graph for thesis plots
+2025-06-25 18:00:47,583 - src.graph_builder - WARNING - The generated graph is not connected.
+2025-06-25 18:00:47,584 - src.graph_builder - INFO - Created original graph with 193 nodes and 1700 edges
+2025-06-25 18:00:47,584 - src.visualizer - INFO - Creating thesis plots
+2025-06-25 18:00:48,594 - src.visualizer - INFO - Saved thesis plot 1 to output/thesis_plots/1_building_obstacles_footprint_20250625_180047.png
+2025-06-25 18:00:49,869 - src.visualizer - INFO - Saved thesis plot 2 to output/thesis_plots/2_building_with_segments_20250625_180048.png
+2025-06-25 18:00:51,036 - src.visualizer - INFO - Saved thesis plot 3 to output/thesis_plots/3_building_original_graph_20250625_180049.png
+2025-06-25 18:00:51,036 - __main__ - INFO - Optimization is disabled in config - skipping optimization step
+2025-06-25 18:00:51,036 - __main__ - INFO - Creating visualization without optimization results
+2025-06-25 18:00:51,036 - src.visualizer - INFO - Creating visualization
+2025-06-25 18:00:51,163 - src.visualizer - WARNING - No selected edges to plot
+2025-06-25 18:00:53,142 - src.visualizer - INFO - Saved plot to output/plots/result_plot_20250625_180051.png
+2025-06-25 18:00:57,647 - __main__ - INFO - Process completed successfully
+2025-06-25 18:00:57,648 - __main__ - INFO - Before cleanup - Memory usage: 448.71 MB
+2025-06-25 18:00:57,709 - __main__ - INFO - After cleanup - Memory usage: 201.90 MB

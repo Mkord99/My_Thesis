@@ -273,7 +273,7 @@ def get_subtour(nodes, selected_edges):
 
 def save_visibility_data(filename, data, is_edge_visibility=False):
     """
-    Save visibility data to a CSV file.
+    Save visibility data to a CSV file with count columns.
     
     Args:
         filename: Output filename
@@ -292,12 +292,16 @@ def save_visibility_data(filename, data, is_edge_visibility=False):
         
         if is_edge_visibility:
             # For edge visibility data (edges -> segments)
-            # Format: edge_start_node, edge_end_node, segment_idx1, segment_idx2, ...
-            csv_writer.writerow(['edge_start_node', 'edge_end_node', 'visible_segments'])
+            # Format: edge_start_node, edge_end_node, visible_segments, segment_count
+            csv_writer.writerow(['edge_start_node', 'edge_end_node', 'visible_segments', 'segment_count'])
             for edge, segments in data.items():
                 if isinstance(edge, tuple) and len(edge) == 2:
                     # Format edge as "start_node,end_node"
                     row = [edge[0], edge[1]]
+                    
+                    # Count the number of visible segments
+                    segment_count = len(segments) if segments else 0
+                    
                     # Add all visible segments
                     if segments:
                         # Convert segment indices to strings and join with semicolons
@@ -305,17 +309,27 @@ def save_visibility_data(filename, data, is_edge_visibility=False):
                         row.append(segments_str)
                     else:
                         row.append('')
+                    
+                    # Add segment count
+                    row.append(segment_count)
                     csv_writer.writerow(row)
         else:
             # For segment visibility data (segments -> edges)
-            # Format: segment_idx, edge_start_node1,edge_end_node1, edge_start_node2,edge_end_node2, ...
-            csv_writer.writerow(['segment_idx', 'visible_edges'])
+            # Format: segment_idx, visible_edges, edge_count
+            csv_writer.writerow(['segment_idx', 'visible_edges', 'edge_count'])
             for segment_idx, edges in data.items():
                 row = [segment_idx]
+                
+                # Count the number of visible edges
+                edge_count = len(edges) if edges else 0
+                
                 if edges:
                     # Convert edges to "start_node,end_node" format and join with semicolons
                     edges_str = ';'.join([f"{e[0]},{e[1]}" for e in edges])
                     row.append(edges_str)
                 else:
                     row.append('')
+                
+                # Add edge count
+                row.append(edge_count)
                 csv_writer.writerow(row)

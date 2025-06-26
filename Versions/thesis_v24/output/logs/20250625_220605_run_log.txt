@@ -1,0 +1,400 @@
+2025-06-25 22:06:05,514 - __main__ - INFO - Starting visibility path planning with grid aligned to building orientation (debug enabled)
+2025-06-25 22:06:05,520 - __main__ - INFO - Initial memory usage - Memory usage: 108.60 MB
+2025-06-25 22:06:05,520 - __main__ - INFO - Loading geometry data
+2025-06-25 22:06:05,520 - __main__ - INFO - Building orientation analysis is enabled
+2025-06-25 22:06:05,520 - __main__ - INFO - Debug visualization is enabled
+2025-06-25 22:06:05,520 - __main__ - INFO - Before geometry loading - Memory usage: 108.60 MB
+2025-06-25 22:06:05,520 - src.data_handler - INFO - Loading geometries from data/geometry.json
+2025-06-25 22:06:05,521 - src.data_handler - WARNING - Building building2 has an invalid polygon
+2025-06-25 22:06:05,521 - src.data_handler - INFO - Building orientation analysis is enabled
+2025-06-25 22:06:05,525 - src.rotation_utils - INFO - Longest edge length: 20.00, angle with north: 90.00 degrees
+2025-06-25 22:06:05,525 - src.rotation_utils - INFO - Target angle: 90 degrees
+2025-06-25 22:06:05,525 - src.rotation_utils - INFO - Rotation angle needed: 0.00 degrees (clockwise)
+2025-06-25 22:06:05,526 - src.rotation_utils - INFO - Rotation center: (50.02710027100271, 26.791666666666668)
+2025-06-25 22:06:05,624 - src.data_handler - INFO - Saved orientation information to output/orientation/orientation_info.json
+2025-06-25 22:06:05,624 - src.data_handler - INFO - Building orientation: Longest edge at 90.00°, Target angle 90°
+2025-06-25 22:06:05,624 - src.data_handler - INFO - Grid alignment: Will use rotation angle of 0.00° around (50.02710027100271, 26.791666666666668)
+2025-06-25 22:06:05,845 - __main__ - INFO - After geometry loading - Memory usage: 165.11 MB
+2025-06-25 22:06:05,845 - __main__ - INFO - Building the graph
+2025-06-25 22:06:05,845 - __main__ - INFO - Before graph building - Memory usage: 165.11 MB
+2025-06-25 22:06:05,845 - src.graph_builder - INFO - Building grid graph
+2025-06-25 22:06:05,845 - src.graph_builder - INFO - Grid will be aligned with building orientation (rotated by -0.00°)
+2025-06-25 22:06:05,870 - src.graph_builder - INFO - Generated 287 grid points
+2025-06-25 22:06:07,045 - src.graph_builder - WARNING - The generated graph is not connected.
+2025-06-25 22:06:07,045 - src.graph_builder - INFO - Created graph with 287 nodes and 2194 edges
+2025-06-25 22:06:07,045 - __main__ - INFO - After graph building - Memory usage: 165.86 MB
+2025-06-25 22:06:07,045 - __main__ - INFO - Analyzing visibility with normal vector approach
+2025-06-25 22:06:07,045 - __main__ - INFO - Before visibility analysis - Memory usage: 165.86 MB
+2025-06-25 22:06:07,045 - src.visibility_analyzer - INFO - Using 12 CPU cores for visibility analysis
+2025-06-25 22:06:07,045 - src.visibility_analyzer - INFO - Using touch threshold of 0.1 meters
+2025-06-25 22:06:07,045 - src.visibility_analyzer - INFO - Analyzing visibility
+2025-06-25 22:06:07,045 - src.visibility_analyzer - INFO - Before segment creation - Memory usage: 165.86 MB
+2025-06-25 22:06:07,059 - src.visibility_analyzer - INFO - Created 85 building segments with normal vectors
+2025-06-25 22:06:07,059 - src.visibility_analyzer - INFO - Calculating edge-segment visibility using normal vector approach (parallelized)
+2025-06-25 22:06:07,059 - src.visibility_analyzer - INFO - Before edge-segment visibility calculation - Memory usage: 165.86 MB
+2025-06-25 22:06:07,059 - src.visibility_analyzer - INFO - Dividing 85 segments into 12 chunks for parallel processing
+2025-06-25 22:06:09,442 - src.visibility_analyzer - INFO - After edge-segment visibility calculation - Memory usage: 172.36 MB
+2025-06-25 22:06:09,442 - src.visibility_analyzer - INFO - Calculating particle-based visibility using normal vector approach (parallelized)
+2025-06-25 22:06:09,442 - src.visibility_analyzer - INFO - Before particle visibility calculation - Memory usage: 172.36 MB
+2025-06-25 22:06:09,442 - src.visibility_analyzer - INFO - Dividing 2194 edges into 12 chunks for parallel processing
+2025-06-25 22:07:05,999 - src.visibility_analyzer - INFO - After particle visibility calculation - Memory usage: 172.98 MB
+2025-06-25 22:07:06,003 - src.visibility_analyzer - INFO - Saved segment visibility to output/visibility/segment_visibility.csv
+2025-06-25 22:07:06,005 - src.visibility_analyzer - INFO - Saved edge visibility to output/visibility/edge_visibility.csv
+2025-06-25 22:07:06,005 - __main__ - INFO - After visibility analysis - Memory usage: 172.98 MB
+2025-06-25 22:07:06,006 - __main__ - INFO - Creating visibility heatmaps (basic)
+2025-06-25 22:07:06,006 - src.visualizer - INFO - Creating visibility heatmaps
+2025-06-25 22:07:06,010 - src.visualizer - INFO - Edge visibility range: 0 to 13 segments
+2025-06-25 22:07:08,105 - src.visualizer - INFO - Saved edge visibility heatmap to output/visibility_heatmaps/1_edge_visibility_heatmap_20250625_220706.png
+2025-06-25 22:07:08,109 - src.visualizer - INFO - Segment visibility range: 0 to 117 edges
+2025-06-25 22:07:09,422 - src.visualizer - INFO - Saved segment visibility heatmap to output/visibility_heatmaps/2_segment_visibility_heatmap_20250625_220708.png
+2025-06-25 22:07:09,426 - src.visualizer - INFO - Edge VRF range: 0.0000 to 1.8333
+2025-06-25 22:07:11,646 - src.visualizer - INFO - Saved edge VRF heatmap to output/visibility_heatmaps/3_edge_vrf_heatmap_20250625_220710.png
+2025-06-25 22:07:11,646 - __main__ - INFO - Running path optimization
+2025-06-25 22:07:11,647 - __main__ - INFO - Before optimization - Memory usage: 355.14 MB
+2025-06-25 22:07:11,647 - __main__ - INFO - Running garbage collection before optimization
+2025-06-25 22:07:11,739 - src.optimizer - INFO - Setting up optimization model
+2025-06-25 22:07:11,739 - src.optimizer - INFO - Before optimization model creation - Memory usage: 204.60 MB
+2025-06-25 22:07:11,740 - gurobipy - INFO - Set parameter Username
+2025-06-25 22:07:11,740 - gurobipy - INFO - Set parameter LicenseID to value 2654881
+2025-06-25 22:07:11,741 - gurobipy - INFO - Academic license - for non-commercial use only - expires 2026-04-21
+2025-06-25 22:07:11,741 - gurobipy - INFO - Set parameter LazyConstraints to value 1
+2025-06-25 22:07:11,741 - gurobipy - INFO - Set parameter MIPGap to value 0,0001
+2025-06-25 22:07:11,750 - src.optimizer - WARNING - Segment 6 has no visible edges
+2025-06-25 22:07:11,750 - src.optimizer - WARNING - Segment 13 has no visible edges
+2025-06-25 22:07:11,750 - src.optimizer - WARNING - Segment 14 has no visible edges
+2025-06-25 22:07:11,751 - src.optimizer - WARNING - Segment 27 has no visible edges
+2025-06-25 22:07:11,752 - src.optimizer - WARNING - Segment 29 has no visible edges
+2025-06-25 22:07:11,753 - src.optimizer - WARNING - Segment 38 has no visible edges
+2025-06-25 22:07:11,766 - src.optimizer - INFO - No tie points specified in config
+2025-06-25 22:07:11,766 - src.optimizer - INFO - Using original subtour elimination constraints
+2025-06-25 22:07:16,217 - src.optimizer - INFO - Added 305202 subtour elimination constraints
+2025-06-25 22:07:16,217 - src.optimizer - INFO - After optimization model setup - Memory usage: 274.35 MB
+2025-06-25 22:07:16,217 - src.optimizer - INFO - Solving optimization model with progress monitoring
+2025-06-25 22:07:16,249 - gurobipy - INFO - Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+2025-06-25 22:07:16,249 - gurobipy - INFO - 
+2025-06-25 22:07:16,249 - gurobipy - INFO - CPU model: 12th Gen Intel(R) Core(TM) i5-12450H, instruction set [SSE2|AVX|AVX2]
+2025-06-25 22:07:16,250 - gurobipy - INFO - Thread count: 12 physical cores, 12 logical processors, using up to 12 threads
+2025-06-25 22:07:16,250 - gurobipy - INFO - 
+2025-06-25 22:07:16,250 - gurobipy - INFO - Non-default parameters:
+2025-06-25 22:07:16,250 - gurobipy - INFO - LazyConstraints  1
+2025-06-25 22:07:16,250 - gurobipy - INFO - 
+2025-06-25 22:07:16,250 - gurobipy - INFO - Optimize a model with 305568 rows, 2194 columns and 635552 nonzeros
+2025-06-25 22:07:16,253 - gurobipy - INFO - Model fingerprint: 0x417abf5a
+2025-06-25 22:07:16,253 - gurobipy - INFO - Variable types: 0 continuous, 2194 integer (2194 binary)
+2025-06-25 22:07:16,254 - gurobipy - INFO - Coefficient statistics:
+2025-06-25 22:07:16,254 - gurobipy - INFO -   Matrix range     [1e+00, 1e+00]
+2025-06-25 22:07:16,254 - gurobipy - INFO -   Objective range  [3e+00, 1e+07]
+2025-06-25 22:07:16,254 - gurobipy - INFO -   Bounds range     [1e+00, 1e+00]
+2025-06-25 22:07:16,254 - gurobipy - INFO -   RHS range        [1e+00, 2e+00]
+2025-06-25 22:07:16,327 - gurobipy - INFO - Presolve removed 299338 rows and 0 columns
+2025-06-25 22:07:16,327 - gurobipy - INFO - Presolve time: 0.04s
+2025-06-25 22:07:16,328 - gurobipy - INFO - Presolved: 6230 rows, 2194 columns, 36952 nonzeros
+2025-06-25 22:07:16,330 - gurobipy - INFO - Variable types: 0 continuous, 2194 integer (2194 binary)
+2025-06-25 22:07:16,336 - gurobipy - INFO - Performing another presolve...
+2025-06-25 22:07:16,370 - gurobipy - INFO - Presolve removed 19 rows and 0 columns
+2025-06-25 22:07:16,370 - gurobipy - INFO - Presolve time: 0.03s
+2025-06-25 22:07:16,389 - gurobipy - INFO - 
+2025-06-25 22:07:16,389 - gurobipy - INFO - Root relaxation: objective 1.565868e+02, 54 iterations, 0.00 seconds (0.00 work units)
+2025-06-25 22:07:16,395 - gurobipy - INFO - 
+2025-06-25 22:07:16,395 - gurobipy - INFO -     Nodes    |    Current Node    |     Objective Bounds      |     Work
+2025-06-25 22:07:16,395 - gurobipy - INFO -  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+2025-06-25 22:07:16,395 - gurobipy - INFO - 
+2025-06-25 22:07:16,395 - gurobipy - INFO -      0     0  156.58679    0   37          -  156.58679      -     -    0s
+2025-06-25 22:07:16,442 - gurobipy - INFO -      0     0  221.61395    0   51          -  221.61395      -     -    0s
+2025-06-25 22:07:16,470 - gurobipy - INFO -      0     0  285.07573    0   65          -  285.07573      -     -    0s
+2025-06-25 22:07:16,482 - gurobipy - INFO -      0     0  286.37314    0   49          -  286.37314      -     -    0s
+2025-06-25 22:07:16,520 - gurobipy - INFO -      0     0  309.57359    0    -          -  309.57359      -     -    0s
+2025-06-25 22:07:16,524 - gurobipy - INFO -      0     0  310.43073    0    4          -  310.43073      -     -    0s
+2025-06-25 22:07:16,553 - gurobipy - INFO -      0     0  310.75800    0   12          -  310.75800      -     -    0s
+2025-06-25 22:07:16,562 - gurobipy - INFO -      0     0  311.61514    0   12          -  311.61514      -     -    0s
+2025-06-25 22:07:16,574 - gurobipy - INFO -      0     0  311.61514    0    4          -  311.61514      -     -    0s
+2025-06-25 22:07:16,594 - gurobipy - INFO -      0     0  311.72423    0   14          -  311.72423      -     -    0s
+2025-06-25 22:07:16,614 - gurobipy - INFO -      0     0  315.94237    0    6          -  315.94237      -     -    0s
+2025-06-25 22:07:16,624 - gurobipy - INFO -      0     0  317.94240    0    4          -  317.94240      -     -    0s
+2025-06-25 22:07:16,638 - gurobipy - INFO -      0     0  323.94227    0    2          -  323.94227      -     -    0s
+2025-06-25 22:07:16,652 - gurobipy - INFO -      0     0  324.02802    0   12          -  324.02802      -     -    0s
+2025-06-25 22:07:16,663 - gurobipy - INFO -      0     0  324.02802    0   16          -  324.02802      -     -    0s
+2025-06-25 22:07:16,674 - gurobipy - INFO -      0     0  324.11381    0   21          -  324.11381      -     -    0s
+2025-06-25 22:07:16,691 - gurobipy - INFO -      0     0  324.11381    0   21          -  324.11381      -     -    0s
+2025-06-25 22:07:16,795 - gurobipy - INFO -      0     2  324.28524    0   19          -  324.28524      -     -    0s
+2025-06-25 22:07:21,291 - gurobipy - INFO -   5304  5002  473.84199  110  190          -  453.18797      -   8.1    5s
+2025-06-25 22:07:26,280 - gurobipy - INFO -   5520  5147  879.55706  181  285          -  476.14136      -   8.9   10s
+2025-06-25 22:07:31,262 - gurobipy - INFO -   5751  5303  504.59568   54  276          -  504.59568      -   9.6   15s
+2025-06-25 22:07:36,350 - gurobipy - INFO -  10473  8547  724.22971  195   59          -  505.07401      -  20.8   20s
+2025-06-25 22:07:41,672 - gurobipy - INFO -  21063 14768  852.06929  186   31          -  505.43816      -  21.5   25s
+2025-06-25 22:07:42,054 - gurobipy - INFO - H21930 15068                    5.843207e+08  505.43816   100%  21.5   25s
+2025-06-25 22:07:42,054 - src.optimizer - INFO - Optimization progress: 115606661.07% gap after 25.8 seconds
+2025-06-25 22:07:42,054 - src.optimizer - INFO - Gap improved by inf% to 115606661.07%
+2025-06-25 22:07:42,064 - src.optimizer - INFO - Gap improved by 93269.85% to 115513391.22%
+2025-06-25 22:07:46,724 - gurobipy - INFO -  27274 20669  566.51903   70  184 5.8432e+08  505.84627   100%  20.7   30s
+2025-06-25 22:07:46,733 - src.optimizer - INFO - Gap improved by 958826.25% to 114554564.97%
+2025-06-25 22:07:49,278 - src.optimizer - INFO - Gap improved by 68630.76% to 114485934.21%
+2025-06-25 22:07:50,010 - src.optimizer - INFO - Gap improved by 136647.80% to 114349286.41%
+2025-06-25 22:07:50,012 - src.optimizer - INFO - Gap improved by 5710.94% to 114343575.47%
+2025-06-25 22:07:51,767 - gurobipy - INFO -  36274 28170  646.55917   65  145 5.8432e+08  511.02143   100%  19.6   35s
+2025-06-25 22:07:52,545 - src.optimizer - INFO - Gap improved by 12444.34% to 114331131.13%
+2025-06-25 22:07:53,288 - src.optimizer - INFO - Gap improved by 64448.90% to 114266682.23%
+2025-06-25 22:07:53,298 - src.optimizer - INFO - Gap improved by 59942.44% to 114206739.79%
+2025-06-25 22:07:56,446 - gurobipy - INFO -  41987 33220  588.99895   80   55 5.8432e+08  511.63371   100%  19.2   40s
+2025-06-25 22:08:00,439 - src.optimizer - INFO - Gap improved by 416483.65% to 113790256.14%
+2025-06-25 22:08:00,444 - src.optimizer - INFO - Gap improved by 76389.12% to 113713867.01%
+2025-06-25 22:08:01,999 - gurobipy - INFO -  47280 38100  621.28745   90   73 5.8432e+08  513.85129   100%  19.9   45s
+2025-06-25 22:08:02,757 - src.optimizer - INFO - Gap improved by 23304.48% to 113690562.53%
+2025-06-25 22:08:03,532 - src.optimizer - INFO - Gap improved by 3693.13% to 113686869.40%
+2025-06-25 22:08:04,391 - src.optimizer - INFO - Gap improved by 28488.16% to 113658381.24%
+2025-06-25 22:08:04,408 - src.optimizer - INFO - Gap improved by 46576.45% to 113611804.79%
+2025-06-25 22:08:06,030 - src.optimizer - INFO - Gap improved by 75133.08% to 113536671.71%
+2025-06-25 22:08:06,835 - gurobipy - INFO -  56681 47835  597.15834   83  120 5.8432e+08  514.65325   100%  19.1   50s
+2025-06-25 22:08:06,850 - src.optimizer - INFO - Gap improved by 86481.74% to 113450189.97%
+2025-06-25 22:08:06,860 - src.optimizer - INFO - Gap improved by 88.54% to 113450101.43%
+2025-06-25 22:08:09,314 - src.optimizer - INFO - Gap improved by 27120.98% to 113422980.45%
+2025-06-25 22:08:10,003 - gurobipy - INFO - H63393 52437                    1.224879e+08  515.16912   100%  18.7   53s
+2025-06-25 22:08:10,004 - src.optimizer - INFO - Gap improved by 89646828.73% to 23776151.72%
+2025-06-25 22:08:10,728 - src.optimizer - INFO - Gap improved by 17771.92% to 23758379.79%
+2025-06-25 22:08:11,405 - gurobipy - INFO -  65588 54470  560.26311   67  167 1.2249e+08  515.55448   100%  18.5   55s
+2025-06-25 22:08:11,410 - gurobipy - INFO - H65590 54470                    8.648735e+07  515.55448   100%  18.5   55s
+2025-06-25 22:08:11,411 - src.optimizer - INFO - Gap improved by 6982880.73% to 16775499.06%
+2025-06-25 22:08:11,421 - gurobipy - INFO - H65597 54466                    6.000194e+07  515.55448   100%  18.5   55s
+2025-06-25 22:08:11,421 - src.optimizer - INFO - Gap improved by 5137268.14% to 11638230.93%
+2025-06-25 22:08:12,927 - gurobipy - INFO - H68515 58201                    6.000191e+07  515.55448   100%  18.3   56s
+2025-06-25 22:08:12,931 - gurobipy - INFO - H68515 58201                    6.000191e+07  515.55448   100%  18.3   56s
+2025-06-25 22:08:12,931 - src.optimizer - INFO - Gap improved by 4.66% to 11638226.27%
+2025-06-25 22:08:12,940 - gurobipy - INFO - H68826 58185                    5.400229e+07  515.55448   100%  18.3   56s
+2025-06-25 22:08:12,940 - src.optimizer - INFO - Gap improved by 1163721.38% to 10474504.89%
+2025-06-25 22:08:14,374 - gurobipy - INFO - H71371 60389                    4.800234e+07  515.55448   100%  18.2   58s
+2025-06-25 22:08:14,375 - src.optimizer - INFO - Gap improved by 1163787.39% to 9310717.50%
+2025-06-25 22:08:14,379 - gurobipy - INFO - H71478 60287                    3.848785e+07  515.55448   100%  18.2   58s
+2025-06-25 22:08:14,380 - src.optimizer - INFO - Gap improved by 1845486.87% to 7465230.64%
+2025-06-25 22:08:15,089 - src.optimizer - INFO - Gap improved by 12500.51% to 7452730.12%
+2025-06-25 22:08:15,831 - gurobipy - INFO - H73208 62186                    3.248773e+07  516.41921   100%  18.6   59s
+2025-06-25 22:08:15,831 - src.optimizer - INFO - Gap improved by 1161869.09% to 6290861.03%
+2025-06-25 22:08:15,846 - gurobipy - INFO - H73911 62016                    2.648801e+07  516.41921   100%  18.6   59s
+2025-06-25 22:08:15,846 - src.optimizer - INFO - Gap improved by 1161792.28% to 5129068.75%
+2025-06-25 22:08:15,851 - gurobipy - INFO - H74158 62016                    2.648787e+07  516.41921   100%  18.6   59s
+2025-06-25 22:08:15,851 - src.optimizer - INFO - Gap improved by 28.60% to 5129040.15%
+2025-06-25 22:08:16,558 - gurobipy - INFO -  74309 63549  719.09665  164   38 2.6488e+07  516.41921   100%  18.7   60s
+2025-06-25 22:08:18,142 - src.optimizer - INFO - Gap improved by 1096.96% to 5127943.20%
+2025-06-25 22:08:18,157 - src.optimizer - INFO - Gap improved by 1846.45% to 5126096.74%
+2025-06-25 22:08:18,939 - src.optimizer - INFO - Gap improved by 3673.48% to 5122423.27%
+2025-06-25 22:08:20,560 - src.optimizer - INFO - Gap improved by 939.81% to 5121483.45%
+2025-06-25 22:08:20,601 - src.optimizer - INFO - Gap improved by 524.61% to 5120958.84%
+2025-06-25 22:08:21,305 - gurobipy - INFO -  83165 71560  557.14602   73  173 2.6488e+07  517.23415   100%  18.3   65s
+2025-06-25 22:08:24,974 - src.optimizer - INFO - Gap improved by 7633.64% to 5113325.20%
+2025-06-25 22:08:26,635 - gurobipy - INFO -  93259 80853  549.84641   55  218 2.6488e+07  518.00631   100%  17.9   70s
+2025-06-25 22:08:28,060 - src.optimizer - INFO - Gap improved by 228.79% to 5113096.41%
+2025-06-25 22:08:28,744 - gurobipy - INFO - H97923 83590                    6001727.7065  518.02949   100%  17.7   72s
+2025-06-25 22:08:28,745 - src.optimizer - INFO - Gap improved by 3954627.66% to 1158468.74%
+2025-06-25 22:08:28,767 - gurobipy - INFO - H98484 79198                    1440.9510019  518.02949  64.0%  17.7   72s
+2025-06-25 22:08:28,767 - src.optimizer - INFO - Gap improved by 1158290.58% to 178.16%
+2025-06-25 22:08:29,455 - gurobipy - INFO - H100019 79657                    1374.9513119  518.02949  62.3%  17.6   73s
+2025-06-25 22:08:29,456 - src.optimizer - INFO - Gap improved by 12.74% to 165.42%
+2025-06-25 22:08:29,470 - gurobipy - INFO - H100216 78247                    1290.9527723  518.02949  59.9%  17.6   73s
+2025-06-25 22:08:29,470 - src.optimizer - INFO - Gap improved by 16.22% to 149.20%
+2025-06-25 22:08:30,252 - gurobipy - INFO - H101650 79827                    1285.3815279  518.41539  59.7%  17.6   74s
+2025-06-25 22:08:30,252 - src.optimizer - INFO - Gap improved by 1.07% to 147.94%
+2025-06-25 22:08:30,264 - gurobipy - INFO - H101972 79328                    1266.9529453  518.41539  59.1%  17.6   74s
+2025-06-25 22:08:30,264 - src.optimizer - INFO - Gap improved by 3.55% to 144.39%
+2025-06-25 22:08:30,271 - gurobipy - INFO - H102102 78440                    1232.7530736  518.41539  57.9%  17.5   74s
+2025-06-25 22:08:30,271 - src.optimizer - INFO - Gap improved by 6.60% to 137.79%
+2025-06-25 22:08:30,283 - gurobipy - INFO - H102291 78094                    1223.6674859  518.41539  57.6%  17.5   74s
+2025-06-25 22:08:30,284 - src.optimizer - INFO - Gap improved by 1.75% to 136.04%
+2025-06-25 22:08:30,961 - gurobipy - INFO - H103675 78850                    1222.4674827  518.41539  57.6%  17.5   74s
+2025-06-25 22:08:30,969 - gurobipy - INFO - H103880 78764                    1220.0674941  518.41539  57.5%  17.5   74s
+2025-06-25 22:08:30,979 - gurobipy - INFO - H103965 77622                    1186.4676312  518.41539  56.3%  17.5   74s
+2025-06-25 22:08:30,979 - src.optimizer - INFO - Gap improved by 6.48% to 128.86%
+2025-06-25 22:08:30,986 - gurobipy - INFO - H104161 76765                    1167.2676920  518.41539  55.6%  17.5   74s
+2025-06-25 22:08:30,987 - src.optimizer - INFO - Gap improved by 3.70% to 125.16%
+2025-06-25 22:08:31,686 - gurobipy - INFO -  104369 77783  659.17867  124   58 1167.26769  518.41539  55.6%  17.6   75s
+2025-06-25 22:08:32,436 - gurobipy - INFO - H105806 78319                    1152.2678644  518.48271  55.0%  17.6   76s
+2025-06-25 22:08:32,436 - src.optimizer - INFO - Gap improved by 2.89% to 122.24%
+2025-06-25 22:08:32,460 - gurobipy - INFO - H106805 77569                    1137.2679344  518.48271  54.4%  17.7   76s
+2025-06-25 22:08:32,461 - src.optimizer - INFO - Gap improved by 2.89% to 119.35%
+2025-06-25 22:08:33,880 - gurobipy - INFO - H108239 79136                    1128.2679764  518.66315  54.0%  17.7   77s
+2025-06-25 22:08:33,880 - src.optimizer - INFO - Gap improved by 1.74% to 117.53%
+2025-06-25 22:08:33,892 - gurobipy - INFO - H108463 76625                    1090.4680830  518.66315  52.4%  17.7   77s
+2025-06-25 22:08:33,892 - src.optimizer - INFO - Gap improved by 7.29% to 110.25%
+2025-06-25 22:08:35,451 - gurobipy - INFO - H111414 79044                    1083.6109571  518.66315  52.1%  17.7   79s
+2025-06-25 22:08:35,451 - src.optimizer - INFO - Gap improved by 1.32% to 108.92%
+2025-06-25 22:08:36,178 - gurobipy - INFO - H112656 79067                    1071.6109361  518.66315  51.6%  17.7   79s
+2025-06-25 22:08:36,179 - src.optimizer - INFO - Gap improved by 2.31% to 106.61%
+2025-06-25 22:08:36,190 - gurobipy - INFO - H112817 77448                    1051.4682740  518.66315  50.7%  17.7   79s
+2025-06-25 22:08:36,191 - src.optimizer - INFO - Gap improved by 3.88% to 102.73%
+2025-06-25 22:08:36,901 - gurobipy - INFO -  113743 78613  971.60052   90   51 1051.46827  518.66315  50.7%  17.7   80s
+2025-06-25 22:08:37,647 - gurobipy - INFO - H116598 79639                    1047.8254131  519.19485  50.5%  17.7   81s
+2025-06-25 22:08:39,157 - gurobipy - INFO - H118731 82102                    1046.8825591  519.19485  50.4%  17.7   82s
+2025-06-25 22:08:39,169 - gurobipy - INFO - H119124 81695                    1041.8254451  519.19485  50.2%  17.7   82s
+2025-06-25 22:08:39,182 - gurobipy - INFO - H119392 80445                    1029.8255781  519.24805  49.6%  17.7   82s
+2025-06-25 22:08:39,182 - src.optimizer - INFO - Gap improved by 2.31% to 98.33%
+2025-06-25 22:08:40,536 - gurobipy - INFO - H121127 81917                    1020.8255751  519.24805  49.1%  17.7   84s
+2025-06-25 22:08:40,536 - src.optimizer - INFO - Gap improved by 1.73% to 96.60%
+2025-06-25 22:08:40,550 - gurobipy - INFO - H121877 78463                     990.8256692  519.24805  47.6%  17.7   84s
+2025-06-25 22:08:40,551 - src.optimizer - INFO - Gap improved by 5.78% to 90.82%
+2025-06-25 22:08:41,288 - gurobipy - INFO -  122613 79162  537.40858   65  167  990.82567  519.30971  47.6%  17.7   85s
+2025-06-25 22:08:41,989 - gurobipy - INFO - H123978 79837                     988.7685302  519.30971  47.5%  17.7   85s
+2025-06-25 22:08:41,997 - gurobipy - INFO - H124042 77984                     972.8257842  519.30971  46.6%  17.7   85s
+2025-06-25 22:08:41,997 - src.optimizer - INFO - Gap improved by 3.07% to 87.33%
+2025-06-25 22:08:42,010 - gurobipy - INFO - H124294 75716                     954.8258967  519.30971  45.6%  17.7   85s
+2025-06-25 22:08:42,011 - src.optimizer - INFO - Gap improved by 3.47% to 83.86%
+2025-06-25 22:08:42,671 - src.optimizer - INFO - Optimization progress: 83.86% gap after 86.5 seconds
+2025-06-25 22:08:43,440 - gurobipy - INFO - H125660 75587                     941.6259349  519.30971  44.8%  17.9   87s
+2025-06-25 22:08:43,441 - src.optimizer - INFO - Gap improved by 2.68% to 81.18%
+2025-06-25 22:08:43,449 - gurobipy - INFO - H125931 74811                     935.6259390  519.70768  44.5%  17.9   87s
+2025-06-25 22:08:43,449 - src.optimizer - INFO - Gap improved by 1.15% to 80.03%
+2025-06-25 22:08:46,307 - gurobipy - INFO -  130395 79211  834.73449  149    9  935.62594  519.70768  44.5%  18.0   90s
+2025-06-25 22:08:51,944 - gurobipy - INFO -  139495 86793  932.07922  212    9  935.62594  520.65582  44.4%  18.2   95s
+2025-06-25 22:08:53,382 - gurobipy - INFO - *141983 87868             172     931.5117482  520.68407  44.1%  18.3   97s
+2025-06-25 22:08:53,399 - gurobipy - INFO - *142852 86081             167     921.7715726  520.68407  43.5%  18.3   97s
+2025-06-25 22:08:53,399 - src.optimizer - INFO - Gap improved by 1.87% to 77.03%
+2025-06-25 22:08:53,404 - gurobipy - INFO - *142853 85936             167     921.1170235  520.68407  43.5%  18.3   97s
+2025-06-25 22:08:54,064 - gurobipy - INFO - *143374 84948             161     911.1117689  521.00712  42.8%  18.3   97s
+2025-06-25 22:08:54,064 - src.optimizer - INFO - Gap improved by 1.92% to 74.88%
+2025-06-25 22:08:56,833 - gurobipy - INFO -  147229 88482  850.69823  162   21  911.11177  521.00712  42.8%  18.4  100s
+2025-06-25 22:09:01,938 - gurobipy - INFO -  154819 94966  839.87186  142   92  911.11177  521.86932  42.7%  18.6  105s
+2025-06-25 22:09:06,895 - gurobipy - INFO -  161432 100716  546.11423   61  255  911.11177  522.42149  42.7%  18.9  110s
+2025-06-25 22:09:11,334 - gurobipy - INFO -  167143 105570  760.48965  107  129  911.11177  522.45915  42.7%  19.1  115s
+2025-06-25 22:09:12,075 - gurobipy - INFO - *168405 102167             151     893.7118330  522.71545  41.5%  19.1  115s
+2025-06-25 22:09:12,076 - src.optimizer - INFO - Gap improved by 3.33% to 70.97%
+2025-06-25 22:09:12,082 - gurobipy - INFO - *168406 101868             151     892.5118285  522.71545  41.4%  19.1  115s
+2025-06-25 22:09:12,784 - gurobipy - INFO - *169403 102304             151     892.5118244  523.10544  41.4%  19.2  116s
+2025-06-25 22:09:16,329 - gurobipy - INFO -  173583 106215  545.24139   71  233  892.51182  523.28985  41.4%  19.4  120s
+2025-06-25 22:09:17,281 - gurobipy - INFO - H174614 106607                     890.3689629  523.28985  41.2%  19.4  121s
+2025-06-25 22:09:18,061 - gurobipy - INFO - H176268 105733                     884.3689949  523.28985  40.8%  19.4  121s
+2025-06-25 22:09:18,061 - src.optimizer - INFO - Gap improved by 1.15% to 69.00%
+2025-06-25 22:09:19,651 - gurobipy - INFO - H178214 106790                     883.7690031  523.90610  40.7%  19.5  123s
+2025-06-25 22:09:21,262 - gurobipy - INFO - H179503 107525                     882.4832892  523.91003  40.6%  19.6  125s
+2025-06-25 22:09:26,427 - gurobipy - INFO -  185889 113090  555.11727   75  214  882.48329  524.55082  40.6%  19.8  130s
+2025-06-25 22:09:31,578 - gurobipy - INFO -  192877 119225  533.60320   69  177  882.48329  524.93685  40.5%  20.0  135s
+2025-06-25 22:09:36,708 - gurobipy - INFO -  199097 124394  543.14263   62  270  882.48329  525.34823  40.5%  20.2  140s
+2025-06-25 22:09:41,888 - gurobipy - INFO -  205617 130119  589.40292   77  203  882.48329  525.73070  40.4%  20.4  145s
+2025-06-25 22:09:42,671 - src.optimizer - INFO - Optimization progress: 67.81% gap after 146.5 seconds
+2025-06-25 22:09:46,531 - gurobipy - INFO -  210829 134192  820.89524  119  100  882.48329  526.04910  40.4%  20.6  150s
+2025-06-25 22:09:51,366 - gurobipy - INFO -  216132 138428  547.88798   83  257  882.48329  526.33160  40.4%  20.8  155s
+2025-06-25 22:09:56,944 - gurobipy - INFO -  221072 142564  575.98229   82  209  882.48329  526.81011  40.3%  21.1  160s
+2025-06-25 22:10:01,965 - gurobipy - INFO -  225826 146548  593.81394   89  224  882.48329  527.09283  40.3%  21.2  165s
+2025-06-25 22:10:06,852 - gurobipy - INFO -  229006 149371  680.04945   99  202  882.48329  527.09283  40.3%  21.4  170s
+2025-06-25 22:10:11,808 - gurobipy - INFO -  231537 151288  553.88741   87  231  882.48329  527.22192  40.3%  21.4  175s
+2025-06-25 22:10:16,356 - gurobipy - INFO -  233367 152818  703.79785   81  119  882.48329  527.45074  40.2%  21.5  180s
+2025-06-25 22:10:22,237 - gurobipy - INFO -  236390 155412  656.92662   89  173  882.48329  527.45074  40.2%  21.6  185s
+2025-06-25 22:10:27,181 - gurobipy - INFO -  238692 157523  568.25325   75  221  882.48329  527.77495  40.2%  21.7  190s
+2025-06-25 22:10:32,083 - gurobipy - INFO -  241266 159288  552.01609   66  247  882.48329  527.84142  40.2%  21.8  195s
+2025-06-25 22:10:37,073 - gurobipy - INFO -  243324 161331  546.82948   59  278  882.48329  527.84142  40.2%  21.9  200s
+2025-06-25 22:10:41,789 - gurobipy - INFO -  245469 162644  572.21132   69  178  882.48329  527.97049  40.2%  21.9  205s
+2025-06-25 22:10:43,313 - src.optimizer - INFO - Optimization progress: 67.08% gap after 207.1 seconds
+2025-06-25 22:10:46,431 - gurobipy - INFO -  247743 164820  548.12767   60  302  882.48329  528.18387  40.1%  22.0  210s
+2025-06-25 22:10:51,394 - gurobipy - INFO -  250298 166911  547.92355   63  261  882.48329  528.22080  40.1%  22.1  215s
+2025-06-25 22:10:53,152 - gurobipy - INFO - *251150 164231             127     875.2833167  528.22080  39.7%  22.1  216s
+2025-06-25 22:10:53,153 - src.optimizer - INFO - Gap improved by 1.36% to 65.70%
+2025-06-25 22:10:58,148 - gurobipy - INFO -  253239 166009  735.28828   85   69  875.28332  528.35862  39.6%  22.2  221s
+2025-06-25 22:11:02,821 - gurobipy - INFO -  255393 167551  843.74553  107   39  875.28332  528.51574  39.6%  22.3  226s
+2025-06-25 22:11:07,721 - gurobipy - INFO -  257698 169626  576.78558   53  278  875.28332  528.57582  39.6%  22.4  231s
+2025-06-25 22:11:12,809 - gurobipy - INFO -  259573 171306  626.81527   52  150  875.28332  528.61267  39.6%  22.5  236s
+2025-06-25 22:11:17,754 - gurobipy - INFO -  261743 173196  832.91026  104  156  875.28332  528.70790  39.6%  22.6  241s
+2025-06-25 22:11:21,301 - gurobipy - INFO -  263412 174285  571.81635   63  266  875.28332  528.95988  39.6%  22.6  245s
+2025-06-25 22:11:26,532 - gurobipy - INFO -  265253 175959  577.08449   62  203  875.28332  529.05788  39.6%  22.7  250s
+2025-06-25 22:11:31,466 - gurobipy - INFO -  267523 177627  561.05888   72  164  875.28332  529.28413  39.5%  22.8  255s
+2025-06-25 22:11:36,586 - gurobipy - INFO -  269698 179795  679.61324  109   95  875.28332  529.28413  39.5%  22.8  260s
+2025-06-25 22:11:41,559 - gurobipy - INFO -  272195 181708  542.32349   79  289  875.28332  529.35527  39.5%  22.9  265s
+2025-06-25 22:11:44,933 - src.optimizer - INFO - Optimization progress: 65.30% gap after 268.7 seconds
+2025-06-25 22:11:46,768 - gurobipy - INFO -  274461 183647  655.78124   81  190  875.28332  529.50616  39.5%  23.0  270s
+2025-06-25 22:11:52,110 - gurobipy - INFO -  276625 185462  873.56876  101  149  875.28332  529.68036  39.5%  23.1  275s
+2025-06-25 22:11:57,266 - gurobipy - INFO -  278724 187164  850.69018  118   92  875.28332  529.68036  39.5%  23.1  281s
+2025-06-25 22:11:57,325 - gurobipy - INFO - H278933 182466                     868.5119015  529.68036  39.0%  23.2  281s
+2025-06-25 22:11:57,326 - src.optimizer - INFO - Gap improved by 1.28% to 63.97%
+2025-06-25 22:12:02,359 - gurobipy - INFO -  280698 183960  665.14977   90  183  868.51190  529.93238  39.0%  23.2  286s
+2025-06-25 22:12:07,593 - gurobipy - INFO -  282718 185706  664.76407   96  131  868.51190  530.00061  39.0%  23.3  291s
+2025-06-25 22:12:12,700 - gurobipy - INFO -  284646 187134  830.64550  108   62  868.51190  530.16861  39.0%  23.4  296s
+2025-06-25 22:12:16,380 - gurobipy - INFO -  286110 188305  573.55528   78  187  868.51190  530.16861  39.0%  23.5  300s
+2025-06-25 22:12:21,662 - gurobipy - INFO -  288186 190167  718.86999   72   89  868.51190  530.36155  38.9%  23.6  305s
+2025-06-25 22:12:26,755 - gurobipy - INFO -  290066 191605  627.13231  120  110  868.51190  530.36155  38.9%  23.7  310s
+2025-06-25 22:12:31,743 - gurobipy - INFO -  291464 192735 infeasible  203       868.51190  530.48651  38.9%  23.8  315s
+2025-06-25 22:12:36,902 - gurobipy - INFO -  293386 194448  832.46009  137   73  868.51190  530.54033  38.9%  23.9  320s
+2025-06-25 22:12:42,553 - gurobipy - INFO -  295189 196060  563.26859   64  274  868.51190  530.57286  38.9%  24.0  326s
+2025-06-25 22:12:46,386 - src.optimizer - INFO - Optimization progress: 63.66% gap after 330.2 seconds
+2025-06-25 22:12:46,387 - gurobipy - INFO -  296877 197351  866.84030   99   60  868.51190  530.68082  38.9%  24.0  330s
+2025-06-25 22:12:51,840 - gurobipy - INFO -  299157 199210  582.62064   76  214  868.51190  530.83869  38.9%  24.1  335s
+2025-06-25 22:12:51,888 - gurobipy - INFO - H299221 198480                     867.5690476  530.83869  38.8%  24.1  335s
+2025-06-25 22:12:55,692 - gurobipy - INFO - H301176 190915                     855.5690845  530.87692  38.0%  24.1  339s
+2025-06-25 22:12:55,693 - src.optimizer - INFO - Gap improved by 2.26% to 61.16%
+2025-06-25 22:12:57,448 - gurobipy - INFO -  301854 191510  591.77739  110  281  855.56908  530.89039  37.9%  24.1  341s
+2025-06-25 22:13:02,886 - gurobipy - INFO -  304003 193131  570.57818   78  300  855.56908  530.97651  37.9%  24.2  346s
+2025-06-25 22:13:06,430 - gurobipy - INFO -  305273 193743  681.98556   94   79  855.56908  530.99870  37.9%  24.3  350s
+2025-06-25 22:13:11,858 - gurobipy - INFO -  305309 194019  670.98233   93   93  855.56908  530.99870  37.9%  24.3  355s
+2025-06-25 22:13:17,332 - gurobipy - INFO -  306912 195656  645.62233   95  186  855.56908  531.15192  37.9%  24.3  361s
+2025-06-25 22:13:21,317 - gurobipy - INFO -  308471 197036  581.92361   67  238  855.56908  531.22478  37.9%  24.3  365s
+2025-06-25 22:13:27,093 - gurobipy - INFO -  310667 198644  662.82529   90  135  855.56908  531.39143  37.9%  24.4  370s
+2025-06-25 22:13:32,724 - gurobipy - INFO -  312919 200429  835.88695  156  107  855.56908  531.46976  37.9%  24.5  376s
+2025-06-25 22:13:36,696 - gurobipy - INFO -  314481 201702  610.18953   66  187  855.56908  531.65183  37.9%  24.6  380s
+2025-06-25 22:13:42,559 - gurobipy - INFO -  316805 203606  562.24370   68  241  855.56908  531.79417  37.8%  24.6  386s
+2025-06-25 22:13:46,428 - src.optimizer - INFO - Optimization progress: 60.87% gap after 390.2 seconds
+2025-06-25 22:13:46,430 - gurobipy - INFO -  318281 204887  593.57916   97  163  855.56908  531.84896  37.8%  24.7  390s
+2025-06-25 22:13:52,529 - gurobipy - INFO -  320667 206656  578.49025   56  269  855.56908  531.98115  37.8%  24.8  396s
+2025-06-25 22:13:56,400 - gurobipy - INFO -  322108 207722  741.30318  103   94  855.56908  531.98115  37.8%  24.8  400s
+2025-06-25 22:14:02,333 - gurobipy - INFO -  324591 210035  563.19144   68  228  855.56908  532.22652  37.8%  24.9  406s
+2025-06-25 22:14:06,626 - gurobipy - INFO -  326296 211350  600.59182   46  325  855.56908  532.34018  37.8%  24.9  410s
+2025-06-25 22:14:12,583 - gurobipy - INFO -  328515 212953  569.91678   70  269  855.56908  532.37584  37.8%  25.0  416s
+2025-06-25 22:14:16,520 - gurobipy - INFO -  329785 214218  569.65935   77  289  855.56908  532.47930  37.8%  25.0  420s
+2025-06-25 22:14:22,584 - gurobipy - INFO -  332288 216189  804.36057  150  122  855.56908  532.47930  37.8%  25.1  426s
+2025-06-25 22:14:26,735 - gurobipy - INFO -  333805 217288  733.28040  150   35  855.56908  532.56086  37.8%  25.2  430s
+2025-06-25 22:14:32,911 - gurobipy - INFO -  335844 219016  566.20716   66  260  855.56908  532.72942  37.7%  25.2  436s
+2025-06-25 22:14:36,952 - gurobipy - INFO -  337284 220304  838.77254  122   98  855.56908  532.77535  37.7%  25.3  440s
+2025-06-25 22:14:43,040 - gurobipy - INFO -  339845 222446  580.67875   73  223  855.56908  532.97558  37.7%  25.3  446s
+2025-06-25 22:14:47,309 - src.optimizer - INFO - Optimization progress: 60.51% gap after 451.1 seconds
+2025-06-25 22:14:47,310 - gurobipy - INFO -  341324 223658  556.19591   77  315  855.56908  533.04064  37.7%  25.4  451s
+2025-06-25 22:14:51,338 - gurobipy - INFO -  342854 224663  566.14174   57  255  855.56908  533.04064  37.7%  25.4  455s
+2025-06-25 22:14:57,940 - gurobipy - INFO -  345221 226521  567.79003   67  236  855.56908  533.24238  37.7%  25.5  461s
+2025-06-25 22:15:02,097 - gurobipy - INFO -  346548 227705  814.39688  172   66  855.56908  533.32043  37.7%  25.6  465s
+2025-06-25 22:15:06,727 - gurobipy - INFO -  348027 228992  797.46397  112  123  855.56908  533.49097  37.6%  25.6  470s
+2025-06-25 22:15:13,796 - gurobipy - INFO -  350224 230557  558.82518   77  249  855.56908  533.57179  37.6%  25.7  477s
+2025-06-25 22:15:18,163 - gurobipy - INFO -  351509 231636  573.40407   68  286  855.56908  533.67306  37.6%  25.7  481s
+2025-06-25 22:15:19,043 - gurobipy - INFO - 
+2025-06-25 22:15:19,045 - gurobipy - INFO - Cutting planes:
+2025-06-25 22:15:19,045 - gurobipy - INFO -   Gomory: 2
+2025-06-25 22:15:19,046 - gurobipy - INFO -   Lift-and-project: 99
+2025-06-25 22:15:19,046 - gurobipy - INFO -   Cover: 411
+2025-06-25 22:15:19,047 - gurobipy - INFO -   MIR: 80
+2025-06-25 22:15:19,047 - gurobipy - INFO -   StrongCG: 1
+2025-06-25 22:15:19,048 - gurobipy - INFO -   Flow cover: 458
+2025-06-25 22:15:19,048 - gurobipy - INFO -   Inf proof: 10
+2025-06-25 22:15:19,049 - gurobipy - INFO -   Zero half: 58
+2025-06-25 22:15:19,049 - gurobipy - INFO -   RLT: 58
+2025-06-25 22:15:19,050 - gurobipy - INFO -   Lazy constraints: 1441
+2025-06-25 22:15:19,055 - gurobipy - INFO - 
+2025-06-25 22:15:19,055 - gurobipy - INFO - Explored 352663 nodes (9093106 simplex iterations) in 482.80 seconds (365.65 work units)
+2025-06-25 22:15:19,056 - gurobipy - INFO - Thread count was 12 (of 12 available processors)
+2025-06-25 22:15:19,056 - gurobipy - INFO - 
+2025-06-25 22:15:19,057 - gurobipy - INFO - Solution count 10: 855.569 867.569 868.512 ... 892.512
+2025-06-25 22:15:19,057 - gurobipy - INFO - 
+2025-06-25 22:15:19,058 - gurobipy - INFO - Solve interrupted
+2025-06-25 22:15:19,064 - gurobipy - INFO - Best objective 8.555690844991e+02, best bound 5.337110811329e+02, gap 37.6192%
+2025-06-25 22:15:19,067 - gurobipy - INFO - 
+2025-06-25 22:15:19,068 - gurobipy - INFO - User-callback calls 740665, time in user-callback 4.04 sec
+2025-06-25 22:15:19,072 - src.optimizer - WARNING - Optimization stopped with status 11
+2025-06-25 22:15:19,072 - src.optimizer - INFO - Solution found with 37.62% optimality gap
+2025-06-25 22:15:19,073 - src.optimizer - INFO - After optimization model solving - Memory usage: 1768.88 MB
+2025-06-25 22:15:19,073 - __main__ - INFO - After optimization - Memory usage: 1768.88 MB
+2025-06-25 22:15:19,082 - __main__ - INFO - Saved 66 selected edges with coordinates to output/path_nodes/
+2025-06-25 22:15:19,082 - __main__ - INFO - Each line contains coordinates of both nodes for one edge
+2025-06-25 22:15:19,082 - __main__ - INFO - Involves 65 unique nodes
+2025-06-25 22:15:19,082 - __main__ - INFO - Creating VRF heatmap with optimized path overlay
+2025-06-25 22:15:19,082 - src.visualizer - INFO - Creating visibility heatmaps
+2025-06-25 22:15:19,092 - src.visualizer - INFO - Edge visibility range: 0 to 13 segments
+2025-06-25 22:15:21,349 - src.visualizer - INFO - Saved edge visibility heatmap to output/visibility_heatmaps/1_edge_visibility_heatmap_20250625_221519.png
+2025-06-25 22:15:21,353 - src.visualizer - INFO - Segment visibility range: 0 to 117 edges
+2025-06-25 22:15:22,625 - src.visualizer - INFO - Saved segment visibility heatmap to output/visibility_heatmaps/2_segment_visibility_heatmap_20250625_221521.png
+2025-06-25 22:15:22,630 - src.visualizer - INFO - Edge VRF range: 0.0000 to 1.8333
+2025-06-25 22:15:24,991 - src.visualizer - INFO - Saved edge VRF heatmap to output/visibility_heatmaps/3_edge_vrf_heatmap_20250625_221523.png
+2025-06-25 22:15:24,996 - src.visualizer - INFO - VRF with path overlay - VRF range: 0.0000 to 1.8333
+2025-06-25 22:15:25,671 - __main__ - ERROR - Error during execution: draw_networkx_nodes() got an unexpected keyword argument 'zorder'
+Traceback (most recent call last):
+  File "/home/mo/thesis/My_Thesis/Versions/thesis_v24/main.py", line 490, in main
+    visualizer.create_visibility_heatmaps(G, building, obstacles, segments, edge_visibility, segment_visibility, vrf, selected_edges)
+  File "/home/mo/thesis/My_Thesis/Versions/thesis_v24/src/visualizer.py", line 400, in create_visibility_heatmaps
+    self._plot_vrf_with_optimized_path(G, building, obstacles, vrf, selected_edges, heatmaps_dir)
+  File "/home/mo/thesis/My_Thesis/Versions/thesis_v24/src/visualizer.py", line 248, in _plot_vrf_with_optimized_path
+    nx.draw_networkx_nodes(G, pos, node_color='lightgray', node_size=20,
+TypeError: draw_networkx_nodes() got an unexpected keyword argument 'zorder'
+2025-06-25 22:15:25,676 - src.visualizer - INFO - Creating visualization
+2025-06-25 22:15:28,559 - src.visualizer - INFO - Saved plot to output/plots/result_plot_20250625_221526.png
+2025-06-25 22:15:36,663 - __main__ - INFO - Disposed Gurobi optimization model
+2025-06-25 22:15:36,665 - __main__ - INFO - Before cleanup - Memory usage: 1503.06 MB
+2025-06-25 22:15:36,806 - __main__ - INFO - After cleanup - Memory usage: 1482.95 MB

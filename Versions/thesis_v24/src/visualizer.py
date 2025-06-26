@@ -53,7 +53,7 @@ class PathVisualizer:
         self._plot_geometries(building, obstacles)
         
         # Plot segments
-        self._plot_segments(segments)
+        self._plot_segments_on_building(building, segments)
         
         # Plot selected path edges
         self._plot_selected_path(G, selected_edges)
@@ -188,7 +188,7 @@ class PathVisualizer:
             self.logger.warning("No VRF variation available for heatmap")
         
         plt.title("Edge VRF (Visibility Ratio Factor) Heatmap\n(VRF = Visible Segments / Edge Length)", 
-                 fontsize=14, fontweight='bold')
+                 fontsize=12)
         plt.xlabel("X-coordinate (m)")
         plt.ylabel("Y-coordinate (m)")
         plt.grid(True, linestyle='--', alpha=0.3)
@@ -472,7 +472,7 @@ class PathVisualizer:
             self.logger.warning("No edge visibility data available for heatmap")
         
         plt.title("Edge Visibility Heatmap\n(Number of Segments Visible from Each Edge)", 
-                 fontsize=14, fontweight='bold')
+                 fontsize=12)
         plt.xlabel("X-coordinate (m)")
         plt.ylabel("Y-coordinate (m)")
         plt.grid(True, linestyle='--', alpha=0.3)
@@ -515,23 +515,62 @@ class PathVisualizer:
                 x, y = poly.exterior.xy
                 plt.plot(x, y, 'black', linewidth=2, alpha=0.8)
             
-            # Plot segments with colors based on visibility count
-            for seg_idx, (seg_start, seg_end) in enumerate(segments):
-                visibility_count = segment_visibility_counts.get(seg_idx, 0)
-                color = cmap(norm(visibility_count))
+            # Plot segments following building boundary with colors based on visibility count
+            segment_size = self.config['visibility']['segment_size']
+            boundary_lines = [poly.exterior for poly in building.geoms]
+            
+            segment_idx = 0
+            for boundary_line in boundary_lines:
+                current_distance = 0
+                boundary_length = boundary_line.length
                 
-                # Line width based on visibility
-                line_width = 3 + 5 * (visibility_count / max_segment_visibility)
-                
-                # Plot segment with color intensity
-                plt.plot([seg_start.x, seg_end.x], [seg_start.y, seg_end.y], 
-                        color=color, linewidth=line_width, alpha=0.8, zorder=3)
-                
-                # Plot segment endpoints with smaller markers
-                plt.plot(seg_start.x, seg_start.y, 'o', color=color, markersize=3, 
-                        markeredgecolor='black', markeredgewidth=0.3, zorder=4)
-                plt.plot(seg_end.x, seg_end.y, 'o', color=color, markersize=3, 
-                        markeredgecolor='black', markeredgewidth=0.3, zorder=4)
+                while current_distance < boundary_length:
+                    # Calculate segment end distance
+                    seg_end_distance = min(current_distance + segment_size, boundary_length)
+                    
+                    # Get start and end points on the boundary
+                    seg_start = boundary_line.interpolate(current_distance)
+                    seg_end = boundary_line.interpolate(seg_end_distance)
+                    
+                    # Get visibility count for this segment
+                    visibility_count = segment_visibility_counts.get(segment_idx, 0)
+                    color = cmap(norm(visibility_count))
+                    
+                    # Line width based on visibility
+                    line_width = 3 + 5 * (visibility_count / max_segment_visibility)
+                    
+                    # Extract the portion of boundary between start and end
+                    coords = []
+                    if seg_end_distance < boundary_length:
+                        # Normal segment
+                        num_samples = max(3, int((seg_end_distance - current_distance) / 0.5))
+                        for i in range(num_samples + 1):
+                            sample_distance = current_distance + i * (seg_end_distance - current_distance) / num_samples
+                            sample_point = boundary_line.interpolate(sample_distance)
+                            coords.append((sample_point.x, sample_point.y))
+                    else:
+                        # Last segment
+                        remaining_distance = seg_end_distance - current_distance
+                        num_samples = max(3, int(remaining_distance / 0.5))
+                        for i in range(num_samples + 1):
+                            sample_distance = current_distance + i * remaining_distance / num_samples
+                            sample_point = boundary_line.interpolate(sample_distance)
+                            coords.append((sample_point.x, sample_point.y))
+                    
+                    # Plot segment along boundary with color intensity
+                    x_coords = [coord[0] for coord in coords]
+                    y_coords = [coord[1] for coord in coords]
+                    plt.plot(x_coords, y_coords, color=color, linewidth=line_width, alpha=0.8, zorder=3)
+                    
+                    # Plot segment endpoints with color
+                    plt.plot(seg_start.x, seg_start.y, 'o', color=color, markersize=4, 
+                            markeredgecolor='black', markeredgewidth=0.3, zorder=4)
+                    plt.plot(seg_end.x, seg_end.y, 'o', color=color, markersize=4, 
+                            markeredgecolor='black', markeredgewidth=0.3, zorder=4)
+                    
+                    # Move to next segment
+                    current_distance += segment_size
+                    segment_idx += 1
             
             # Create colorbar
             sm = ScalarMappable(cmap=cmap, norm=norm)
@@ -545,15 +584,49 @@ class PathVisualizer:
                 plt.plot(x, y, 'g-', linewidth=2)
                 plt.fill(x, y, alpha=0.3, color='green')
             
-            # Plot segments in default color
-            for seg_idx, (seg_start, seg_end) in enumerate(segments):
-                plt.plot([seg_start.x, seg_end.x], [seg_start.y, seg_end.y], 
-                        'ro-', linewidth=2, markersize=4, alpha=0.8)
+            # Plot segments in default color following boundary
+            segment_size = self.config['visibility']['segment_size']
+            boundary_lines = [poly.exterior for poly in building.geoms]
+            
+            segment_idx = 0
+            for boundary_line in boundary_lines:
+                current_distance = 0
+                boundary_length = boundary_line.length
+                
+                while current_distance < boundary_length:
+                    seg_end_distance = min(current_distance + segment_size, boundary_length)
+                    seg_start = boundary_line.interpolate(current_distance)
+                    seg_end = boundary_line.interpolate(seg_end_distance)
+                    
+                    # Extract boundary portion and plot
+                    coords = []
+                    if seg_end_distance < boundary_length:
+                        num_samples = max(3, int((seg_end_distance - current_distance) / 0.5))
+                        for i in range(num_samples + 1):
+                            sample_distance = current_distance + i * (seg_end_distance - current_distance) / num_samples
+                            sample_point = boundary_line.interpolate(sample_distance)
+                            coords.append((sample_point.x, sample_point.y))
+                    else:
+                        remaining_distance = seg_end_distance - current_distance
+                        num_samples = max(3, int(remaining_distance / 0.5))
+                        for i in range(num_samples + 1):
+                            sample_distance = current_distance + i * remaining_distance / num_samples
+                            sample_point = boundary_line.interpolate(sample_distance)
+                            coords.append((sample_point.x, sample_point.y))
+                    
+                    x_coords = [coord[0] for coord in coords]
+                    y_coords = [coord[1] for coord in coords]
+                    plt.plot(x_coords, y_coords, 'r-', linewidth=2, alpha=0.8)
+                    plt.plot(seg_start.x, seg_start.y, 'ro', markersize=4, alpha=0.8)
+                    plt.plot(seg_end.x, seg_end.y, 'ro', markersize=4, alpha=0.8)
+                    
+                    current_distance += segment_size
+                    segment_idx += 1
             
             self.logger.warning("No segment visibility data available for heatmap")
         
         plt.title("Segment Visibility Heatmap\n(Number of Edges that Can See Each Segment)", 
-                 fontsize=14, fontweight='bold')
+                 fontsize=12)
         plt.xlabel("X-coordinate (m)")
         plt.ylabel("Y-coordinate (m)")
         plt.grid(True, linestyle='--', alpha=0.3)
@@ -617,6 +690,7 @@ class PathVisualizer:
             plt.plot(x, y, 'purple', linewidth=2)
             plt.fill(x, y, alpha=0.4, color='purple', hatch='xxx', 
                     label='Radiation + Visibility Obstacle' if i == 0 and show_legend else "")
+
     def create_thesis_plots(self, G, building, obstacles, segments, G_rotated=None, rotation_params=None):
         """
         Create thesis-specific plots for analysis.
@@ -671,7 +745,7 @@ class PathVisualizer:
             x, y = poly.exterior.xy
             plt.plot(x, y, 'r-', linewidth=2)
             plt.fill(x, y, alpha=0.6, color='red', hatch='///', 
-                    label='Radiation Obstacle' if i == 0 else "")
+                    label='Floor Obstacle' if i == 0 else "")
         
         # Plot visibility obstacles
         visibility_only_geoms = []
@@ -685,7 +759,7 @@ class PathVisualizer:
             x, y = poly.exterior.xy
             plt.plot(x, y, 'b-', linewidth=2)
             plt.fill(x, y, alpha=0.6, color='blue', hatch='+++', 
-                    label='Visibility Obstacle' if i == 0 else "")
+                    label='Wall Obstacle' if i == 0 else "")
         
         # Plot combined obstacles (both radiation and visibility)
         combined_geoms = []
@@ -698,9 +772,9 @@ class PathVisualizer:
             x, y = poly.exterior.xy
             plt.plot(x, y, 'purple', linewidth=2)
             plt.fill(x, y, alpha=0.6, color='purple', hatch='xxx', 
-                    label='Radiation + Visibility Obstacle' if i == 0 else "")
+                    label='Wall Obstacle' if i == 0 else "")
         
-        plt.title("Building and Obstacles Footprint", fontsize=14, fontweight='bold')
+        plt.title("Building and Obstacles Footprint", fontsize=12)
         plt.xlabel("X-coordinate (m)")
         plt.ylabel("Y-coordinate (m)")
         plt.grid(True, linestyle='--', alpha=0.7)
@@ -716,9 +790,9 @@ class PathVisualizer:
     
     def _plot_building_with_segments(self, building, obstacles, segments, output_dir):
         """
-        Plot 2: Building footprint with segments.
+        Plot 2: Building footprint with segments following building boundary.
         """
-        plt.figure(figsize=(12, 10))
+        plt.figure(figsize=(14, 10))
         
         # Plot building
         for poly in building.geoms:
@@ -731,7 +805,7 @@ class PathVisualizer:
             x, y = poly.exterior.xy
             plt.plot(x, y, 'r-', linewidth=2)
             plt.fill(x, y, alpha=0.6, color='red', hatch='///', 
-                    label='Radiation Obstacle' if i == 0 else "")
+                    label='Floor Obstacle' if i == 0 else "")
         
         visibility_only_geoms = []
         for poly in obstacles['visibility'].geoms:
@@ -743,7 +817,7 @@ class PathVisualizer:
             x, y = poly.exterior.xy
             plt.plot(x, y, 'b-', linewidth=2)
             plt.fill(x, y, alpha=0.6, color='blue', hatch='+++', 
-                    label='Visibility Obstacle' if i == 0 else "")
+                    label='Wall Obstacle' if i == 0 else "")
         
         combined_geoms = []
         for poly in obstacles['visibility'].geoms:
@@ -755,28 +829,88 @@ class PathVisualizer:
             x, y = poly.exterior.xy
             plt.plot(x, y, 'purple', linewidth=2)
             plt.fill(x, y, alpha=0.6, color='purple', hatch='xxx', 
-                    label='Radiation + Visibility Obstacle' if i == 0 else "")
+                    label='Wall Obstacle' if i == 0 else "")
         
-        # Plot segments
-        for seg_idx, (seg_start, seg_end) in enumerate(segments):
-            # Plot segment line
-            plt.plot([seg_start.x, seg_end.x], [seg_start.y, seg_end.y], 
-                    'ro-', linewidth=2, markersize=4, alpha=0.8,
-                    label='Segments' if seg_idx == 0 else "")
-            
-            # Add segment ID labels
-            midpoint_x = (seg_start.x + seg_end.x) / 2.0
-            midpoint_y = (seg_start.y + seg_end.y) / 2.0
-            plt.text(midpoint_x, midpoint_y, str(seg_idx), fontsize=8,
-                    ha='center', va='center', color='darkred', fontweight='bold',
-                    bbox=dict(facecolor='white', alpha=0.8, boxstyle='round,pad=0.2'))
-        
+        # Plot segments following building boundary
         segment_size = self.config['visibility']['segment_size']
-        plt.title(f"Building Footprint with Segments (Segment Size: {segment_size}m)", 
-                 fontsize=14, fontweight='bold')
+        
+        # Get boundary lines from building polygons
+        boundary_lines = [poly.exterior for poly in building.geoms]
+        
+        # Recreate segments properly along boundaries to match the original creation logic
+        segment_idx = 0
+        for boundary_line in boundary_lines:
+            current_distance = 0
+            boundary_length = boundary_line.length
+            
+            while current_distance < boundary_length:
+                # Calculate segment end distance
+                seg_end_distance = min(current_distance + segment_size, boundary_length)
+                
+                # Get start and end points on the boundary
+                seg_start = boundary_line.interpolate(current_distance)
+                seg_end = boundary_line.interpolate(seg_end_distance)
+                
+                # Extract the portion of boundary between start and end
+                if seg_end_distance < boundary_length:
+                    # Normal segment - extract line portion
+                    coords = []
+                    
+                    # Sample points along the boundary segment for smooth curves
+                    num_samples = max(3, int((seg_end_distance - current_distance) / 0.5))  # Sample every 0.5 units
+                    for i in range(num_samples + 1):
+                        sample_distance = current_distance + i * (seg_end_distance - current_distance) / num_samples
+                        sample_point = boundary_line.interpolate(sample_distance)
+                        coords.append((sample_point.x, sample_point.y))
+                    
+                    # Plot segment along boundary
+                    x_coords = [coord[0] for coord in coords]
+                    y_coords = [coord[1] for coord in coords]
+                    plt.plot(x_coords, y_coords, 'r-', linewidth=2, alpha=0.8,
+                            label='Segments' if segment_idx == 0 else "")
+                    
+                    # Plot segment endpoints
+                    plt.plot(seg_start.x, seg_start.y, 'ro', markersize=5, alpha=0.9)
+                    plt.plot(seg_end.x, seg_end.y, 'ro', markersize=5, alpha=0.9)
+                    
+                else:
+                    # Last segment or segment that reaches the end
+                    coords = []
+                    
+                    # Sample points along the remaining boundary
+                    remaining_distance = seg_end_distance - current_distance
+                    num_samples = max(3, int(remaining_distance / 0.5))
+                    for i in range(num_samples + 1):
+                        sample_distance = current_distance + i * remaining_distance / num_samples
+                        sample_point = boundary_line.interpolate(sample_distance)
+                        coords.append((sample_point.x, sample_point.y))
+                    
+                    # Plot segment along boundary
+                    x_coords = [coord[0] for coord in coords]
+                    y_coords = [coord[1] for coord in coords]
+                    plt.plot(x_coords, y_coords, 'r-', linewidth=2, alpha=0.8,
+                            label='Segments' if segment_idx == 0 else "")
+                    
+                    # Plot segment endpoints
+                    plt.plot(seg_start.x, seg_start.y, 'ro', markersize=5, alpha=0.9)
+                    plt.plot(seg_end.x, seg_end.y, 'ro', markersize=5, alpha=0.9)
+                
+                # Add segment ID labels
+                midpoint_x = (seg_start.x + seg_end.x) / 2.0
+                midpoint_y = (seg_start.y + seg_end.y) / 2.0
+                plt.text(midpoint_x, midpoint_y, str(segment_idx), fontsize=7,
+                        ha='center', va='center', color='darkred',
+                        bbox=dict(facecolor='white', alpha=0.8, boxstyle='round,pad=0.2'))
+                
+                # Move to next segment
+                current_distance += segment_size
+                segment_idx += 1
+        
+        plt.title(f"Segmentized Buidling Footprint (Segment Size: {segment_size}m)", 
+                 fontsize=12)
         plt.xlabel("X-coordinate (m)")
         plt.ylabel("Y-coordinate (m)")
-        plt.grid(True, linestyle='--', alpha=0.7)
+        plt.grid(True, linestyle='--', alpha=0.4)
         plt.legend(loc='best')
         plt.axis('equal')
         
@@ -804,7 +938,7 @@ class PathVisualizer:
             x, y = poly.exterior.xy
             plt.plot(x, y, 'r-', linewidth=2)
             plt.fill(x, y, alpha=0.6, color='red', hatch='///', 
-                    label='Radiation Obstacle' if i == 0 else "")
+                    label='Floor Obstacle' if i == 0 else "")
         
         visibility_only_geoms = []
         for poly in obstacles['visibility'].geoms:
@@ -816,7 +950,7 @@ class PathVisualizer:
             x, y = poly.exterior.xy
             plt.plot(x, y, 'b-', linewidth=2)
             plt.fill(x, y, alpha=0.6, color='blue', hatch='+++', 
-                    label='Visibility Obstacle' if i == 0 else "")
+                    label='Wall Obstacle' if i == 0 else "")
         
         combined_geoms = []
         for poly in obstacles['visibility'].geoms:
@@ -828,7 +962,7 @@ class PathVisualizer:
             x, y = poly.exterior.xy
             plt.plot(x, y, 'purple', linewidth=2)
             plt.fill(x, y, alpha=0.6, color='purple', hatch='xxx', 
-                    label='Radiation + Visibility Obstacle' if i == 0 else "")
+                    label='Wall Obstacle' if i == 0 else "")
         
         # Plot graph network
         pos = nx.get_node_attributes(G, 'pos')
@@ -841,7 +975,7 @@ class PathVisualizer:
         
         grid_spacing = self.config['graph']['grid_spacing']
         plt.title(f"Building with Original Graph Network (Grid Spacing: {grid_spacing}m)", 
-                 fontsize=14, fontweight='bold')
+                 fontsize=12)
         plt.xlabel("X-coordinate (m)")
         plt.ylabel("Y-coordinate (m)")
         plt.grid(True, linestyle='--', alpha=0.7)
@@ -872,7 +1006,7 @@ class PathVisualizer:
             x, y = poly.exterior.xy
             plt.plot(x, y, 'r-', linewidth=2)
             plt.fill(x, y, alpha=0.6, color='red', hatch='///', 
-                    label='Radiation Obstacle' if i == 0 else "")
+                    label='Floor Obstacle' if i == 0 else "")
         
         visibility_only_geoms = []
         for poly in obstacles['visibility'].geoms:
@@ -884,7 +1018,7 @@ class PathVisualizer:
             x, y = poly.exterior.xy
             plt.plot(x, y, 'b-', linewidth=2)
             plt.fill(x, y, alpha=0.6, color='blue', hatch='+++', 
-                    label='Visibility Obstacle' if i == 0 else "")
+                    label='Wall Obstacle' if i == 0 else "")
         
         combined_geoms = []
         for poly in obstacles['visibility'].geoms:
@@ -896,7 +1030,7 @@ class PathVisualizer:
             x, y = poly.exterior.xy
             plt.plot(x, y, 'purple', linewidth=2)
             plt.fill(x, y, alpha=0.6, color='purple', hatch='xxx', 
-                    label='Radiation + Visibility Obstacle' if i == 0 else "")
+                    label='Wall Obstacle' if i == 0 else "")
         
         # Plot rotated graph network
         pos = nx.get_node_attributes(G_rotated, 'pos')
@@ -916,7 +1050,7 @@ class PathVisualizer:
         grid_spacing = self.config['graph']['grid_spacing']
         title += f"\nGrid Spacing: {grid_spacing}m"
         
-        plt.title(title, fontsize=14, fontweight='bold')
+        plt.title(title, fontsize=12)
         plt.xlabel("X-coordinate (m)")
         plt.ylabel("Y-coordinate (m)")
         plt.grid(True, linestyle='--', alpha=0.7)
@@ -1007,14 +1141,89 @@ class PathVisualizer:
                 plt.plot(x, y, 'k-', linewidth=2)
                 plt.fill(x, y, alpha=0.6, color='black')
     
+    def _plot_segments_on_building(self, building, segments):
+        """
+        Plot the building segments following the building boundary.
+        
+        Args:
+            building: MultiPolygon representing the building
+            segments: List of segments
+        """
+        # Plot segments following building boundary
+        segment_size = self.config['visibility']['segment_size']
+        
+        # Get boundary lines from building polygons
+        boundary_lines = [poly.exterior for poly in building.geoms]
+        
+        # Recreate segments properly along boundaries to match the original creation logic
+        segment_idx = 0
+        for boundary_line in boundary_lines:
+            current_distance = 0
+            boundary_length = boundary_line.length
+            
+            while current_distance < boundary_length:
+                # Calculate segment end distance
+                seg_end_distance = min(current_distance + segment_size, boundary_length)
+                
+                # Get start and end points on the boundary
+                seg_start = boundary_line.interpolate(current_distance)
+                seg_end = boundary_line.interpolate(seg_end_distance)
+                
+                # Extract the portion of boundary between start and end
+                coords = []
+                if seg_end_distance < boundary_length:
+                    # Normal segment - extract line portion
+                    num_samples = max(3, int((seg_end_distance - current_distance) / 0.5))  # Sample every 0.5 units
+                    for i in range(num_samples + 1):
+                        sample_distance = current_distance + i * (seg_end_distance - current_distance) / num_samples
+                        sample_point = boundary_line.interpolate(sample_distance)
+                        coords.append((sample_point.x, sample_point.y))
+                else:
+                    # Last segment or segment that reaches the end
+                    remaining_distance = seg_end_distance - current_distance
+                    num_samples = max(3, int(remaining_distance / 0.5))
+                    for i in range(num_samples + 1):
+                        sample_distance = current_distance + i * remaining_distance / num_samples
+                        sample_point = boundary_line.interpolate(sample_distance)
+                        coords.append((sample_point.x, sample_point.y))
+                
+                # Plot segment along boundary
+                x_coords = [coord[0] for coord in coords]
+                y_coords = [coord[1] for coord in coords]
+                plt.plot(x_coords, y_coords, 'r-', linewidth=2, alpha=0.8)
+                
+                # Plot segment endpoints
+                plt.plot(seg_start.x, seg_start.y, 'ro', markersize=3, alpha=0.9)
+                plt.plot(seg_end.x, seg_end.y, 'ro', markersize=3, alpha=0.9)
+                
+                # Add segment ID labels if enabled
+                if self.config['visualization']['show_segment_ids']:
+                    midpoint_x = (seg_start.x + seg_end.x) / 2.0
+                    midpoint_y = (seg_start.y + seg_end.y) / 2.0
+                    plt.text(
+                        midpoint_x, midpoint_y,
+                        str(segment_idx),
+                        fontsize=8,
+                        ha='center',
+                        va='center',
+                        color='blue',
+                        bbox=dict(facecolor='white', alpha=0.7, boxstyle='round,pad=0.2')
+                    )
+                
+                # Move to next segment
+                current_distance += segment_size
+                segment_idx += 1
+    
     def _plot_segments(self, segments):
         """
-        Plot the building segments.
+        Plot the building segments following the building boundary.
+        This is a fallback method when building geometry is not available.
         
         Args:
             segments: List of segments
         """
-        # Plot segment endpoints
+        # This method needs access to building geometry to plot segments correctly
+        # For now, plot segment endpoints only since we don't have building reference here
         for seg_idx, (seg_start, seg_end) in enumerate(segments):
             # Plot segment endpoints
             plt.plot(

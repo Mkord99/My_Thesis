@@ -1,7 +1,7 @@
 # Path Summary
-Total selected edges: 48
-Unique nodes involved: 46
-Total path length: 456.90 units
+Total selected edges: 60
+Unique nodes involved: 60
+Total path length: 771.13 units
 
 # Available files:
 # - selected_edges_coordinates.txt: Selected edge N: (X1,Y1) (X2,Y2)
